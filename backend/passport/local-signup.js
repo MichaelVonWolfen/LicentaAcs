@@ -9,7 +9,7 @@ module.exports = new LocalStrategy(
         passReqToCallback: true,
     },
     async (req, username, password, done) => {
-        User.findOne({name: username}).then((user) => {
+        User.findOne({username}).then((user) => {
             if (user) {
                 return done({userName: "Exista deja un cont cu acest nume"}, false);
             }

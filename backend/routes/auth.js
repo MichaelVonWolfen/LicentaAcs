@@ -15,7 +15,7 @@ router.post("/register", (req, res, next) => {
             res,
             200,
             "Înregistrare efectuată",
-            "Vei primi un email de confirmare în scurt timp. Verifică și folderul de spam."
+            "Felicitari! Acum te poti loga!"
         );
     })(req, res, next);
 });

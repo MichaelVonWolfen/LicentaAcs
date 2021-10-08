@@ -198,7 +198,8 @@
 			"relations": [
 				"7225635d-8625-49ae-83ab-92335878c099",
 				"1e133384-0ee4-4fb6-bed3-9024fca7854d",
-				"aa9b3407-afc6-493c-b4ae-fdaa5cc5d473"
+				"aa9b3407-afc6-493c-b4ae-fdaa5cc5d473",
+				"2e371b8a-7149-4878-a13d-c9c3eaf86949"
 			],
 			"lines": [],
 			"keys": [
@@ -224,8 +225,8 @@
 			"collation": "",
 			"others": "",
 			"referencedItemId": "d179d331-de85-47a9-9dd2-fc38217cdf85",
-			"x": 441,
-			"y": 81,
+			"x": 576,
+			"y": 194,
 			"gHeight": 160,
 			"gWidth": 232,
 			"color": "#ffffff",
@@ -319,11 +320,25 @@
 					"list": false,
 					"enum": "",
 					"validate": ""
+				},
+				{
+					"id": "f0fdef6e-e908-4556-8b80-ff18a9460107",
+					"name": "Posts_liked_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"fk": true,
+					"ref": "Posts"
 				}
 			],
 			"relations": [
 				"1e133384-0ee4-4fb6-bed3-9024fca7854d",
-				"11a7c7a6-9208-46ba-9547-24ae2d9e5945"
+				"11a7c7a6-9208-46ba-9547-24ae2d9e5945",
+				"2e371b8a-7149-4878-a13d-c9c3eaf86949"
 			],
 			"lines": [],
 			"keys": [
@@ -349,9 +364,9 @@
 			"collation": "",
 			"others": "",
 			"referencedItemId": "34245746-18d8-4e17-b565-524cd0605c6c",
-			"x": 813,
-			"y": 89,
-			"gHeight": 124,
+			"x": 939,
+			"y": 319,
+			"gHeight": 142,
 			"gWidth": 242,
 			"color": "#ffffff",
 			"background": "#03a9f4",
@@ -675,6 +690,27 @@
 			],
 			"generate": true,
 			"generateCustomCode": true
+		},
+		"2e371b8a-7149-4878-a13d-c9c3eaf86949": {
+			"id": "2e371b8a-7149-4878-a13d-c9c3eaf86949",
+			"visible": true,
+			"name": "Posts_Users",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "8f6fdadb-11c9-4975-a565-549c33581c96",
+			"parent": "d179d331-de85-47a9-9dd2-fc38217cdf85",
+			"child": "34245746-18d8-4e17-b565-524cd0605c6c",
+			"c_mp": "true",
+			"c_mch": "true",
+			"cols": [
+				{
+					"id": "12c533c9-9e74-4644-aad6-a03985117c7a",
+					"parentcol": "df629459-3b1d-467c-be25-d278da508795",
+					"childcol": "f0fdef6e-e908-4556-8b80-ff18a9460107"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true
 		}
 	},
 	"notes": {},
@@ -706,8 +742,8 @@
 		"def_collation": "",
 		"def_others": "",
 		"writeFileParam": false,
-		"filePath": "C:\\Users\\mihai\\Documents\\Github\\Proiect IT+Design\\Resources\\svhema.dmm",
-		"lastSaved": "Fri Oct 08 2021 15:47:26 GMT+0300 (Eastern European Summer Time)"
+		"filePath": "C:\\Users\\mihai\\WebstormProjects\\Proiect IT+Design\\Resources\\svhema.dmm",
+		"lastSaved": "10/8/2021"
 	},
 	"otherObjects": {},
 	"diagrams": {
@@ -745,9 +781,9 @@
 				},
 				"34245746-18d8-4e17-b565-524cd0605c6c": {
 					"referencedItemId": "34245746-18d8-4e17-b565-524cd0605c6c",
-					"x": 933,
-					"y": 328,
-					"gHeight": 142,
+					"x": 939,
+					"y": 319,
+					"gHeight": 160,
 					"gWidth": 242,
 					"color": "#ffffff",
 					"background": "#03a9f4",

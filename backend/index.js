@@ -1,22 +1,40 @@
-const express = require('express');
-require("./db")
+require("./db");
+const express = require("express");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const constants = require("./constants");
 const app = express();
-const http = require('http');
+const PORT = constants.port || 5000;
+const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const constants = require("./constants");
-const io = new Server(server);
-const PORT = constants.port
-const userMiddleware = require("./middleware/auth").userMiddleware
-
-app.get('/', (req, res) => {
-    res.send('<h1>Hello world</h1>');
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        credentials: true,
+    },
 });
-app.get("/api", userMiddleware, (req, res)=>{
-    res.send('<h1>Hello API world</h1>');
-})
+
+require("dotenv").config();
+// Bodyparser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Load passport strategies
+const localSignupStrategy = require("./passport/local-signup");
+const localLoginStrategy = require("./passport/local-login");
+passport.use("local-signup", localSignupStrategy);
+passport.use("local-login", localLoginStrategy);
+
+const auth = require("./routes/auth");
+
+app.use("/api/auth", auth);
+
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log('a user connected on ' + socket.id);
 });
 
 server.listen(PORT, () => {
