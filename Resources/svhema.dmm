@@ -250,6 +250,20 @@
 					"data": ""
 				},
 				{
+					"id": "0dbd7723-4e02-4c96-8851-3033e6963ce9",
+					"name": "role",
+					"datatype": "enum",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
 					"id": "4469952a-a29c-440a-b63d-b18ec2ca2bb8",
 					"name": "username",
 					"datatype": "string",
@@ -693,7 +707,7 @@
 		"def_others": "",
 		"writeFileParam": false,
 		"filePath": "C:\\Users\\mihai\\Documents\\Github\\Proiect IT+Design\\Resources\\svhema.dmm",
-		"lastSaved": "Fri Oct 08 2021 13:31:46 GMT+0300 (Eastern European Summer Time)"
+		"lastSaved": "Fri Oct 08 2021 15:47:26 GMT+0300 (Eastern European Summer Time)"
 	},
 	"otherObjects": {},
 	"diagrams": {
@@ -711,8 +725,8 @@
 			"diagramItems": {
 				"ae8f1099-5220-45bf-849d-3e8e0ca47bc9": {
 					"referencedItemId": "ae8f1099-5220-45bf-849d-3e8e0ca47bc9",
-					"x": 124,
-					"y": 200,
+					"x": 158,
+					"y": 181,
 					"gHeight": 214,
 					"gWidth": 296,
 					"color": "#ffffff",
@@ -732,8 +746,8 @@
 				"34245746-18d8-4e17-b565-524cd0605c6c": {
 					"referencedItemId": "34245746-18d8-4e17-b565-524cd0605c6c",
 					"x": 933,
-					"y": 327,
-					"gHeight": 124,
+					"y": 328,
+					"gHeight": 142,
 					"gWidth": 242,
 					"color": "#ffffff",
 					"background": "#03a9f4",
@@ -751,7 +765,7 @@
 				},
 				"b58f691f-9be9-468a-8613-26a304badda8": {
 					"referencedItemId": "b58f691f-9be9-468a-8613-26a304badda8",
-					"x": 938,
+					"x": 943,
 					"y": 30,
 					"gHeight": 142,
 					"gWidth": 246,
