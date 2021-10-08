@@ -1,0 +1,290 @@
+{
+	"tables": {
+		"ae8f1099-5220-45bf-849d-3e8e0ca47bc9": {
+			"id": "ae8f1099-5220-45bf-849d-3e8e0ca47bc9",
+			"visible": true,
+			"name": "Categoryes",
+			"desc": "",
+			"cols": [
+				{
+					"id": "f408410d-d140-44dd-ba0c-876f80341f88",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": ""
+				},
+				{
+					"id": "8ee74616-241b-482c-bf89-695b9d229b0b",
+					"name": "Name",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "cf423502-56ec-4c7c-bce2-65e8094e4ff7",
+					"name": "image",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				}
+			],
+			"relations": [
+				"7225635d-8625-49ae-83ab-92335878c099"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "25a43071-1735-4c96-9707-7ae1e0c5802e",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": [
+						{
+							"id": "de87394f-31db-467d-b84a-9c5c310aaeb2",
+							"colid": "f408410d-d140-44dd-ba0c-876f80341f88"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"referencedItemId": "ae8f1099-5220-45bf-849d-3e8e0ca47bc9",
+			"x": 153,
+			"y": 58,
+			"gHeight": 88,
+			"gWidth": 200,
+			"color": "#ffffff",
+			"background": "#3f51b5",
+			"resized": false
+		},
+		"d179d331-de85-47a9-9dd2-fc38217cdf85": {
+			"id": "d179d331-de85-47a9-9dd2-fc38217cdf85",
+			"visible": true,
+			"name": "Posts",
+			"desc": "",
+			"cols": [
+				{
+					"id": "df629459-3b1d-467c-be25-d278da508795",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": ""
+				},
+				{
+					"id": "b9d29dd5-44d6-4c07-98ea-10344aaa9f59",
+					"name": "Title",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "0d75a29f-8cc1-4802-bd96-33129d3a05b0",
+					"name": "content",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "9fdb80ec-7e4c-4b9f-a29e-049e2e5851e4",
+					"name": "post_image",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"list": false,
+					"enum": "",
+					"validate": ""
+				},
+				{
+					"id": "024dc28d-c851-40aa-9209-62e5a82a9360",
+					"name": "Category_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"comment": "",
+					"defaultvalue": "",
+					"data": "",
+					"fk": true,
+					"ref": "Categoryes"
+				}
+			],
+			"relations": [
+				"7225635d-8625-49ae-83ab-92335878c099"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "8f6fdadb-11c9-4975-a565-549c33581c96",
+					"name": "Primary key",
+					"isPk": true,
+					"using": "na",
+					"cols": [
+						{
+							"id": "402d7ab4-a000-414d-963a-e2694d314622",
+							"colid": "df629459-3b1d-467c-be25-d278da508795"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"referencedItemId": "d179d331-de85-47a9-9dd2-fc38217cdf85",
+			"x": 443,
+			"y": 56,
+			"gHeight": 106,
+			"gWidth": 208,
+			"color": "#ffffff",
+			"background": "#03a9f4",
+			"resized": false
+		}
+	},
+	"relations": {
+		"7225635d-8625-49ae-83ab-92335878c099": {
+			"id": "7225635d-8625-49ae-83ab-92335878c099",
+			"visible": true,
+			"name": "Categoryes_Posts",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "25a43071-1735-4c96-9707-7ae1e0c5802e",
+			"parent": "ae8f1099-5220-45bf-849d-3e8e0ca47bc9",
+			"child": "d179d331-de85-47a9-9dd2-fc38217cdf85",
+			"c_mp": "true",
+			"c_mch": "true",
+			"cols": [
+				{
+					"id": "ca52d964-a16d-4248-9b69-6753abbe1dc3",
+					"parentcol": "f408410d-d140-44dd-ba0c-876f80341f88",
+					"childcol": "024dc28d-c851-40aa-9209-62e5a82a9360"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true
+		}
+	},
+	"notes": {},
+	"lines": {},
+	"model": {
+		"name": "Split Personality Blog",
+		"id": "504cf988-30bd-4591-8bbe-36a6aa19f2bd",
+		"activeDiagram": "0678070d-21d2-45ba-b3e3-97936b1a87e0",
+		"desc": "",
+		"path": "",
+		"type": "MONGODB",
+		"version": 1,
+		"parentTableInFkCols": true,
+		"caseConvention": "under",
+		"replaceSpace": "_",
+		"color": "transparent",
+		"sideSelections": true,
+		"isDirty": true,
+		"storedin": {
+			"major": 4,
+			"minor": 1,
+			"extra": 0
+		},
+		"embeddedInParentsIsDisplayed": true,
+		"schemaContainerIsDisplayed": false,
+		"def_coltopk": true,
+		"def_validationLevel": "na",
+		"def_validationAction": "na",
+		"def_collation": "",
+		"def_others": "",
+		"writeFileParam": false,
+		"filePath": "C:\\Users\\mihai\\Documents\\Github\\Proiect IT+Design\\Resources\\svhema.dmm",
+		"lastSaved": "Fri Oct 08 2021 13:21:57 GMT+0300 (Eastern European Summer Time)"
+	},
+	"otherObjects": {},
+	"diagrams": {
+		"0678070d-21d2-45ba-b3e3-97936b1a87e0": {
+			"name": "Main Diagram",
+			"description": "",
+			"id": "0678070d-21d2-45ba-b3e3-97936b1a87e0",
+			"keysgraphics": true,
+			"linegraphics": "detailed",
+			"zoom": 1,
+			"background": "transparent",
+			"lineColor": "transparent",
+			"isOpen": true,
+			"main": true,
+			"diagramItems": {
+				"ae8f1099-5220-45bf-849d-3e8e0ca47bc9": {
+					"referencedItemId": "ae8f1099-5220-45bf-849d-3e8e0ca47bc9",
+					"x": 153,
+					"y": 58,
+					"gHeight": 88,
+					"gWidth": 200,
+					"color": "#ffffff",
+					"background": "#3f51b5",
+					"resized": false
+				},
+				"d179d331-de85-47a9-9dd2-fc38217cdf85": {
+					"referencedItemId": "d179d331-de85-47a9-9dd2-fc38217cdf85",
+					"x": 443,
+					"y": 56,
+					"gHeight": 124,
+					"gWidth": 228,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false
+				}
+			},
+			"scroll": {
+				"x": 0,
+				"y": 0
+			}
+		}
+	},
+	"order": []
+}
