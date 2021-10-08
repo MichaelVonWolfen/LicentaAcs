@@ -7,3 +7,5 @@ O sa fie responsive site-ul
 Categoriile au popularitate (exista un top 3 al popularitatii acestora)
 Sortare dupa nr de likes si dupa data crearii elementelor
 Pagina de adaugat postari (daca nu exista categoria sa fie adaugata)
+
+Admin-ul creeaza categoriile??? Sau fiecare user poate in cazul in care nu exista????
