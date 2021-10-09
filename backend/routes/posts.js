@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const Posts = require("../models/post")
 const Categories = require("../models/categorie")
+const mongoose = require("mongoose");
 // route to update likes
 // route to delete like
 router.patch("/:id", async (req, res) => {
@@ -93,7 +94,13 @@ router.patch("/post/:post_id", async(req, res) => {
 // route to delete post
 router.delete("/post/:id", async (req, res) => {
     try{
-        let deleted_data = await Posts.deleteMany({_id:req.params.id})
+        let _id = req.params.id;
+        let post = await Posts.findOne({_id: new mongoose.Types.ObjectId(_id)})
+        let authorID = req.user._id.toString()
+        if(post.creatorID.toString() !== authorID){
+            return res.sendStatus(403)
+        }
+        let deleted_data = await Posts.deleteOne({_id})
         return res.send(deleted_data)
     }catch (e) {
         console.log(e)
@@ -103,7 +110,7 @@ router.delete("/post/:id", async (req, res) => {
 // get a post
 router.get("/post/:id", async (req, res) => {
     try{
-        let post = await Posts.findById(req.params.id)
+        let post = await Posts.findById(req.params.id).populate("creatorID", "username")
         return res.send(post)
     }catch (e) {
         console.log(e)

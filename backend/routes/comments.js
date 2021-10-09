@@ -33,7 +33,13 @@ router.patch("/:comment_id",async(req, res) => {
     try {
         let _id = req.params.comment_id;
         let {content} = req.body;
-        await Comments.findOneAndUpdate({_id: new mongoose.Types.ObjectId(_id)}, {content})
+        let comment = await Comments.findOne({_id: new mongoose.Types.ObjectId(_id)})
+        let authorID = req.user._id.toString()
+        if(comment.authorID.toString() !== authorID){
+            return res.sendStatus(403)
+        }
+        comment.content = content
+        await comment.save()
         return res.sendStatus(200)
     }catch (e) {
         console.log(e)
@@ -44,6 +50,11 @@ router.patch("/:comment_id",async(req, res) => {
 router.delete("/:comment_id",async(req, res) => {
     try {
         let _id = req.params.comment_id;
+        let comment = await Comments.findOne({_id: new mongoose.Types.ObjectId(_id)})
+        let authorID = req.user._id.toString()
+        if(comment.authorID.toString() !== authorID){
+            return res.sendStatus(403)
+        }
         await Comments.findByIdAndRemove(_id)
         return res.sendStatus(200)
     }catch (e) {
