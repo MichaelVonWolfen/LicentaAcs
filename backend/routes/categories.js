@@ -55,7 +55,7 @@ router.delete("/:name", async (req, res) => {
 router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
-        let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)})
+        let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username')
         return res.send(post)
     }catch (e) {
         console.log(e)
