@@ -1,8 +1,10 @@
 const router = require("express").Router()
 let Comments = require("../models/comment")
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
+const requiredAuth = require("../middleware/auth");
+
 //route to create comments
-router.post("/", async(req, res) => {
+router.post("/",requiredAuth.userMiddleware, async(req, res) => {
     try {
         let authorID = req.user._id.toString()
         let {postID, content} = req.body;
@@ -29,7 +31,7 @@ router.get("/:post_id",async(req, res) => {
     }
 })
 //Route to update comments
-router.patch("/:comment_id",async(req, res) => {
+router.patch("/:comment_id",requiredAuth.userMiddleware,async(req, res) => {
     try {
         let _id = req.params.comment_id;
         let {content} = req.body;
@@ -47,7 +49,7 @@ router.patch("/:comment_id",async(req, res) => {
     }
 })
 //Route to delete comments
-router.delete("/:comment_id",async(req, res) => {
+router.delete("/:comment_id",requiredAuth.userMiddleware, async(req, res) => {
     try {
         let _id = req.params.comment_id;
         let comment = await Comments.findOne({_id: new mongoose.Types.ObjectId(_id)})

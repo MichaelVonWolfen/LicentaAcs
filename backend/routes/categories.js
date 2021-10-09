@@ -2,7 +2,8 @@ const router = require("express").Router()
 const Categories = require("../models/categorie")
 const Posts = require("../models/post");
 const mongoose = require("mongoose")
-router.post("/", async (req, res) => {
+const requiredAuth = require("../middleware/auth");
+router.post("/", requiredAuth.userMiddleware,async (req, res) => {
     try {
         const {name, image, style} = req.body
         let copy_category = await Categories.findOne({name})
@@ -20,17 +21,7 @@ router.post("/", async (req, res) => {
         return res.sendStatus(500)
     }
 })
-router.get("", async (req, res) => {
-    try{
-        let categories = await Categories.find({})
-        console.log(categories)
-        return  res.send(categories)
-    }catch (e) {
-        console.log(e)
-        return res.sendStatus(500)
-    }
-})
-router.patch("/:id", async (req, res) => {
+router.patch("/:id",requiredAuth.userMiddleware, async (req, res) => {
     try{
         const {name, image, style} = req.body
         const id = req.params.id
@@ -41,7 +32,7 @@ router.patch("/:id", async (req, res) => {
         res.sendStatus(500)
     }
 })
-router.delete("/:name", async (req, res) => {
+router.delete("/:name",requiredAuth.userMiddleware, async (req, res) => {
     try {
         let category_name = req.params.name
         await Categories.deleteMany({name: category_name})
@@ -57,6 +48,17 @@ router.get("/:category_id", async (req, res) => {
         const category_id = req.params.category_id
         let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username')
         return res.send(post)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
+//get all categories
+router.get("", async (req, res) => {
+    try{
+        let categories = await Categories.find({})
+        console.log(categories)
+        return  res.send(categories)
     }catch (e) {
         console.log(e)
         return res.sendStatus(500)

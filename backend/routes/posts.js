@@ -2,9 +2,11 @@ const router = require("express").Router()
 const Posts = require("../models/post")
 const Categories = require("../models/categorie")
 const mongoose = require("mongoose");
+const requiredAuth = require("../middleware/auth");
+
 // route to update likes
 // route to delete like
-router.patch("/:id", async (req, res) => {
+router.patch("/:id",requiredAuth.userMiddleware, async (req, res) => {
     try{
         const {operation_type} = req.body;
         let user_id = req.user._id.toString()
@@ -45,7 +47,7 @@ router.get("/:id", async (req, res) => {
     }
 })
 // route to create a post
-router.post("/post", async(req, res) => {
+router.post("/post",requiredAuth.userMiddleware, async(req, res) => {
     try{
         const {title, content, post_img, category_name}  = req.body;
         let user_id = req.user._id.toString()
@@ -68,7 +70,7 @@ router.post("/post", async(req, res) => {
     }
 })
 // route to update a post
-router.patch("/post/:post_id", async(req, res) => {
+router.patch("/post/:post_id",requiredAuth.userMiddleware, async(req, res) => {
     try{
         let id = req.params.post_id;
         let user_id = req.user._id.toString();
@@ -92,7 +94,7 @@ router.patch("/post/:post_id", async(req, res) => {
     }
 })
 // route to delete post
-router.delete("/post/:id", async (req, res) => {
+router.delete("/post/:id",requiredAuth.userMiddleware, async (req, res) => {
     try{
         let _id = req.params.id;
         let post = await Posts.findOne({_id: new mongoose.Types.ObjectId(_id)})
