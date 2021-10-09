@@ -70,12 +70,10 @@ router.post("/post", async(req, res) => {
 router.patch("/post/:post_id", async(req, res) => {
     try{
         let id = req.params.post_id;
-        let user_id = req.body.user_id;
+        let user_id = req.user._id.toString();
         const {title, content, post_img, category_name}  = req.body;
         let post = await Posts.findById(id)
         if(post.creatorID.toString() !==  user_id) {
-            console.log(post.categoryID.toString())
-            console.log(user_id)
             return res.sendStatus(403)
         }
         const category = await Categories.findOne({name:category_name})
