@@ -9,3 +9,5 @@ Sortare dupa nr de likes si dupa data crearii elementelor
 Pagina de adaugat postari (daca nu exista categoria sa fie adaugata)
 
 Admin-ul creeaza categoriile??? Sau fiecare user poate in cazul in care nu exista????
+Cand se comenteaza la o postare trebuie sa fii logat, insa ce se intampla daca nu esti logat?
+(Sa apara comentariile dar sa nu poti comenta tu pana ce nu esti logat si sa apara un warning ca nu esti logat??)

@@ -30,9 +30,12 @@ passport.use("local-signup", localSignupStrategy);
 passport.use("local-login", localLoginStrategy);
 
 const auth = require("./routes/auth");
+const requiredAuth = require("./middleware/auth");
+const users = require("./routes/user")
 
 app.use("/api/auth", auth);
-
+app.use("/api/users", requiredAuth.userMiddleware)
+app.use("/api/users", users)
 io.on('connection', (socket) => {
     console.log('a user connected on ' + socket.id);
 });
