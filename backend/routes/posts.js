@@ -1,8 +1,115 @@
-// TODO ADD route to update likes
-// TODO ADD route to delete like
-// TODO ADD read nb of likes of a post like
-// TODO ADD route to create a post
-// TODO ADD route to update a post
-// TODO ADD route to delete post
-// TODO ADD get a post
-// TODO ADD get all posts from a category
+const router = require("express").Router()
+const Posts = require("../models/post")
+const Categories = require("../models/categorie")
+// route to update likes
+// route to delete like
+router.patch("/:id", async (req, res) => {
+    try{
+        const {operation_type} = req.body;
+        let user_id = req.user._id.toString()
+        if(!operation_type || !user_id)
+            return res.sendStatus(400)
+        const id = req.params.id
+        let post = await Posts.findById(id)
+        if(!post)
+            return res.sendStatus(404)
+        if(operation_type.toLowerCase() === "add") {
+            let already_liked = post.users_likes_IDS.filter(u_id => u_id.toString() === user_id)
+            if(already_liked.length !== 0)
+                return res.sendStatus(400)
+            post.users_likes_IDS.push(user_id);
+            post.like_nb++;
+        }else if(operation_type.toLowerCase() === "remove"){
+            post.like_nb--;
+            post.users_likes_IDS = post.users_likes_IDS.filter(u_id => u_id.toString() !== user_id)
+        }
+        await post.save()
+        return res.send("Post updated")
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
+// read nb of likes of a post like
+router.get("/:id", async (req, res) => {
+    try{
+        const id = req.params.id
+        let post = await Posts.findById(id)
+        if(!post)
+            return res.sendStatus(404)
+        return res.send({likes:post.users_likes_IDS.length})
+    }catch (e) {
+        console.log(e)
+        return  res.sendStatus(500)
+    }
+})
+// route to create a post
+router.post("/post", async(req, res) => {
+    try{
+        const {title, content, post_img, category_name}  = req.body;
+        let user_id = req.user._id.toString()
+        if(!user_id || !title || !content || !post_img || !category_name)
+            return res.status(400).send("Not all required fields received")
+        const category = await Categories.findOne({name:category_name})
+        if(!category)
+            return res.status(404).send("Category does not exist")
+        await new Posts({
+            title,
+            content,
+            post_img,
+            categoryID:category._id,
+            creatorID:user_id
+        }).save()
+        return res.sendStatus(201)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
+// route to update a post
+router.patch("/post/:post_id", async(req, res) => {
+    try{
+        let id = req.params.post_id;
+        let user_id = req.body.user_id;
+        const {title, content, post_img, category_name}  = req.body;
+        let post = await Posts.findById(id)
+        if(post.creatorID.toString() !==  user_id) {
+            console.log(post.categoryID.toString())
+            console.log(user_id)
+            return res.sendStatus(403)
+        }
+        const category = await Categories.findOne({name:category_name})
+        if(!category)
+            return res.status(404).send("Category does not exist")
+        post.title = title;
+        post.content = content;
+        post.post_img = post_img;
+        post.categoryID = category._id;
+        await post.save()
+        return res.sendStatus(200)
+    }catch (e) {
+        console.log(e)
+        return res.send(400)
+    }
+})
+// route to delete post
+router.delete("/post/:id", async (req, res) => {
+    try{
+        let deleted_data = await Posts.deleteMany({_id:req.params.id})
+        return res.send(deleted_data)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
+// get a post
+router.get("/post/:id", async (req, res) => {
+    try{
+        let post = await Posts.findById(req.params.id)
+        return res.send(post)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
+module.exports = router

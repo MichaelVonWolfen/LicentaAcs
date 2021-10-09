@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema({
     },
     content:{
         type:String,
+        required:true
     },
     post_img:{
         type:String
@@ -17,12 +18,18 @@ const postSchema = new mongoose.Schema({
     },
     categoryID:{
         type:mongoose.Types.ObjectId,
+        required:true,
         ref:"categories"
     },
-    authorID:{
+    creatorID:{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:"users"
+    },
+    users_likes_IDS:[{
         type:mongoose.Types.ObjectId,
         ref:"users"
-    }
+    }]
 },{
     timestamps:true
 })

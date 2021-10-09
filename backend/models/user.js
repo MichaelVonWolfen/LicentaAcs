@@ -20,10 +20,6 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    likedPostsIDs:[{
-        type:mongoose.Types.ObjectId,
-        ref:"posts"
-    }],
     password:{
         type:String,
         required:true

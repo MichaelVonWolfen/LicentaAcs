@@ -31,9 +31,20 @@ passport.use("local-login", localLoginStrategy);
 
 const auth = require("./routes/auth");
 const requiredAuth = require("./middleware/auth");
+const categories = require("./routes/categories")
+const comments = require("./routes/comments")
+const posts = require("./routes/posts")
 const users = require("./routes/user")
 
 app.use("/api/auth", auth);
+//TODO USER SHOULD NOT BE LOGGED TO SEE categories
+app.use("/api/categories", requiredAuth.userMiddleware)
+app.use("/api/categories", categories)
+//TODO USER SHOULD NOT BE LOGGED TO SEE COMMENTS
+app.use("/api/comments", requiredAuth.userMiddleware)
+app.use("/api/comments", comments)
+app.use("/api/posts", requiredAuth.userMiddleware)
+app.use("/api/posts", posts)
 app.use("/api/users", requiredAuth.userMiddleware)
 app.use("/api/users", users)
 io.on('connection', (socket) => {
