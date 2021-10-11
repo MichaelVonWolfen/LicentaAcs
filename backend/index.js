@@ -34,12 +34,14 @@ const categories = require("./routes/categories")
 const comments = require("./routes/comments")
 const posts = require("./routes/posts")
 const users = require("./routes/user")
+const search = require("./routes/search")
 
 app.use("/api/auth", auth);
 app.use("/api/categories", categories)
 app.use("/api/comments", comments)
 app.use("/api/posts", posts)
 app.use("/api/users", users)
+app.use("/api/search", search)
 io.on('connection', (socket) => {
     console.log('a user connected on ' + socket.id);
 });

@@ -46,7 +46,8 @@ router.delete("/:name",requiredAuth.userMiddleware, async (req, res) => {
 router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
-        let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username')
+        const orderby = req.body;
+        let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby)
         return res.send(post)
     }catch (e) {
         console.log(e)
@@ -56,7 +57,7 @@ router.get("/:category_id", async (req, res) => {
 //get all categories
 router.get("", async (req, res) => {
     try{
-        let categories = await Categories.find({})
+        let categories = await Categories.find({}).sort({createdAt:'desc'})
         console.log(categories)
         return  res.send(categories)
     }catch (e) {

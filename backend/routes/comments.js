@@ -23,7 +23,7 @@ router.post("/",requiredAuth.userMiddleware, async(req, res) => {
 router.get("/:post_id",async(req, res) => {
     try {
         let postID = req.params.post_id;
-        let comments = await Comments.find({postID}).populate("authorID", "username")
+        let comments = await Comments.find({postID}).populate("authorID", "username").sort({createdAt:'desc'})
         return res.send(comments)
     }catch (e) {
         console.log(e)
