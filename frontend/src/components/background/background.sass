@@ -1,0 +1,31 @@
+body
+  min-height: 100vh
+  //Find how to change the hue so that only one color shall be enough
+  background: transparent linear-gradient(90deg, #252422 0%, #262522 0%, #3C3936 100%, #403D39 100%) 0 0 no-repeat padding-box
+  position: relative
+  overflow-x: hidden
+
+@mixin circle_base
+  z-index: 0
+  position: absolute
+  width: var(--radius, 100px)
+  height: var(--radius, 100px)
+  top: var(--top_distance, 100px)
+  left: var(--left_distance, 100px)
+  opacity: 0.35
+  border-radius: 100%
+  transform: translate(-50%, -50%)
+.background
+  position: fixed
+.circle
+  @include circle_base
+  background-color: var(--color, #CCC5B9)
+
+.circle_stroke_only
+  @include circle_base
+  border: 15px solid var(--color, #CCC5B9)
+
+.multiple_circles
+  @include circle_base
+  box-shadow: 0 0 0 3px var(--color,#CCC5B9), 0 0 0 14px #252422,0 0 0 17px var(--color,#CCC5B9), 0 0 0 28px #252422,0 0 0 31px var(--color,#CCC5B9)
+  opacity: 0.2
