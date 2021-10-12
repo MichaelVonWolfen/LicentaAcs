@@ -1,0 +1,65 @@
+a, .span {
+  text-decoration: none;
+  padding: 10px;
+  height: 40px;
+  line-height: 40px;
+  white-space: nowrap;
+}
+
+nav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color, #CCC5B9) 0 0 no-repeat padding-box;
+  box-shadow: 0 3px 6px var(--background-color, #252422);
+}
+nav .links a {
+  margin: 0 20px;
+}
+nav .search_span {
+  max-width: 400px;
+  width: 20vw;
+  position: relative;
+  opacity: 0.9;
+}
+nav .search_span .search_bar {
+  width: 100%;
+  height: 100%;
+  padding: 0 50px;
+  background: var(--background-color, #252422) 0 0 no-repeat padding-box;
+  box-shadow: 0 3px 6px var(--background-color, #252422);
+  border: none;
+  border-radius: 20px;
+  opacity: 1;
+  color: var(--color, #CCC5B9);
+}
+nav .search_span .search_bar:focus {
+  border: none;
+  outline: none;
+}
+nav .search_span::before, nav .search_span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  transform: translate(-50%, -50%);
+}
+nav .search_span::before {
+  width: 15px;
+  height: 15px;
+  border: 3px solid var(--color, #CCC5B9);
+  border-radius: 100%;
+}
+nav .search_span::after {
+  width: 1px;
+  height: 10px;
+  border-left: 3px solid var(--color, #CCC5B9);
+  top: 56%;
+  left: 43px;
+  transform: rotate(-45deg);
+}
+
+/*# sourceMappingURL=navbar.css.map */

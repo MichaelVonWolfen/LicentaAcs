@@ -1,0 +1,52 @@
+.category {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: 35px;
+}
+.category::before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  outline: 1px solid var(--color, #252422);
+  height: 150px;
+  width: 150px;
+  transform: rotate(10deg);
+  transition: 0.5s;
+}
+.category:hover::before {
+  margin: 10px;
+  width: 130px;
+  height: 130px;
+  transform: rotate(30deg);
+  background-color: var(--color, #252422);
+}
+.category img {
+  width: 150px;
+  z-index: 1;
+}
+.category .filter {
+  z-index: 2;
+  position: absolute;
+  background: #252422;
+  width: 150px;
+  height: 150px;
+  top: 0;
+  left: 0;
+  border: none;
+  opacity: 0.2;
+  cursor: pointer;
+}
+.category::after {
+  position: absolute;
+  content: attr(name);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: brightness(1.5);
+  color: var(--color, #252422);
+  font-size: x-large;
+  text-transform: capitalize;
+}
+
+/*# sourceMappingURL=category.css.map */

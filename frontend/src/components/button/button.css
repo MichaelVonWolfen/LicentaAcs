@@ -1,0 +1,36 @@
+.button_parent {
+  position: relative;
+  height: auto;
+  margin: 20px;
+  width: fit-content;
+}
+.button_parent::before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  border: 1px solid var(--color, #CCC5B9);
+  top: -10px;
+  left: -10px;
+  min-width: 150px;
+  height: 25px;
+  transition: 0.5s;
+}
+.button_parent:hover::before {
+  top: -5px;
+  left: -5px;
+}
+.button_parent .button {
+  padding: 5px;
+  background-color: var(--background-color, #252422);
+  color: var(--color, #CCC5B9);
+  min-width: 150px;
+  border: 1px solid var(--color, #CCC5B9);
+  cursor: pointer;
+  transition: 0.5s;
+}
+.button_parent .button:hover {
+  color: var(--background-color, #252422);
+  background-color: var(--color, #CCC5B9);
+}
+
+/*# sourceMappingURL=button.css.map */
