@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import { LoggedOutRoute, PropsRoute } from "./modules/Routes";
@@ -6,6 +6,7 @@ import Home from "./components/Home/home";
 import Register from "./components/Register/register";
 import Login from "./components/LogIN/Login";
 function App() {
+    let [smt, setSmt] = useState(0)
   return (
       <BrowserRouter>
           <div className="App">

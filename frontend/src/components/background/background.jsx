@@ -11,13 +11,14 @@ const Background = (props) => {
         setWidth(window.innerWidth);
         setHeight(window.innerHeight  - 100);
     }
-    window.addEventListener("resize", handleResize)
 
-    const fill_background = (color) => {
+    const fill_background = (color, bkg) => {
         let elements = []
-        for(let i = 0; i < constants.MAX_BACKGROUND_ELEMENTS; i++){
+        document.body.style =`--background-color: ${bkg};--color: ${color};`
+        let nb_elements = Math.floor(constants.MAX_BACKGROUND_ELEMENTS * width / constants.NUMBER_DECREASER_CONSTANT)
+        console.log(nb_elements)
+        for(let i = 0; i < nb_elements; i++){
             const style = {
-                "--color": color,
                 "--radius": Math.floor(Math.random() * constants.MAX_CIRCLE_RADIUS) + "px",
                 "--top_distance":  Math.floor(Math.random() * height) + "px",
                 "--left_distance":  Math.floor(Math.random() * width) + "px"
@@ -26,9 +27,10 @@ const Background = (props) => {
         }
         return elements;
     }
+    window.addEventListener("resize", handleResize)
     return (
         <div className="background">
-            {fill_background(props.color)}
+            {fill_background(props.color, props.background_color)}
         </div>
     )
 }
