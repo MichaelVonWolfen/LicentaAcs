@@ -1,4 +1,34 @@
-.button
-  position: absolute
-  top: 50%
-  color: white
+$background-color: var(--background-color, #252422)
+$text-color: var(--color, #CCC5B9)
+$min-width: 150px
+$height:25px
+$transition_time: 0.5s
+.button_parent
+  position: relative
+  height: auto
+  margin: 20px
+  width: fit-content
+  &::before
+    z-index: -1
+    position: absolute
+    content: ""
+    border: 1px solid $text-color
+    top: -10px
+    left: -10px
+    min-width: $min-width
+    height: $height
+    transition: $transition_time
+  &:hover::before
+    top: -5px
+    left: -5px
+  .button
+    padding: 5px
+    background-color: $background-color
+    color: $text-color
+    min-width: $min-width
+    border: 1px solid $text-color
+    cursor: pointer
+    transition: $transition_time
+    &:hover
+      color: $background-color
+      background-color: $text-color

@@ -1,5 +1,4 @@
 @mixin circle_base
-  z-index: 0
   position: absolute
   width: var(--radius, 100px)
   height: var(--radius, 100px)
@@ -13,9 +12,10 @@ body
   //Find how to change the hue so that only one color shall be enough
   position: relative
   overflow-x: hidden
-  background-color: var(--background-color)
+  background-color: var(--background-color, #252422)
 .background
   position: fixed
+  z-index: -1
 .circle
   @include circle_base
   background-color: var(--color, #CCC5B9)

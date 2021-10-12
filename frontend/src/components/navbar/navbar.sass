@@ -1,13 +1,14 @@
 $background_color: var(--background-color, #252422)
 $color: var(--color, #CCC5B9)
-a,span
+$size: 40px
+a,.span
   text-decoration: none
   padding: 10px
-  height: 60px
-  line-height: 60px
+  height: $size
+  line-height: $size
   white-space: nowrap
 nav
-  position: fixed
+  position: relative
   width: 100%
   display: flex
   z-index: 1
@@ -15,6 +16,8 @@ nav
   align-items: center
   background: $color 0 0 no-repeat padding-box
   box-shadow: 0 3px 6px $background_color
+  //margin-bottom: $size
+
   .links a
     margin: 0 20px
   .search_span
@@ -39,7 +42,7 @@ nav
     &::before, &::after
       content: ""
       position: absolute
-      top: 45%
+      top: 50%
       left: 35px
       transform: translate(-50%, -50%)
     &::before
@@ -51,6 +54,6 @@ nav
       width: 1px
       height: 10px
       border-left: 3px solid $color
-      top: 51%
+      top: 56%
       left: 43px
       transform: rotate(-45deg)

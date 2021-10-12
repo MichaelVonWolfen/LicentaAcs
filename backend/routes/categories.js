@@ -42,7 +42,7 @@ router.delete("/:name",requiredAuth.userMiddleware, async (req, res) => {
         return res.status(500).send("Something went wrong")
     }
 })
-// get all posts from a category
+// get all post from a category
 router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
@@ -54,7 +54,7 @@ router.get("/:category_id", async (req, res) => {
         return res.sendStatus(500)
     }
 })
-//get all categories
+//get all categorie
 router.get("", async (req, res) => {
     try{
         let categories = await Categories.find({}).sort({createdAt:'desc'})

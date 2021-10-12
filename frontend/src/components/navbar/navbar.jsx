@@ -11,13 +11,13 @@ export default class Navbar extends React.Component{
         return(
             <nav>
                 <a href="/" className={"Logo"}>Split</a>
-                <span className={"search_span"}>
+                <span className={"search_span span"}>
                     <input type="text" placeholder="Search" className="search_bar"/>
                 </span>
-                <span className={"links"}>
+                <span className={"links span"}>
                     <a href="/">Home</a>
                     {!this.isLoggedIn ? (
-                    <span >
+                    <span className={"span"}>
                         <a href="/login">Log In</a>
                         <a href="/register">Register</a>
                     </span>

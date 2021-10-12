@@ -19,7 +19,7 @@ const Background = (props) => {
         console.log(nb_elements)
         for(let i = 0; i < nb_elements; i++){
             const style = {
-                "--radius": Math.floor(Math.random() * constants.MAX_CIRCLE_RADIUS) + "px",
+                "--radius": Math.floor(Math.random() * constants.MAX_CIRCLE_RADIUS) + 2 + "px",
                 "--top_distance":  Math.floor(Math.random() * height) + "px",
                 "--left_distance":  Math.floor(Math.random() * width) + "px"
             }

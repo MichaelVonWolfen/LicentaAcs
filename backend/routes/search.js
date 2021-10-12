@@ -2,7 +2,7 @@ const router = require("express").Router()
 const Categories = require("../models/categorie")
 const Posts = require("../models/post")
 
-//search for categories and posts based on a string
+//search for categorie and post based on a string
 router.get("/", async (req, res) => {
     try{
         const search_strings = req.body.search;
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     return res.sendStatus(403)
 
 })
-//TODO Get top 3 categories by nb of likes
+//TODO Get top n categorie by nb of likes
 router.get("/top3", async (req, res) => {
     try{
         return res.send(await  Categories.getTop())

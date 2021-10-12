@@ -1,0 +1,50 @@
+$size_pc: 150px
+$size_smaller_pc: 130px
+$background_color:var(--color, #252422)
+$transition_time: 0.5s
+.category
+  width: $size_pc
+  height: $size_pc
+  position: relative
+  margin: 35px
+  &::before
+    z-index: -1
+    content: ""
+    position: absolute
+    outline: 1px solid $background_color
+    height: $size_pc
+    width: $size_pc
+    transform: rotate(10deg)
+    transition: $transition_time
+  &:hover
+    &::before
+      margin: 10px
+      width: $size_smaller_pc
+      height: $size_smaller_pc
+      transform: rotate(30deg)
+      background-color: $background_color
+  img
+    width: $size_pc
+    z-index: 1
+  .filter
+    z-index: 2
+    position: absolute
+    background: #252422
+    width: $size_pc
+    height: $size_pc
+    top: 0
+    left: 0
+    border: none
+    opacity: 0.2
+    cursor: pointer
+
+  &::after
+    position: absolute
+    content: attr(name)
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    filter: brightness(1.5)
+    color: $background_color
+    font-size: x-large
+    text-transform: capitalize
