@@ -1,65 +1,160 @@
-a, .span {
-  text-decoration: none;
-  padding: 10px;
-  height: 40px;
-  line-height: 40px;
-  white-space: nowrap;
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(128, 128, 128, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(169, 169, 169, 0.6);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 211, 211, 0.6);
 }
 
 nav {
-  position: relative;
   width: 100%;
   display: flex;
-  z-index: 1;
   justify-content: space-between;
-  align-items: center;
   background: var(--color, #CCC5B9) 0 0 no-repeat padding-box;
   box-shadow: 0 3px 6px var(--background-color, #252422);
+  padding: 20px 0;
 }
-nav .links a {
-  margin: 0 20px;
+nav .hamburger {
+  display: none;
 }
-nav .search_span {
-  max-width: 400px;
-  width: 20vw;
-  position: relative;
-  opacity: 0.9;
+nav .logo {
+  padding: 0 0 0 15px;
 }
-nav .search_span .search_bar {
-  width: 100%;
-  height: 100%;
-  padding: 0 50px;
-  background: var(--background-color, #252422) 0 0 no-repeat padding-box;
+nav .search_bar {
+  background: var(--background-color, #252422) 0% 0 no-repeat padding-box;
+  width: 200px;
   box-shadow: 0 3px 6px var(--background-color, #252422);
+  border-radius: 50px;
   border: none;
-  border-radius: 20px;
-  opacity: 1;
+  padding: 10px 20px;
   color: var(--color, #CCC5B9);
+  position: relative;
 }
-nav .search_span .search_bar:focus {
-  border: none;
+nav .search_bar:focus {
   outline: none;
 }
-nav .search_span::before, nav .search_span::after {
+nav .search_bar::placeholder {
+  color: var(--color, #CCC5B9);
+}
+nav .search_bar::before, nav .search_bar::after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 35px;
   transform: translate(-50%, -50%);
 }
-nav .search_span::before {
+nav .search_bar::before {
   width: 10px;
   height: 10px;
-  border: 3px solid var(--color, #CCC5B9);
-  border-radius: 100%;
+  border: 2px solid var(--color, #CCC5B9);
 }
-nav .search_span::after {
-  width: 1px;
-  height: 8px;
-  border-left: 3px solid var(--color, #CCC5B9);
-  top: 55%;
+nav .links {
+  padding-top: 5px;
+}
+nav .nav_link {
+  text-decoration: none;
+  color: var(--background-color, #252422);
+  padding: 10px;
+  margin: 5px 5px;
+  border-radius: 3px;
+  transition: 0.5s;
+  outline: 2px solid rgba(0, 0, 0, 0);
+  position: relative;
+  font-weight: 700;
+}
+nav .nav_link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+}
+nav .hamburger_links {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding-top: 10px;
+  z-index: 99;
+  width: 75vw;
+  max-width: 600px;
+  background-color: var(--color, #CCC5B9);
+  color: white !important;
+  right: 0;
+  box-shadow: 0 0 300px 200px var(--background-color, #252422);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+  font-size: 18pt;
+}
+nav .hamburger_links .span {
+  display: flex;
+  flex-direction: column;
+}
+nav .hamburger_links .nav_link {
+  margin-top: 10px;
+  padding: 10px 70px;
+}
+nav .hamburger_links .nav_link .svg_icon {
+  position: absolute;
+  top: 53%;
   left: 40px;
-  transform: rotate(-45deg);
+  transform: translate(-50%, -50%);
+  color: var(--background-color, #252422);
+}
+
+.sidebar_hidden {
+  display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  nav .search_bar {
+    width: 150px;
+  }
+  nav .links {
+    display: none;
+  }
+  nav .hamburger {
+    margin: 0 20px 0 0;
+    width: 45px;
+    height: 40px;
+    cursor: pointer;
+    color: var(--background-color, #252422);
+    border-radius: 10px;
+    border: 4px solid var(--background-color, #252422);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  nav .hamburger .bars {
+    width: 30px;
+    border-bottom: 4px solid var(--background-color, #252422);
+    border-radius: 5px;
+  }
+  nav .hamburger::after, nav .hamburger::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    border-radius: 5px;
+  }
+  nav .hamburger::before {
+    border-top: 4px solid var(--background-color, #252422);
+    top: 25%;
+  }
+  nav .hamburger::after {
+    border-top: 4px solid var(--background-color, #252422);
+    top: 75%;
+  }
+}
+@media screen and (max-width: 400px) {
+  nav .search_bar {
+    width: 100px;
+  }
 }
 
 /*# sourceMappingURL=navbar.css.map */

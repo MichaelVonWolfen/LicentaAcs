@@ -11,7 +11,7 @@ function App() {
   return (
       <BrowserRouter>
           <div className="App">
-              {/*<Navbar/>*/}
+              <Navbar/>
               {/*//TODO FIND a way to change the colors on the neded pages*/}
               <Background color="#CCC5B9" background_color="#252422"/>
               <PropsRoute exact path="/" component={Home} />

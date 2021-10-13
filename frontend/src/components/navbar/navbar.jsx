@@ -1,28 +1,56 @@
 import React from "react";
 import "./navbar.css"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 export default class Navbar extends React.Component{
     isLoggedIn;
+    changeSidebarState =(e)=>{
+        let sidebar = document.querySelector("#sidebar_menu")
+        if (sidebar.classList.contains("sidebar_hidden"))
+            sidebar.classList.remove("sidebar_hidden")
+        else
+            sidebar.classList.add("sidebar_hidden")
+    };
     constructor(props) {
         super(props);
         this.isLoggedIn = localStorage.length >= 1
         console.log(this.isLoggedIn)
     }
-    render() {
+    render()
+{
         return(
             <nav>
-                <a href="/" className={"Logo"}>Split</a>
-                <span className={"search_span span"}>
+                <a href="/" className={"logo"}>Split</a>
+                <span className={"search_container"}>
                     <input type="text" placeholder="Search" className="search_bar"/>
                 </span>
-                <span className={"links span"}>
-                    <a href="/">Home</a>
+                <span className={"links"}>
+                    <a className={"nav_link"} href="/">Home</a>
                     {!this.isLoggedIn ? (
                     <span className={"span"}>
-                        <a href="/login">Log In</a>
-                        <a href="/register">Register</a>
+                        <a className={"nav_link"} href="/login">Log In</a>
+                        <a className={"nav_link"} href="/register">Register</a>
                     </span>
                     ):(
-                        <a href="#" className={"position_right"}>Log Out</a>
+                        <a className={"nav_link"} href="#">Log Out</a>
+                    )}
+                </span>
+                <span className={"links hamburger"} onClick={this.changeSidebarState}>
+                    <div className="bars"/>
+                </span>
+                <span className={"hamburger_links sidebar_hidden"}  id={"sidebar_menu"}>
+                    <a className={"nav_link"} href="#" onClick={this.changeSidebarState}><ArrowBackIcon className={"svg_icon"}/> Back</a>
+                    <a className={"nav_link"} href="/"><HomeIcon className={"svg_icon"}/> Home</a>
+                    {!this.isLoggedIn ? (
+                        <span className={"span"}>
+                        <a className={"nav_link"} href="/login"><LoginIcon className={"svg_icon"}/> Log In</a>
+                        <a className={"nav_link"} href="/register"><PersonAddIcon className={"svg_icon"}/> Register</a>
+                    </span>
+                    ):(
+                        <a className={"nav_link"} href="#"><LogoutIcon className={"svg_icon"}/> Log Out</a>
                     )}
                 </span>
             </nav>

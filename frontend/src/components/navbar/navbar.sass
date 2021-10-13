@@ -1,59 +1,138 @@
-$background_color: var(--background-color, #252422)
+$background-color: var(--background-color, #252422)
 $color: var(--color, #CCC5B9)
-$size: 40px
-a,.span
-  text-decoration: none
-  padding: 10px
-  height: $size
-  line-height: $size
-  white-space: nowrap
+$size: 20px
+//$hamburger-border: 4px solid $background-color
+$hamburger-border: 4px solid $background-color
+$hamburger-width: 30px
+$hamburger-border-radius: 5px
+::-webkit-scrollbar
+  width: 5px
+
+::-webkit-scrollbar-track
+  background: rgba(gray, 0.3)
+
+::-webkit-scrollbar-thumb
+  background: rgba(darkgray,0.6)
+  border-radius: 50px
+
+::-webkit-scrollbar-thumb:hover
+  background: rgba(lightgray,0.6)
 nav
-  position: relative
   width: 100%
   display: flex
-  z-index: 1
   justify-content: space-between
-  align-items: center
   background: $color 0 0 no-repeat padding-box
-  box-shadow: 0 3px 6px $background_color
-  //margin-bottom: $size
-
-  .links a
-    margin: 0 20px
-  .search_span
-    //margin-left: 50px
-    max-width: 400px
-    width: 20vw
+  box-shadow: 0 3px 6px $background-color
+  padding: $size 0
+  .hamburger
+    display: none
+  .logo
+    padding: 0 0 0 15px
+  .search_bar
+    background: $background-color 0% 0 no-repeat padding-box
+    width: 200px
+    box-shadow: 0 3px 6px $background-color
+    border-radius: 50px
+    border: none
+    padding: 10px 20px
+    color: $color
     position: relative
-    opacity: 0.9
-    .search_bar
-      width: 100%
-      height: 100%
-      padding: 0 50px
-      background: $background_color 0 0 no-repeat padding-box
-      box-shadow: 0 3px 6px $background_color
-      border: none
-      border-radius: 20px
-      opacity: 1
+    &:focus
+      outline: none
+    &::placeholder
       color: $color
-      &:focus
-        border: none
-        outline: none
     &::before, &::after
       content: ""
       position: absolute
-      top: 50%
-      left: 35px
-      transform: translate(-50%, -50%)
+      transform: translate(-50%,-50%)
     &::before
       width: 10px
       height: 10px
-      border: 3px solid $color
-      border-radius: 100%
-    &::after
-      width: 1px
-      height: 8px
-      border-left: 3px solid $color
-      top: 55%
-      left: 40px
-      transform: rotate(-45deg)
+      border: 2px solid $color
+  .links
+    padding-top: 5px
+  .nav_link
+    text-decoration: none
+    color: $background-color
+    padding: 10px
+    margin: 5px 5px
+    border-radius: 3px
+    transition: 0.5s
+    outline: 2px solid rgba(black, 0)
+    position: relative
+    font-weight: 700
+    &:hover
+      background-color: rgba(white, 0.3)
+      outline: 2px solid rgba(black, 0.2)
+  .hamburger_links
+    position: absolute
+    top: 0
+    bottom: 0
+    padding-top: 10px
+    z-index: 99
+    width: 75vw
+    max-width: 600px
+    //height: 100vmax
+    background-color: $color
+    color: white!important
+    right: 0
+    box-shadow: 0 0 300px 200px $background-color
+    display: flex
+    flex-direction: column
+    text-align: left
+    //justify-content: center
+    font-weight: 500
+    font-size: 18pt
+    .span
+      display: flex
+      flex-direction: column
+    .nav_link
+      margin-top: 10px
+      padding: 10px 70px
+      .svg_icon
+        position: absolute
+        top: 53%
+        left: 40px
+        transform: translate(-50%,-50%)
+        color: $background-color
+.sidebar_hidden
+  display: none!important
+
+@media screen and (max-width: 768px)
+  nav
+    .search_bar
+      width: 150px
+    .links
+      display: none
+    .hamburger
+      //display: inline
+      margin: 0 20px 0 0
+      width: 45px
+      height: 40px
+      cursor: pointer
+      color: $background-color
+      border-radius: 10px
+      border: $hamburger-border
+      display: flex
+      align-items: center
+      justify-content: center
+      position: relative
+      .bars
+        width: $hamburger-width
+        border-bottom: $hamburger-border
+        border-radius: $hamburger-border-radius
+      &::after, &::before
+        content: ""
+        position: absolute
+        width: $hamburger-width
+        border-radius: $hamburger-border-radius
+      &::before
+        border-top: $hamburger-border
+        top: 25%
+      &::after
+        border-top: $hamburger-border
+        top: 75%
+@media screen and (max-width: 400px)
+  nav
+    .search_bar
+      width: 100px

@@ -46,7 +46,28 @@ export default function home(){
                 <h6>Dozens of personalities</h6>
             </div>
             <h2 className="most-popular">Our most popular splits</h2>
-            <div className="categories" id={"categories"}>
+            <div className="categories expanded" id={"categories"}>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
+                <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
+                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
                 <Category image={constants.IMAGE} color="#7F90C5" name={ "workout"}/>
                 <Category image={constants.IMAGE2} color="#7FC58D" name={ "Diet"}/>
                 <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
