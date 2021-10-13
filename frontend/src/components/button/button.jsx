@@ -12,7 +12,7 @@ export default function Button(props){
         )
     }else{
         button = (
-            <button className="button">{props.text}</button>
+            <button className="button" onClick={props.customClickEvent}>{props.text}</button>
         )
     }
     return(

@@ -1,3 +1,107 @@
+.home {
+  position: relative;
+}
 
+.title {
+  height: fit-content;
+}
+
+.background_header {
+  background-image: url("../../Assets/mask-g962ea3593_1920.png");
+  height: 500px;
+  z-index: 2;
+  color: var(--color, white);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.background_header .header_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.background_header h1 {
+  margin: 0;
+}
+.background_header .offset-1 {
+  margin-left: 50px;
+}
+.background_header .offset-2 {
+  margin-left: 100px;
+}
+.background_header h5 {
+  text-align: center;
+  opacity: 0.8;
+}
+.background_header .info {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+.background_header .info .details {
+  margin-right: 75px;
+  display: flex;
+  flex-direction: column;
+}
+
+.transparent_bar {
+  background-color: rgba(211, 211, 211, 0.2);
+  backdrop-filter: blur(5px);
+  text-align: center;
+  font-size: xx-large;
+  color: var(--color, white);
+  padding: 10px;
+}
+.transparent_bar h6 {
+  font: normal normal 400 25px/33px Segoe UI;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.most-popular {
+  color: var(--color, white);
+  margin-left: 15vw;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 200px;
+  transition: max-height 1s;
+  overflow: hidden;
+}
+
+.expanded {
+  max-height: 100rem;
+  transition: max-height 1s;
+  position: relative;
+}
+
+.button_parent {
+  margin: 30px;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 570px) {
+  .background_header {
+    height: 250px;
+  }
+
+  .info .details {
+    margin-right: 25px !important;
+  }
+
+  .background_header h1 {
+    margin: 0 !important;
+  }
+
+  h1 {
+    font-size: 16pt;
+  }
+}
 
 /*# sourceMappingURL=home.css.map */

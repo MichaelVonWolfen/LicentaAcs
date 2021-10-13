@@ -48,17 +48,17 @@ nav .search_span::before, nav .search_span::after {
   transform: translate(-50%, -50%);
 }
 nav .search_span::before {
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   border: 3px solid var(--color, #CCC5B9);
   border-radius: 100%;
 }
 nav .search_span::after {
   width: 1px;
-  height: 10px;
+  height: 8px;
   border-left: 3px solid var(--color, #CCC5B9);
-  top: 56%;
-  left: 43px;
+  top: 55%;
+  left: 40px;
   transform: rotate(-45deg);
 }
 

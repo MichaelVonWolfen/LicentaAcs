@@ -16,7 +16,6 @@ const Background = (props) => {
         let elements = []
         document.body.style =`--background-color: ${bkg};--color: ${color};`
         let nb_elements = Math.floor(constants.MAX_BACKGROUND_ELEMENTS * width / constants.NUMBER_DECREASER_CONSTANT)
-        console.log(nb_elements)
         for(let i = 0; i < nb_elements; i++){
             const style = {
                 "--radius": Math.floor(Math.random() * constants.MAX_CIRCLE_RADIUS) + 2 + "px",

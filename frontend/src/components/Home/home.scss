@@ -1,0 +1,105 @@
+$color:var(--color, white);
+$background-color:var(--background-color, black);
+.home{
+  position: relative;
+}
+.title{
+  height: fit-content;
+}
+.background_header {
+  background-image: url('../../Assets/mask-g962ea3593_1920.png');
+  height: 500px;
+  z-index: 2;
+  color: $color;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+
+  .header_title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .offset-1 {
+    margin-left: 50px;
+  }
+
+  .offset-2 {
+    margin-left: 100px;
+  }
+  h5 {
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    .details {
+      margin-right: 75px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.transparent_bar {
+  background-color: rgba(lightgray, 0.2);
+  backdrop-filter: blur(5px);
+  text-align: center;
+  font-size: xx-large;
+  color: $color;
+  padding: 10px;
+
+  h6 {
+    font: normal normal 400 25px/33px Segoe UI;
+    letter-spacing: 0;
+    margin: 0;
+  }
+}
+.most-popular{
+  color: $color;
+  margin-left: 15vw;
+}
+.categories{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 200px;
+  transition: max-height 1s;
+  overflow: hidden;
+}
+.expanded{
+  max-height: 100rem;
+  transition: max-height 1s;
+  position: relative;
+}
+.button_parent{
+  margin: 30px;
+  margin-left: auto;
+}
+@media screen and (max-width: 570px) {
+  .background_header{
+    height: 250px;
+  }
+  .info {
+    .details{
+      margin-right:25px!important;
+    }
+  }
+  .background_header h1{
+    margin: 0!important;
+  }
+  h1{
+    font-size: 16pt;
+  }
+}
