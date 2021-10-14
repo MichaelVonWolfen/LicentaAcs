@@ -1,0 +1,70 @@
+.post-container {
+  margin: min(20px, 2vw);
+  padding: 30px 60px;
+  border: 2px solid var(--color, white);
+  width: 260px;
+  color: var(--color, white);
+  background: var(--background-color, black);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.post-container img {
+  width: 200px;
+  height: auto;
+  outline: 2px solid var(--color, white);
+  box-shadow: -10px 10px 0 0 var(--color, white);
+  transform: translatex(30px);
+}
+.post-container .bookmark {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+.post-container p {
+  font: normal normal bold 21px/28px Segoe UI;
+  letter-spacing: 0;
+  text-align: center;
+}
+.post-container .reaction-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.post-container .reaction-buttons .icon {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.post-container .reaction-buttons .icon span {
+  margin: auto 2px;
+}
+
+@media screen and (max-width: 835px) {
+  .post-container {
+    padding: 15px 35px;
+    width: 230px;
+  }
+  .post-container img {
+    width: 140px;
+    box-shadow: -10px 10px 0 0 var(--color, white);
+    transform: translatex(30px);
+  }
+  .post-container .bookmark {
+    top: 15px;
+    right: 15px;
+  }
+  .post-container p {
+    font: normal normal bold 21px/28px Segoe UI;
+  }
+  .post-container .reaction-buttons {
+    width: 100%;
+  }
+  .post-container .reaction-buttons span {
+    margin: auto 5px;
+  }
+}
+
+/*# sourceMappingURL=post.css.map */
