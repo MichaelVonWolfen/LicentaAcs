@@ -1,7 +1,9 @@
 $background-color: var(--background-color, #252422)
 $text-color: var(--color, #CCC5B9)
-$min-width: 150px
+$min-width: 100px
 $height:25px
+$min-width-phone: 75px
+$height-phone:25px
 $transition_time: 0.5s
 .button_parent
   position: relative
@@ -32,3 +34,11 @@ $transition_time: 0.5s
     &:hover
       color: $background-color
       background-color: $text-color
+@media screen and (max-width: 768px)
+  .button_parent
+    &::before
+      min-width: $min-width-phone
+      height: $height-phone
+    .button
+      min-width: $min-width-phone
+      font-size: 8pt

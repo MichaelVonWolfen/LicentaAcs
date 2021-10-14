@@ -1,0 +1,29 @@
+$color:var(--color, white)
+$background-color:var(--background-color, black)
+.categories_page_container
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  color: $color
+  .sort_buttons
+    display: flex
+    justify-content: space-around
+    h2
+      margin-right: 40px
+
+  .posts_container
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-evenly
+    align-content: flex-start
+  .buttons
+    display: flex
+    flex-wrap: wrap
+    text-align: left
+@media screen and (max-width: 600px)
+  .sort_buttons
+    flex-direction: column
+    .buttons .button_parent
+      margin: 20px 20px 20px auto

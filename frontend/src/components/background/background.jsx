@@ -14,7 +14,7 @@ const Background = (props) => {
 
     const fill_background = (color, bkg) => {
         let elements = []
-        document.body.style =`--background-color: ${bkg};--color: ${color};`
+        // document.body.style =`--background-color: ${bkg};--color: ${color};`
         let nb_elements = Math.floor(constants.MAX_BACKGROUND_ELEMENTS * width / constants.NUMBER_DECREASER_CONSTANT)
         for(let i = 0; i < nb_elements; i++){
             const style = {

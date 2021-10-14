@@ -11,7 +11,7 @@
   border: 1px solid var(--color, #CCC5B9);
   top: -10px;
   left: -10px;
-  min-width: 150px;
+  min-width: 100px;
   height: 25px;
   transition: 0.5s;
 }
@@ -23,7 +23,7 @@
   padding: 5px;
   background-color: var(--background-color, #252422);
   color: var(--color, #CCC5B9);
-  min-width: 150px;
+  min-width: 100px;
   border: 1px solid var(--color, #CCC5B9);
   cursor: pointer;
   transition: 0.5s;
@@ -31,6 +31,17 @@
 .button_parent .button:hover {
   color: var(--background-color, #252422);
   background-color: var(--color, #CCC5B9);
+}
+
+@media screen and (max-width: 768px) {
+  .button_parent::before {
+    min-width: 75px;
+    height: 25px;
+  }
+  .button_parent .button {
+    min-width: 75px;
+    font-size: 8pt;
+  }
 }
 
 /*# sourceMappingURL=button.css.map */

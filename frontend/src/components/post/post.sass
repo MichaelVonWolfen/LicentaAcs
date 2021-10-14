@@ -1,0 +1,64 @@
+$color:var(--color, white)
+$background-color:var(--background-color, black)
+$box-shadow-deviation: 10px
+$container-width: 260px
+$image-width: 200px
+$container-padding-top: 30px
+$container-padding-left: 60px
+$container-width_phone: 230px
+$image-width_phone: 140px
+$container-padding-top_phone: 15px
+$container-padding-left_phone: 35px
+.post-container
+  margin: min(20px, 2vw)
+  padding: $container-padding-top $container-padding-left
+  border: 2px solid $color
+  width: $container-width
+  color: $color
+  background: $background-color
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  justify-content: space-between
+  img
+    width: $image-width
+    height: auto
+    outline: 2px solid $color
+    box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+    transform: translatex(30px)
+  .bookmark
+    position: absolute
+    top: $container-padding-top
+    right: $container-padding-top
+  p
+    font: normal normal bold 21px/28px Segoe UI
+    letter-spacing: 0
+    text-align: center
+  .reaction-buttons
+    display: flex
+    justify-content: space-around
+    width: 100%
+    .icon
+      display: flex
+      align-content: center
+      justify-content: center
+      span
+        margin: auto 2px
+@media screen and (max-width: 835px)
+  .post-container
+    padding: $container-padding-top-phone $container-padding-left-phone
+    width: $container-width-phone
+    img
+      width: $image-width-phone
+      box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+      transform: translatex(30px)
+    .bookmark
+      top: $container-padding-top-phone
+      right: $container-padding-top-phone
+    p
+      font: normal normal bold 21px/28px Segoe UI
+    .reaction-buttons
+      width: 100%
+      span
+        margin: auto 5px
