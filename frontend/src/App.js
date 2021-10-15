@@ -7,6 +7,7 @@ import Register from "./components/Register/register";
 import Login from "./components/LogIN/Login";
 import Background from "./components/background/background";
 import categoryPage from "./components/category_page/category-page";
+import createPost from "./components/create-post/create-post";
 function App() {
   return (
       <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
               <PropsRoute exact path="/" component={Home} />
               <Route path="/register" component={Register} />
               <Route path="/category/:category" component={categoryPage} />
+              <Route path="/add/category/:category" component={createPost} />
               <Route path="/login" component={Login} />
           </div>
       </BrowserRouter>
