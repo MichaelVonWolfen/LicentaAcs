@@ -1,3 +1,9 @@
+.spanFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .button_parent {
   position: relative;
   height: auto;

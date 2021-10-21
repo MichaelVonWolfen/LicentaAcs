@@ -4,6 +4,11 @@ import * as constants from "../../constants";
 import "./home.css"
 import Category from "../category/category";
 export default function home(){
+    const home_data ={
+        splits: "2.8M",
+        users: "52 M",
+        bloggers: "1.4 M"
+    }
     const expandOrRetractCategories = (e)=>{
         const categories = document.querySelector('#categories')
         let isExpanded = categories.classList.contains("expanded")
@@ -26,15 +31,15 @@ export default function home(){
                         <h5>On the worlds largest blog</h5>
                         <div className="info">
                             <span className="details">
-                                <strong>2.8M </strong>
+                                <strong>{home_data.splits}</strong>
                                 Splits
                             </span>
                             <span className="details">
-                                <strong>52M </strong>
+                                <strong>{home_data.users}</strong>
                                 Users
                             </span>
                             <span className="details">
-                                <strong>1.4M </strong>
+                                <strong>{home_data.bloggers}</strong>
                                 Bloggers
                             </span>
                         </div>

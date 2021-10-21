@@ -1,21 +1,23 @@
 import CustomInput from "../inputs/inputs";
 import React from "react";
-import {Button} from "@mui/material";
-
+import Button from "../button/button"
+import "./create-post.css"
+import getCategoryDetailAndSetColors from "../helpers/setColors";
 export default function createPost(props){
-    console.log(props.match)
+    const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
     return(
-        <div className="add-post-container">
+        <form action="/" method="post" className="add-post-container">
             <div className="left">
-                <CustomInput type={"text"} name={"title"} placeholder={'Add Title'}/>
-                <CustomInput type={"textarea"} name={"content"} placeholder={'Add your special experiences'}/>
+                <CustomInput type={"text"} name={"title"} placeholder={'Add Title'} additionalClasses={"titleInput"}/>
+                <CustomInput type={"textarea"} name={"content"} placeholder={'Add your special experiences'} additionalClasses={"contentArea"}/>
             </div>
             <div className="right">
-                <CustomInput type={"file"} name={"file"} placeholder={'Add file'}/>
+                <CustomInput type={"file"} name={"file"} placeholder={'Add file'} additionalClasses={"fileAddClass"}/>
                 <div className="buttons">
-                    <Button text={"Comments"} customClickEvent={sortPosts}/>
+                    <Button text={"Save Split"} customClickEvent={""} additionalClasses={"post"}/>
+                    <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"submit"}/>
                 </div>
             </div>
-        </div>
+        </form>
     )
 }

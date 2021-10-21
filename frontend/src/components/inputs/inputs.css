@@ -1,0 +1,45 @@
+.input {
+  color: var(--color, white);
+  font-size: 20pt;
+  background: var(--background-color, black) padding-box;
+  border: 2px solid var(--color, white);
+  margin: 10px;
+  box-shadow: -10px 10px 0 var(--color, white);
+  padding: 15px;
+  min-width: auto;
+  text-align: center;
+}
+.input:focus {
+  outline: none;
+}
+.input::placeholder {
+  color: var(--color, white);
+}
+
+textarea.input {
+  text-align: left;
+  font-size: 16pt;
+  font-weight: 200;
+}
+
+input[type=file] {
+  display: none;
+}
+
+.file {
+  min-width: fit-content;
+  height: auto;
+  padding: 0;
+}
+.file label {
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.file .image {
+  min-width: 180px;
+  height: auto;
+}
+
+/*# sourceMappingURL=inputs.css.map */
