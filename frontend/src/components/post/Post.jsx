@@ -6,6 +6,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Icon from '@mui/material/Icon';
 import './post.css'
+import * as constants from "../../constants";
+import Image from "../image/image"
 export default function Post(props){
     const {image, date, likeNb, commNb} = props
     let [state,setState] = React.useState(props.state);
@@ -31,9 +33,7 @@ export default function Post(props){
     // <FavoriteBorderIcon label="Hearth"/>
     return(
         <div className={"post-container"}>
-            <div className="image-container">
-                <img src={image} alt="Post Image"/>
-            </div>
+            <Image image={constants.IMAGE}/>
             {
                 state === "not_saved" ?
                     <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>

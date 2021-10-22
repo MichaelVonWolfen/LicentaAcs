@@ -1,6 +1,10 @@
-//This component is meant to be used when loading images so that it can do a lazy loading and load the images more efficiently
-//by using react code splitting
-
+import "./image.css"
+import * as constants from "../../constants";
+import * as React from "react";
 export default function Image(props){
-    return (<div/>)
+    return (
+        <div className="image-container">
+            <img src={props.image} alt="Post Image"/>
+        </div>
+    )
 }

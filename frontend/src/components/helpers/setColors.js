@@ -13,7 +13,7 @@ function getCategoryDetailAndSetColors(category) {
         color:"#7F90C5",
         name:"Workout"
     };
-    setCategoryColors(categoryDetails)
+    // setCategoryColors(categoryDetails)
     if(categoryDetails)
         setCategoryColors(categoryDetails)
     window.addEventListener("resize", resetCategoryColors)

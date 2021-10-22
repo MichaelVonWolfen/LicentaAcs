@@ -17,7 +17,7 @@ export default function CustomInput(props){
     switch (props.type) {
         case "textarea":
             return(
-                <textarea name={props.name} placeholder={props.placeholder} className={"input " + additionalClasses}/>
+                <textarea name={props.name} placeholder={props.placeholder} className={"input " + additionalClasses} disabled={props.disabled || false}/>
             )
         case "file":
             return (

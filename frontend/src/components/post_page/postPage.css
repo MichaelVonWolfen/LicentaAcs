@@ -1,0 +1,63 @@
+.add_comment {
+  display: grid;
+  grid-template: "image username_place" "image comment_box" "image buttons";
+  grid-template-columns: 1fr 11fr;
+  grid-column-gap: 40px;
+}
+.add_comment .profile_image {
+  width: 75px;
+  border-radius: 50%;
+  box-shadow: none;
+  transform: translate(0, 0);
+  border: 1px;
+  grid-area: image;
+  margin: 0;
+  padding: 0;
+}
+.add_comment .username {
+  grid-area: username_place;
+}
+.add_comment .commentArea {
+  grid-area: comment_box;
+  box-shadow: none;
+  margin: 10px 0;
+  padding: 5px 10px;
+  font-size: 10pt;
+}
+.add_comment .buttons {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+  padding: 0 15px;
+}
+
+.PostContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color, white);
+}
+.PostContainer .post_content {
+  width: 65vw;
+  background: var(--background-color, black);
+  padding: 15px;
+  outline: 2px solid var(--color, white);
+  box-shadow: -10px 10px 0 0 var(--color, white);
+  transform: translatex(30px);
+  margin: 50px 0;
+}
+.PostContainer img {
+  width: 400px;
+  margin: 50px 0;
+}
+
+@media screen and (max-width: 1370px) {
+  img {
+    width: 140px;
+  }
+}
+
+/*# sourceMappingURL=postPage.css.map */

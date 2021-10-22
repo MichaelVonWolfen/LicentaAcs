@@ -1,0 +1,53 @@
+.comment_container {
+  display: grid;
+  grid-template: "image image image username creation" "image image image post post" "hearth_icon likes reply_icon post post";
+  margin: 25px 0;
+}
+.comment_container .left .profile_image {
+  width: 75px;
+  height: 75px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+  transform: translate(0, 0);
+  grid-area: image;
+  border-radius: 50%;
+  border: 1px solid;
+}
+.comment_container .left .reactions {
+  display: flex;
+  justify-content: space-around;
+  transform: translateX(-5px);
+}
+.comment_container .left .reactions .likes_container {
+  display: flex;
+}
+.comment_container .left .reactions .likes_container .heart_icon {
+  grid-area: hearth_icon;
+}
+.comment_container .left .reactions .likes_container .likes_total {
+  grid-area: likes;
+  margin: 0 5px;
+}
+.comment_container .left .reactions .reply {
+  grid-area: reply_icon;
+}
+.comment_container .right .username {
+  grid-area: username;
+  margin-left: 30px;
+}
+.comment_container .right .creation_date {
+  grid-area: creation;
+  margin-left: 30px;
+}
+.comment_container .right .comment_text {
+  grid-area: post;
+  width: 65vw;
+  background: var(--background-color, black);
+  padding: 15px;
+  outline: 2px solid var(--color, white);
+  transform: translatex(30px);
+}
+
+/*# sourceMappingURL=comment.css.map */

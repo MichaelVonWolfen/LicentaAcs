@@ -11,13 +11,6 @@
   align-items: flex-start;
   justify-content: space-between;
 }
-.post-container img {
-  width: 200px;
-  height: auto;
-  outline: 2px solid var(--color, white);
-  box-shadow: -10px 10px 0 0 var(--color, white);
-  transform: translatex(30px);
-}
 .post-container .bookmark {
   position: absolute;
   top: 30px;
@@ -46,11 +39,6 @@
   .post-container {
     padding: 15px 35px;
     width: 230px;
-  }
-  .post-container img {
-    width: 140px;
-    box-shadow: -10px 10px 0 0 var(--color, white);
-    transform: translatex(30px);
   }
   .post-container .bookmark {
     top: 15px;
