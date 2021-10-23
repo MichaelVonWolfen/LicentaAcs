@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import logo from "../../Assets/logo.svg"
 export default class Navbar extends React.Component{
     isLoggedIn;
     changeSidebarState =(e)=>{
@@ -23,7 +24,7 @@ export default class Navbar extends React.Component{
 {
         return(
             <nav>
-                <a href="/" className={"logo"}>Split</a>
+                <a href="/" className={"logo"}><img src={logo} alt="logo"/></a>
                 <span className={"search_container"}>
                     <input type="text" placeholder="Search" className="search_bar"/>
                 </span>

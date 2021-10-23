@@ -24,6 +24,9 @@
 .category img {
   width: 150px;
   z-index: 1;
+  outline: none;
+  box-shadow: none;
+  transform: none;
 }
 .category .filter {
   z-index: 2;

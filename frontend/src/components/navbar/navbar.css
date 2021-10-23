@@ -23,6 +23,12 @@ nav {
   box-shadow: 0 3px 6px var(--background-color, #252422);
   padding: 20px 0;
 }
+nav img {
+  outline: none;
+  box-shadow: none;
+  width: 150px;
+  height: auto;
+}
 nav .hamburger {
   display: none;
 }
