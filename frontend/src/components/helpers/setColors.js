@@ -9,8 +9,8 @@ const resetCategoryColors = (e) => {
 function getCategoryDetailAndSetColors(category) {
     //TODO get category color palette from backend
     categoryDetails = {
-        background_color:"#2A2D41",
-        color:"#7F90C5",
+        background_color:"#252422",
+        color:"#CCC5B9",
         name:"Workout"
     };
     // setCategoryColors(categoryDetails)

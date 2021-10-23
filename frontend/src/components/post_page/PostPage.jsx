@@ -12,7 +12,7 @@ export default function PostPage(props){
     const sortPosts = (e)=>{
         console.log(e.target.innerText)
     };
-    const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
+    const categoryDetails = getCategoryDetailAndSetColors("")
     return(
         <div className="PostContainer">
             <h1>The road to a candy body (without candy)</h1>

@@ -13,22 +13,63 @@ $width:300px
 $widthButton:200px
 $height:30px
 $heightButton:50px
-.login
-  height: 90vh
+.login_container
+  color: $color
   display: flex
   flex-direction: column
   align-items: center
   justify-content: center
-  input,button
-    width: $width
-    height: $height
-    font-size: large
-    text-transform: capitalize
-    margin: 10px 0
-  button
-    width: $widthButton
-    height: $heightButton
+  margin: 50px 0
+  a
+    color: $color!important
+.login
+  margin: 50px 0
+  width: 30vw
+  display: flex
+  flex-direction: column
+  background-color: $background_color
+  padding: 20px
+  outline: 1px solid
+  box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 $color
+  .login_input
+    cursor: text
+    height: 50px
+    position: relative
+    border-bottom: 2px solid $color
+    margin: 40px 5px 0 5px
+    padding-top: 10px
+    &::after
+      content: attr(placeholderText)
+      color: $color
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 25%
+      left: 0
+      transition: 0.3s ease-in
+    &:hover, &:focus-within
+      &:after
+        top: 5px
+        font-size: 10pt
+    input
+      width: 100%
+      height: $height
+      font-size: large
+      margin: 10px 0
+      background-color: $background_color
+      color: $color
+      border: none
+      &:focus-visible
+        outline: none
+  .button_parent
+    z-index: 1
+    margin: 40px auto 10px auto
+    &::before
+      z-index: -1
   label
     text-transform: capitalize
-    width: $width
     text-align: left
+.input_has_contents
+  &:after
+    top: 5px!important
+    font-size: 10pt!important
