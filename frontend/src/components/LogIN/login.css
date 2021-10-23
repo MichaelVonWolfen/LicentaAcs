@@ -12,6 +12,7 @@
 
 .login {
   margin: 50px 0;
+  min-width: 260px;
   width: 30vw;
   display: flex;
   flex-direction: column;

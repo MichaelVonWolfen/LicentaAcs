@@ -11,7 +11,6 @@ export default function Login(props){
         const label = document.querySelector(`#${e.target.name}`)
         if(value){
             label.classList.add("input_has_contents")
-            console.log(label.classList)
         }else{
             label.classList.remove("input_has_contents")
         }
@@ -30,8 +29,8 @@ export default function Login(props){
                     <Button text={"Log In"} customClickEvent={""} additionalClasses={"loginButton"}/>
                 </div>
             </form>
-                <p>Don't have a Split account?</p>
-                <a href="/register">Create one today!</a>
+            <p>Don't have a Split account?</p>
+            <a href="/register">Create one today!</a>
         </div>
     )
 }
