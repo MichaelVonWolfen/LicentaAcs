@@ -33,7 +33,7 @@ export default function home() {
             <div className="title">
                 <div className="background_header">
                     <div className="header_title">
-                        <h1>Discover,</h1>
+                        <h1>Discover</h1>
                         <h1 className={"offset-1"}>Explore&nbsp;and&nbsp;Share</h1>
                         <h1 className={"offset-2"}>your&nbsp;special&nbsp;Experiences</h1>
                         <h5>On the worlds largest blog</h5>

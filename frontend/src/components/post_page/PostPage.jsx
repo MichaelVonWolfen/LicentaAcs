@@ -8,14 +8,14 @@ import React from "react";
 import Button from "../button/button";
 export default function PostPage(props){
     const category = props.match.params.category
-
+    console.log(category)
     const sortPosts = (e)=>{
         console.log(e.target.innerText)
     };
     const categoryDetails = getCategoryDetailAndSetColors(category)
     return(
         <div className="PostContainer">
-            <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quaerat.</h1>
+            <h1 className={"titlePost"}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima, quaerat.</h1>
             <Image image={constants.DesertImage}/>
             <p className={"post_content"}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.

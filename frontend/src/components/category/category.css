@@ -56,25 +56,26 @@
 
 @media screen and (max-width: 600px) {
   .category {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     margin: 15px;
   }
   .category::before {
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
   }
   .category:hover::before {
     margin: 5px;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
   }
   .category img {
-    width: 70px;
+    width: 100px;
+    height: 100px;
   }
   .category .filter {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
   .category::after {
     font-size: 10pt;

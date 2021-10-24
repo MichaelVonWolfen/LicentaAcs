@@ -42,6 +42,9 @@
   align-items: center;
   color: var(--color, white);
 }
+.PostContainer .titlePost {
+  text-align: center;
+}
 .PostContainer .post_content {
   width: 65vw;
   background: var(--background-color, black);

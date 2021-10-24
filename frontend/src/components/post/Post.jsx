@@ -31,15 +31,17 @@ export default function Post(props){
 
     // <FavoriteBorderIcon label="Hearth"/>
     return(
-        <a href={`/post/${category}/${title.toLowerCase()}`} className={"post-container"}>
-            <Image image={image}/>
-            {
-                state === "not_saved" ?
-                    <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>
-                    :
-                    <CheckIcon className={"bookmark"} onClick={changeState}/>
-            }
-            <p>{title}</p>
+        <div className={"post-container"}>
+            <a href={`/post/${category}/${title.toLowerCase()}`}>
+                <Image image={image}/>
+                <p>{title}</p>
+            </a>
+                {
+                    state === "not_saved" ?
+                        <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>
+                        :
+                        <CheckIcon className={"bookmark"} onClick={changeState}/>
+                }
             <div className="reaction-buttons">
                 <span className="icon">
                     <FavoriteIcon label="Hearth"/>
@@ -51,6 +53,6 @@ export default function Post(props){
                 </span>
                 <span>{date}</span>
             </div>
-        </a>
+        </div>
     )
 }

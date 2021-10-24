@@ -41,12 +41,12 @@ module.exports = {
         },{
             name: "Art",
             image: "/images/unnamed.png",
-            color: "#422981",
-            background_color: "#1a1031"
+            color: "#8270bb",
+            background_color: "#393249"
         },{
             name: "Depresion",
             image: "/images/AdobeStock_76812841-min.png",
-            color: "#c2ac7e",
+            color: "#f5e3bd",
             background_color: "#3d3828"
         },{
             name: "Fruits",
@@ -65,42 +65,62 @@ module.exports = {
             image: "/images/man-g94f555c4a_1920-min.png",
             title: "The road to a candy body (without candy)",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image: "/images/woman-g7dc7d1761_1920-min.png",
             title: "The best way to lose weight",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },{
             image:  "/images/woman-g28bead904_1920-min.png",
             title: "Lorem Ipsum",
             date: "20-oct-2021",
+            likeNb:Math.floor(Math.random()*1000),
+            commNb:Math.floor(Math.random()*1000)
         },
     ],
 }

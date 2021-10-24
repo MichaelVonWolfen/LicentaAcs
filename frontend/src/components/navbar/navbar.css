@@ -118,6 +118,11 @@ nav .hamburger_links .nav_link .svg_icon {
 }
 
 @media screen and (max-width: 768px) {
+  nav img {
+    margin-top: 10px;
+    width: 50px;
+    height: auto;
+  }
   nav .search_bar {
     width: 150px;
   }

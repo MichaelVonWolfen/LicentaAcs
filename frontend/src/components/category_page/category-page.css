@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   color: var(--color, white);
+  position: relative;
 }
 .categories_page_container .sort_buttons {
   display: flex;
@@ -24,6 +25,20 @@
   flex-wrap: wrap;
   text-align: left;
 }
+.categories_page_container .new_post_button {
+  padding: 0;
+  text-decoration: none;
+  color: var(--color, white);
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: var(--background-color, black);
+  border-radius: 50%;
+}
+.categories_page_container .new_post_button .icon {
+  width: 100px;
+  height: 100px;
+}
 
 @media screen and (max-width: 600px) {
   .sort_buttons {
@@ -31,6 +46,15 @@
   }
   .sort_buttons .buttons .button_parent {
     margin: 20px 20px 20px auto;
+  }
+
+  .categories_page_container .new_post_button {
+    right: 10px;
+    bottom: 10px;
+  }
+  .categories_page_container .new_post_button .icon {
+    width: 60px;
+    height: 60px;
   }
 }
 

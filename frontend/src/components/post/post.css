@@ -10,7 +10,10 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+}
+.post-container a {
   text-decoration: none;
+  color: var(--color, white);
 }
 .post-container .bookmark {
   position: absolute;

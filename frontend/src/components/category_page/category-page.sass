@@ -6,6 +6,7 @@ $background-color:var(--background-color, black)
   justify-content: center
   align-items: center
   color: $color
+  position: relative
   .sort_buttons
     display: flex
     justify-content: space-around
@@ -22,8 +23,26 @@ $background-color:var(--background-color, black)
     display: flex
     flex-wrap: wrap
     text-align: left
+  .new_post_button
+    padding: 0
+    text-decoration: none
+    color: $color
+    position: fixed
+    right: 20px
+    bottom: 20px
+    background-color: $background-color
+    border-radius: 50%
+    .icon
+      width: 100px
+      height: 100px
 @media screen and (max-width: 600px)
   .sort_buttons
     flex-direction: column
     .buttons .button_parent
       margin: 20px 20px 20px auto
+  .categories_page_container .new_post_button
+    right: 10px
+    bottom: 10px
+    .icon
+      width: 60px
+      height: 60px

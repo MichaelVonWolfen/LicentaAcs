@@ -4,6 +4,7 @@ import Post from "../post/Post";
 import * as constants from "../../constants";
 import "./category-page.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 export default function categoryPage(props) {
     const category = props.match.params.category
 
@@ -20,8 +21,8 @@ export default function categoryPage(props) {
                              category = {category}
                              image={templatePost.image}
                              date={templatePost.date}
-                             likeNb={Math.floor(Math.random()*1000)}
-                             commNb={Math.floor(Math.random()*1000)}
+                             likeNb={templatePost.likeNb}
+                             commNb={templatePost.commNb}
                              state={Math.random() > 0.5? "saved":"not_saved"}
             />
             posts.push(post)
@@ -39,10 +40,14 @@ export default function categoryPage(props) {
                     <Button text={"Kudos"} customClickEvent={sortPosts}/>
                     <Button text={"Date"} customClickEvent={sortPosts}/>
                 </div>
+
             </div>
             <div className="posts_container">
                 {getPosts()}
             </div>
+                <a href={`/add/post/${category}`} className={"new_post_button"}>
+                    <AddCircleIcon className={"icon"}/>
+                </a>
         </div>
     )
 }
