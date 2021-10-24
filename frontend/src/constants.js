@@ -3,9 +3,10 @@ module.exports = {
     MAX_CIRCLE_RADIUS:150,
     NUMBER_DECREASER_CONSTANT:1600,
     DesertImage:"/images/AdobeStock_231318381-min.png",
-    FigsImage:"",
-    MaskImage:"/images/mask-g962ea3593_1920-min.png",
+    MaskImage:"/images/mask-g962ea3593_1920.png",
     YogaImage:"/images/woman-g7dc7d1761_1920-min.png",
+    LSAC_CHAN: "/images/unnamed.png",
+
     categories:[
         {
             name: "workout",

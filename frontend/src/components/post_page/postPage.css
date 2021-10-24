@@ -6,6 +6,8 @@
 }
 .add_comment .profile_image {
   width: 75px;
+  height: 75px;
+  object-fit: cover;
   border-radius: 50%;
   box-shadow: none;
   transform: translate(0, 0);
@@ -51,12 +53,14 @@
 }
 .PostContainer img {
   width: 400px;
+  height: 400px;
   margin: 50px 0;
 }
 
 @media screen and (max-width: 1370px) {
   img {
     width: 140px;
+    height: 140px;
   }
 }
 

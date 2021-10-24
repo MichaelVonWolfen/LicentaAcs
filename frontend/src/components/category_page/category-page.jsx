@@ -22,8 +22,8 @@ export default function categoryPage(props) {
                              date={templatePost.date}
                              likeNb={Math.floor(Math.random()*1000)}
                              commNb={Math.floor(Math.random()*1000)}
-                             state={"not_saved"
-                             }/>
+                             state={Math.random() > 0.5? "saved":"not_saved"}
+            />
             posts.push(post)
         })
         return posts

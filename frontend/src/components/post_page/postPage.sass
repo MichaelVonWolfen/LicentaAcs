@@ -16,6 +16,8 @@ $container_padding_left_phone: 35px
   grid-column-gap: 40px
   .profile_image
     width: 75px
+    height: 75px
+    object-fit: cover
     border-radius: 50%
     box-shadow: none
     transform: translate(0,0)
@@ -54,8 +56,10 @@ $container_padding_left_phone: 35px
     margin: 50px 0
   img
     width: $image_width
+    height: $image_width
     margin: 50px 0
 @media screen and (max-width: 1370px)
   //.add_comment
   img
     width: $image_width_phone
+    height: $image_width_phone
