@@ -70,7 +70,7 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  max-height: 135px;
+  max-height: 200px;
   transition: max-height 1s;
   overflow: hidden;
 }
@@ -87,6 +87,14 @@
 }
 
 @media screen and (max-width: 570px) {
+  .categories {
+    max-height: 135px;
+  }
+
+  .expanded {
+    max-height: 100rem;
+  }
+
   .background_header {
     height: 250px;
   }
