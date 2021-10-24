@@ -2,14 +2,13 @@ import * as React from 'react';
 import { loadCSS } from 'fg-loadcss';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import CheckIcon from '@mui/icons-material/Check';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Icon from '@mui/material/Icon';
 import './post.css'
 import * as constants from "../../constants";
 import Image from "../image/image"
 export default function Post(props){
-    const {image, date, likeNb, commNb} = props
+    const {image, date, likeNb, commNb, title, category} = props
     let [state,setState] = React.useState(props.state);
     React.useEffect(() => {
         const node = loadCSS(
@@ -32,15 +31,15 @@ export default function Post(props){
 
     // <FavoriteBorderIcon label="Hearth"/>
     return(
-        <div className={"post-container"}>
-            <Image image={constants.IMAGE}/>
+        <a href={`/post/${category}/${title.toLowerCase()}`} className={"post-container"}>
+            <Image image={image}/>
             {
                 state === "not_saved" ?
                     <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>
                     :
                     <CheckIcon className={"bookmark"} onClick={changeState}/>
             }
-            <p>The road to a candy body (without candy)</p>
+            <p>{title}</p>
             <div className="reaction-buttons">
                 <span className="icon">
                     <FavoriteIcon label="Hearth"/>
@@ -52,6 +51,6 @@ export default function Post(props){
                 </span>
                 <span>{date}</span>
             </div>
-        </div>
+        </a>
     )
 }

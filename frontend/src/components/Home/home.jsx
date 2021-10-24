@@ -3,28 +3,32 @@ import Button from "../button/button";
 import * as constants from "../../constants";
 import "./home.css"
 import Category from "../category/category";
-export default function home(){
-    const home_data ={
+export default function home() {
+    const home_data = {
         splits: "2.8M",
         users: "52 M",
         bloggers: "1.4 M"
     }
-    const addCategories = ()=>{
-        let categories =[].push(<Category image={constants.IMAGE} color="purple" name={ "workout"}/>)
-
+    const addCategories = () => {
+        const categories = constants.categories;
+        let categoriesAdded = []
+        categories.forEach((category)=>{
+            categoriesAdded.push(<Category image={category.image} color={category.color} name={category.name}/>)
+        })
+        return categoriesAdded;
     }
-    const expandOrRetractCategories = (e)=>{
+    const expandOrRetractCategories = (e) => {
         const categories = document.querySelector('#categories')
         let isExpanded = categories.classList.contains("expanded")
-        if(isExpanded) {
+        if (isExpanded) {
             categories.classList.remove('expanded')
             e.target.innerText = "Explore More"
-        }else {
+        } else {
             categories.classList.add("expanded")
             e.target.innerText = "Explore Less"
         }
     };
-    return(
+    return (
         <div className={"home"}>
             <div className="title">
                 <div className="background_header">
@@ -56,7 +60,7 @@ export default function home(){
             </div>
             <h2 className="most-popular">Our most popular splits</h2>
             <div className="categories" id={"categories"}>
-                <Category image={constants.IMAGE} color="purple" name={ "workout"}/>
+                {addCategories()}
             </div>
             <div className="explore">
                 <Button text={"Explore More"} customClickEvent={expandOrRetractCategories}/>

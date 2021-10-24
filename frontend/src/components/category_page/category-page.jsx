@@ -5,12 +5,30 @@ import * as constants from "../../constants";
 import "./category-page.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 export default function categoryPage(props) {
-    console.log(`Props:${props.match.params.category}`)
+    const category = props.match.params.category
 
     const sortPosts = (e)=>{
         console.log(e.target.innerText)
     };
     const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
+
+    function getPosts() {
+        let posts = []
+        const templatePosts = constants.posts
+        templatePosts.forEach(templatePost =>{
+            let post = <Post title={templatePost.title}
+                             category = {category}
+                             image={templatePost.image}
+                             date={templatePost.date}
+                             likeNb={Math.floor(Math.random()*1000)}
+                             commNb={Math.floor(Math.random()*1000)}
+                             state={"not_saved"
+                             }/>
+            posts.push(post)
+        })
+        return posts
+    }
+
     return(
         <div className="categories_page_container">
             <h1>{categoryDetails.name}</h1>
@@ -23,16 +41,7 @@ export default function categoryPage(props) {
                 </div>
             </div>
             <div className="posts_container">
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"saved"}/>
-                <Post image={constants.IMAGE} date={"20-nov-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
-                <Post image={constants.IMAGE} date={"20-nov-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
-                <Post image={constants.IMAGE} date={"20-oct-2021"} likeNb={Math.floor(Math.random()*1000)} commNb={Math.floor(Math.random()*1000)} state={"not_saved"}/>
+                {getPosts()}
             </div>
         </div>
     )

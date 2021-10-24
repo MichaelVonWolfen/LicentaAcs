@@ -16,7 +16,7 @@ export default function PostPage(props){
     return(
         <div className="PostContainer">
             <h1>The road to a candy body (without candy)</h1>
-            <Image image={constants.IMAGE}/>
+            {/*<Image image={constants.IMAGE}/>*/}
             <p className={"post_content"}>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
                 At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -48,7 +48,7 @@ export default function PostPage(props){
             </p>
             <div className="comments">
                <div className="add_comment">
-                   <img src={constants.IMAGE2} alt="" className={"profile_image"}/>
+                   {/*<img src={constants.IMAGE2} alt="" className={"profile_image"}/>*/}
                    <strong className="username">LSAC CHAN</strong>
                    <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                    <div className="buttons">
@@ -57,9 +57,9 @@ export default function PostPage(props){
                    </div>
                </div>
                 <div className="comments_section">
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."} likes={Math.floor(Math.random()*100)}/>
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>
+                    {/*<Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."} likes={Math.floor(Math.random()*100)}/>*/}
+                    {/*<Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>*/}
+                    {/*<Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.IMAGE} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>*/}
                 </div>
             </div>
         </div>

@@ -23,6 +23,8 @@
 }
 .category img {
   width: 150px;
+  height: 150px;
+  object-fit: cover;
   z-index: 1;
   outline: none;
   box-shadow: none;

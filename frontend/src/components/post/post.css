@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  text-decoration: none;
 }
 .post-container .bookmark {
   position: absolute;
@@ -19,6 +20,7 @@
 .post-container p {
   font: normal normal bold 21px/28px Segoe UI;
   letter-spacing: 0;
+  margin: 10px auto;
   text-align: center;
 }
 .post-container .reaction-buttons {
