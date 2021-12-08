@@ -31,7 +31,7 @@ export default function (props){
             alert(result.data.title)
             window.location.href = "/login"
         }).catch(err =>{
-            console.log("ERROR IN FE")
+            console.log("ERROR IN BE")
             console.log(err)
             alert(err)
         })

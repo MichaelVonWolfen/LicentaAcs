@@ -31,6 +31,7 @@ router.post("/login", (req, res, next) => {
         if (error) {
             return res.status(400).json(error);
         }
+        console.log(token)
         return res.status(200).json(token);
     })(req, res, next);
 });
