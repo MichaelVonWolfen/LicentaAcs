@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../button/button";
 import CustomInputs from "../inputs/inputs"
 import axios from "axios";
-import qs from "qs"
 export default function (props){
     document.body.style =`--background-color: #252422;--color: #CCC5B9;`
     const input = (e)=>{
@@ -17,6 +16,25 @@ export default function (props){
     const formSubmit = (e) =>{
         e.preventDefault()
         console.log(e)
+        if(e.target.password.value !== e.target.confirmPassword.value){
+            console.log("Passwords must be the same")
+            return
+        }
+        let user ={
+            image:e.target.image,
+            username: e.target.username.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
+            confirmationPassword: e.target.confirmPassword.value
+        }
+        axios.post("/api/auth/register",user).then(result =>{
+            alert(result.data.title)
+            window.location.href = "/login"
+        }).catch(err =>{
+            console.log("ERROR IN FE")
+            console.log(err)
+            alert(err)
+        })
     }
     return(
         <div className="login_container">

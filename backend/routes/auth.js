@@ -5,10 +5,12 @@ const utils = require("./utils");
 router.post("/register", (req, res, next) => {
     const { errors, isValid } = utils.validateRegisterTeamInput(req.body);
     if (!isValid) {
+        console.log(errors)
         return res.status(400).json(errors);
     }
     passport.authenticate("local-signup", (error) => {
         if (error) {
+            console.log(error)
             return res.status(400).json(error);
         }
         return utils.constructResponse(

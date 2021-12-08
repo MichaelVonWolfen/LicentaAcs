@@ -1,4 +1,3 @@
-require("./db");
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -8,6 +7,7 @@ const PORT = constants.port || 5000;
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+require("./db");
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
