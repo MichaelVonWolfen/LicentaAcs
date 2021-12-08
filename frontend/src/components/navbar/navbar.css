@@ -74,6 +74,7 @@ nav .nav_link {
   outline: 2px solid rgba(0, 0, 0, 0);
   position: relative;
   font-weight: 700;
+  cursor: pointer;
 }
 nav .nav_link:hover {
   background-color: rgba(255, 255, 255, 0.3);

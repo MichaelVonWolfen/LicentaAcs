@@ -7,7 +7,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import logo from "../../Assets/logo.svg"
 export default class Navbar extends React.Component{
-    isLoggedIn;
+    constructor(props) {
+        super(props);
+        this.isLoggedIn = localStorage.length >= 1
+        this.state = {
+            handleLogout: this.handleLogout.bind(this)
+        }
+    }
     changeSidebarState =(e)=>{
         let sidebar = document.querySelector("#sidebar_menu")
         if (sidebar.classList.contains("sidebar_hidden"))
@@ -15,10 +21,9 @@ export default class Navbar extends React.Component{
         else
             sidebar.classList.add("sidebar_hidden")
     };
-    constructor(props) {
-        super(props);
-        this.isLoggedIn = localStorage.length >= 1
-        console.log(this.isLoggedIn)
+    handleLogout = (e)=>{
+        localStorage.removeItem("token")
+        window.location.href = "/"
     }
     render()
 {
@@ -36,7 +41,7 @@ export default class Navbar extends React.Component{
                         <a className={"nav_link"} href="/register">Register</a>
                     </span>
                     ):(
-                        <a className={"nav_link"} href="#">Log Out</a>
+                        <a className={"nav_link"} onClick={this.handleLogout}>Log Out</a>
                     )}
                 </span>
                 <span className={"links hamburger"} onClick={this.changeSidebarState}>
@@ -51,7 +56,7 @@ export default class Navbar extends React.Component{
                         <a className={"nav_link"} href="/register"><PersonAddIcon className={"svg_icon"}/> Register</a>
                     </span>
                     ):(
-                        <a className={"nav_link"} href="#"><LogoutIcon className={"svg_icon"}/> Log Out</a>
+                        <a className={"nav_link"} onClick={this.handleLogout}><LogoutIcon className={"svg_icon"}/>Log Out</a>
                     )}
                 </span>
             </nav>
