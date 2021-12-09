@@ -15,10 +15,11 @@ export default function Home() {
         axiox.get("/api/categories").then(result => {
             setCategoriesAdded([])
             const categories = result.data;
+            console.log(categories)
             setCategoriesAdded(categories.map(category => <Category image={category.image}
                                                                     color={category.style.primary_color}
                                                                     name={category.name}
-                                                                    url_name={category.url_name}
+                                                                    path={category._id}
             />))
         })
     },[])

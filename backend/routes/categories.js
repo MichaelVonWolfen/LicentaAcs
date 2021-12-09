@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 const requiredAuth = require("../middleware/auth");
 router.post("/", requiredAuth.userMiddleware,async (req, res) => {
     try {
-        const {name, image, url_name, style} = req.body
+        const {name, image, style} = req.body
         let copy_category = await Categories.findOne({name})
         if (copy_category) {
             return res.status(400).send("Category already exists")
@@ -13,7 +13,6 @@ router.post("/", requiredAuth.userMiddleware,async (req, res) => {
         await new Categories({
             name,
             image,
-            url_name,
             style
         }).save()
         return res.sendStatus(201)
