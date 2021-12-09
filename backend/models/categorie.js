@@ -1,34 +1,14 @@
 const mongoose = require("mongoose")
 const constants = require("../constants");
 const styleSchema = new mongoose.Schema({
-    btn_color:{
+    primary_color:{
         type:String,
         required:true
     },
-    btn_bkg:{
+    secondary_color:{
         type:String,
         required:true
     },
-    pg_color:{
-        type:String,
-        required:true
-    },
-    pg_bkg:{
-        type:String,
-        required:true
-    },
-    anchor_color:{
-        type:String,
-        required:true
-    },
-    anchor_bkg:{
-        type:String,
-        required:true
-    },
-    background_elements:[{
-      type:String
-    }]
-
 })
 const categorySchema = new mongoose.Schema({
     name:{
