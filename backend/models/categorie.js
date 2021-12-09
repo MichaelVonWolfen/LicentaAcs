@@ -19,6 +19,10 @@ const categorySchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    url_name:{
+        type:String,
+        required:true
+    },
     style:{
         type:styleSchema
     }

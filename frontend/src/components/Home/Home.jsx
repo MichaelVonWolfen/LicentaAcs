@@ -1,22 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../button/button";
 import * as constants from "../../constants";
 import "./home.css"
 import Category from "../category/category";
-export default function home() {
+import axiox from "axios"
+export default function Home() {
+    const [categoriesAdded, setCategoriesAdded] = useState([])
     const home_data = {
         splits: "2.8M",
         users: "52 M",
         bloggers: "1.4 M"
     }
-    const addCategories = () => {
-        const categories = constants.categories;
-        let categoriesAdded = []
-        categories.forEach((category)=>{
-            categoriesAdded.push(<Category image={category.image} color={category.color} name={category.name}/>)
+    useEffect(()=> {
+        axiox.get("/api/categories").then(result => {
+            setCategoriesAdded([])
+            const categories = result.data;
+            setCategoriesAdded(categories.map(category => <Category image={category.image}
+                                                                    color={category.style.primary_color}
+                                                                    name={category.name}
+                                                                    url_name={category.url_name}
+            />))
         })
-        return categoriesAdded;
-    }
+    },[])
     const expandOrRetractCategories = (e) => {
         const categories = document.querySelector('#categories')
         let isExpanded = categories.classList.contains("expanded")
@@ -60,7 +65,7 @@ export default function home() {
             </div>
             <h2 className="most-popular">Our most popular splits</h2>
             <div className="categories" id={"categories"}>
-                {addCategories()}
+                {categoriesAdded}
             </div>
             <div className="explore">
                 <Button text={"Explore More"} customClickEvent={expandOrRetractCategories}/>

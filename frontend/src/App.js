@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import { LoggedOutRoute, PropsRoute } from "./modules/Routes";
-import Home from "./components/Home/home";
+import Home from "./components/Home/Home";
 import Register from "./components/Register/register";
 import Login from "./components/LogIN/Login";
 import Background from "./components/background/background";
