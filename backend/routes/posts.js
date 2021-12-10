@@ -49,18 +49,18 @@ router.get("/:id", async (req, res) => {
 // route to create a post
 router.post("/post",requiredAuth.userMiddleware, async(req, res) => {
     try{
-        const {title, content, post_img, category_name}  = req.body;
+        const {title, content, post_img, categoryID}  = req.body;
         let user_id = req.user._id.toString()
-        if(!user_id || !title || !content || !post_img || !category_name)
+        if(!user_id || !title || !content || !post_img || !categoryID)
             return res.status(400).send("Not all required fields received")
-        const category = await Categories.findOne({name:category_name})
+        const category = await Categories.findById(categoryID)
         if(!category)
             return res.status(404).send("Category does not exist")
         await new Posts({
             title,
             content,
             post_img,
-            categoryID:category._id,
+            categoryID,
             creatorID:user_id
         }).save()
         return res.sendStatus(201)
