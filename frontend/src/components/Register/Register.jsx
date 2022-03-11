@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "../button/button";
-import CustomInputs from "../inputs/inputs"
+import Button from "../button/Button";
+import CustomInputs from "../inputs/Inputs"
 import axios from "axios";
-export default function (props){
+export default function Register (props){
     document.body.style =`--background-color: #252422;--color: #CCC5B9;`
     const input = (e)=>{
         let value = e.target.value

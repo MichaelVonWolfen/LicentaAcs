@@ -22,7 +22,7 @@ const Background = (props) => {
                 "--top_distance":  Math.floor(Math.random() * height) + "px",
                 "--left_distance":  Math.floor(Math.random() * width) + "px"
             }
-            elements.push(<span className={clases[Math.floor(Math.random()*3)]} style={style}/>)
+            elements.push(<span className={clases[Math.floor(Math.random()*3)]} style={style} key={i}/>)
         }
         return elements;
     }

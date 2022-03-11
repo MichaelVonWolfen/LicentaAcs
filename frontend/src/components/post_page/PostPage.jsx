@@ -1,11 +1,11 @@
 import "./postPage.css"
 import * as constants from "../../constants";
-import Image from "../image/image"
+import Image from "../image/Image"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
-import Comment from "../comment/comment"
-import CustomInput from "../inputs/inputs";
+import Comment from "../comment/Comment"
+import CustomInput from "../inputs/Inputs";
 import React from "react";
-import Button from "../button/button";
+import Button from "../button/Button";
 export default function PostPage(props){
     const category = props.match.params.category
     console.log(category)

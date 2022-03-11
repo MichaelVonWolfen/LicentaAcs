@@ -5,8 +5,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Icon from '@mui/material/Icon';
 import './post.css'
-import * as constants from "../../constants";
-import Image from "../image/image"
+import Image from "../image/Image"
 export default function Post(props){
     const {image, date, likeNb, commNb, title, category} = props
     let [state,setState] = React.useState(props.state);

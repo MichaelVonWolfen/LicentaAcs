@@ -1,6 +1,6 @@
-import CustomInput from "../inputs/inputs";
+import CustomInput from "../inputs/Inputs";
 import React from "react";
-import Button from "../button/button"
+import Button from "../button/Button"
 import "./create-post.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 export default function createPost(props){

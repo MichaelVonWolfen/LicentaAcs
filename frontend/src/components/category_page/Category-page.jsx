@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import Button from "../button/button"
+import Button from "../button/Button"
 import Post from "../post/Post";
 import * as constants from "../../constants";
 import "./category-page.css"

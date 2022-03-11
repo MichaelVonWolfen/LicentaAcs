@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import Button from "../button/button";
-import * as constants from "../../constants";
+import Button from "../button/Button";
 import "./home.css"
-import Category from "../category/category";
+import Category from "../category/Category";
 import axiox from "axios"
 export default function Home() {
     const [categoriesAdded, setCategoriesAdded] = useState([])

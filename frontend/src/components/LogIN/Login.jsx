@@ -1,8 +1,6 @@
 import React from "react";
 import "./login.css"
-import Button from "../button/button";
-import CustomInput from "../inputs/inputs";
-import getCategoryDetailAndSetColors from "../helpers/setColors";
+import Button from "../button/Button";
 import axios from "axios";
 export default function Login(props){
     // const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
