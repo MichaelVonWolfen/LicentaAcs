@@ -1,3 +1,4 @@
+import React from "react";
 import "./inputs.css"
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 

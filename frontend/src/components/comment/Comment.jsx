@@ -1,3 +1,4 @@
+import React from "react";
 import "./comment.css"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
