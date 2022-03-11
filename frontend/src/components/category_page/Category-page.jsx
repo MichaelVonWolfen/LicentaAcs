@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../button/Button"
 import Post from "../post/Post";
 import * as constants from "../../constants";
@@ -6,37 +6,52 @@ import "./category-page.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from "axios";
+import {useParams} from "react-router-dom";
 export default function CategoryPage(props) {
-    const category = props.match.params.category
+    // const category = props.match.params.category
+    const {category} = useParams()
+    const [categoryDetails, setCategoryDetails] = useState({})
+    const [categoryData, setCategoryData] = useState({})
+    const [posts, setPosts] = useState([])
+
     const sortPosts = (e)=>{
         console.log(e.target.innerText)
     };
-    const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
-            const posts = r.data;
-            console.log(posts)
+            let data = r.data
+            console.log(data)
+            setCategoryData(data);
         }).catch(e =>{
             console.log(e)
         })
     },  [])
-    function getPosts() {
-        let posts = []
-        const templatePosts = constants.posts
-        templatePosts.forEach(templatePost =>{
-            let post = <Post title={templatePost.title}
-                             category = {category}
-                             image={templatePost.image}
-                             date={templatePost.date}
-                             likeNb={templatePost.likeNb}
-                             commNb={templatePost.commNb}
-                             state={Math.random() > 0.5? "saved":"not_saved"}
-            />
-            posts.push(post)
-        })
-        return posts
-    }
-
+    useEffect(()=>{
+        const {category, postsList} = categoryData
+        if(category){
+            setCategoryDetails(getCategoryDetailAndSetColors(category))
+        }
+        let allPosts = []
+        if(postsList){
+            postsList.forEach(postElement =>{
+                console.log(postElement)
+                let post = <Post title={postElement.title}
+                                 category = {category.name}
+                                 image={postElement.post_img}
+                                 date={new Date(postElement.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
+                                 likeNb={postElement.like_nb}
+                                 commNb={postElement.commNb}
+                                 key={postElement._id}
+                                 state={Math.random() > 0.5? "saved":"not_saved"}
+                />
+                allPosts.push(post)
+            })
+            setPosts(allPosts)
+        }
+    }, [categoryData])
+    useEffect(() =>{
+        console.log(posts)
+    }, [posts])
     return(
         <div className="categories_page_container">
             <h1>{categoryDetails.name}</h1>
@@ -50,7 +65,7 @@ export default function CategoryPage(props) {
 
             </div>
             <div className="posts_container">
-                {getPosts()}
+                {posts}
             </div>
                 <a href={`/add/post/${category}`} className={"new_post_button"}>
                     <AddCircleIcon className={"icon"}/>

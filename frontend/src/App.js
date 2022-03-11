@@ -5,7 +5,7 @@ import Home from "./components/Home/Home";
 import Register from "./components/Register/Register";
 import Login from "./components/LogIN/Login";
 import Background from "./components/background/Background";
-import categoryPage from "./components/category_page/Category-page";
+import CategoryPage from "./components/category_page/Category-page";
 import createPost from "./components/create-post/Create-post";
 import PostPage from "./components/post_page/PostPage";
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Home/>} />
               <Route path="register" element={<Register/>} />
-              <Route path="category/:category" element={<categoryPage/>} />
+              <Route path="category/:category" element={<CategoryPage/>} />
               <Route path="add/post/:category" element={<createPost/>} />
               <Route path="post/:category/:post" element={<PostPage/>} />
               <Route path="login" element={<Login/>} />

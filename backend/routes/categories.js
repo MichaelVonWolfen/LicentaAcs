@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const Categories = require("../models/categorie")
 const Posts = require("../models/post");
+const Comments = require("../models/comment")
 const mongoose = require("mongoose")
 const requiredAuth = require("../middleware/auth");
 router.post("/", requiredAuth.userMiddleware,async (req, res) => {
@@ -47,8 +48,21 @@ router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
         const orderby = req.body;
-        let post = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby)
-        return res.send(post)
+        let category = await Categories.find({_id:new mongoose.Types.ObjectId(category_id)})
+        let posts = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby).lean()
+        posts = await Promise.all(
+            posts.map( async (post) =>{
+                let comments = await Comments.find({postID:new mongoose.Types.ObjectId(post._id)})
+                return {
+                    ...post,
+                    commNb:comments.length
+                }
+            })
+        );
+        return res.send({
+            category:category[0],
+            postsList:posts
+        })
     }catch (e) {
         console.log(e)
         return res.sendStatus(500)

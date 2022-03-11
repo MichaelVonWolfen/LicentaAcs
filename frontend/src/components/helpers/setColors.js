@@ -14,9 +14,9 @@ function getCategoryDetailAndSetColors(category) {
     // console.log(categoryDetails)
     // setCategoryColors(categoryDetails)
     categoryDetails = {
-        background_color:"#252422",
-        color:"#CCC5B9",
-        name:"Workout"
+        color:category.style.primary_color,
+        background_color:category.style.secondary_color,
+        name:category.name,
     };
     if(categoryDetails)
         setCategoryColors(categoryDetails)
