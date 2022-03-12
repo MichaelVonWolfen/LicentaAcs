@@ -13,10 +13,15 @@ export default function CategoryPage(props) {
     const [categoryData, setCategoryData] = useState({})
     const [posts, setPosts] = useState([])
 
-    const sortPosts = (sorter)=>{
+    const sortPosts = (sorter, order, callback)=>{
         console.log(sorter)
         axios.get(`/api/categories/${category}`,{
-            params:{sort:sorter}
+            params:{
+                sort: {
+                    sortBy: sorter,
+                    value: order
+                }
+            }
         }).then(r =>{
             let data = r.data
             console.log("data")
@@ -25,6 +30,7 @@ export default function CategoryPage(props) {
         }).catch(e =>{
             console.log(e)
         })
+        callback()
     };
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
@@ -67,9 +73,9 @@ export default function CategoryPage(props) {
             <div className="sort_buttons">
                 <h2>Sort by</h2>
                 <div className="buttons">
-                    <Button text={"Comments"} customClickEvent={()=>sortPosts("commNb")}/>
-                    <Button text={"Likes"} customClickEvent={() => sortPosts("like_nb")}/>
-                    <Button text={"Date"} customClickEvent={() => sortPosts("createdAt")}/>
+                    <Button text={"Comments"} customClickEvent={(order,callback)=>sortPosts("commNb",order, callback)}/>
+                    <Button text={"Likes"} customClickEvent={(order,callback) => sortPosts("like_nb",order, callback)}/>
+                    <Button text={"Date"} customClickEvent={(order,callback) => sortPosts("createdAt",order, callback)}/>
                 </div>
 
             </div>

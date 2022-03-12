@@ -47,10 +47,13 @@ router.delete("/:name",requiredAuth.userMiddleware, async (req, res) => {
 router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
-        const orderby = req.query.sort || {}
+        let orderby = {}
+        let parsedQuery = JSON.parse(req.query.sort);
+        if(req.query.sort)
+        orderby =[[parsedQuery.sortBy, parsedQuery.value]]
         console.log(orderby)
         let category = await Categories.find({_id:new mongoose.Types.ObjectId(category_id)})
-        let posts = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort([[orderby,-1]]).lean()
+        let posts = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby).lean()
         posts = await Promise.all(
             posts.map( async (post) =>{
                 let comments = await Comments.find({postID:new mongoose.Types.ObjectId(post._id)})
@@ -60,8 +63,8 @@ router.get("/:category_id", async (req, res) => {
                 }
             })
         );
-        if(orderby === 'commNb')
-            posts = posts.sort((a,b) => b.commNb - a.commNb)
+        if(parsedQuery.sortBy === 'commNb')
+            posts = posts.sort((a,b) => parsedQuery.value * (b.commNb - a.commNb))
         return res.send({
             category:category[0],
             postsList:posts
