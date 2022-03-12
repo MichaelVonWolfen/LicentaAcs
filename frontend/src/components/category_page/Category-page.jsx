@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Button from "../button/Button"
 import Post from "../post/Post";
-import * as constants from "../../constants";
 import "./category-page.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -14,8 +13,18 @@ export default function CategoryPage(props) {
     const [categoryData, setCategoryData] = useState({})
     const [posts, setPosts] = useState([])
 
-    const sortPosts = (e)=>{
-        console.log(e.target.innerText)
+    const sortPosts = (sorter)=>{
+        console.log(sorter)
+        axios.get(`/api/categories/${category}`,{
+            params:{sort:sorter}
+        }).then(r =>{
+            let data = r.data
+            console.log("data")
+            console.log(data)
+            setCategoryData(data);
+        }).catch(e =>{
+            console.log(e)
+        })
     };
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
@@ -58,9 +67,9 @@ export default function CategoryPage(props) {
             <div className="sort_buttons">
                 <h2>Sort by</h2>
                 <div className="buttons">
-                    <Button text={"Comments"} customClickEvent={sortPosts}/>
-                    <Button text={"Kudos"} customClickEvent={sortPosts}/>
-                    <Button text={"Date"} customClickEvent={sortPosts}/>
+                    <Button text={"Comments"} customClickEvent={()=>sortPosts("commNb")}/>
+                    <Button text={"Likes"} customClickEvent={() => sortPosts("like_nb")}/>
+                    <Button text={"Date"} customClickEvent={() => sortPosts("createdAt")}/>
                 </div>
 
             </div>
