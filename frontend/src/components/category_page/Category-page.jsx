@@ -19,7 +19,7 @@ export default function CategoryPage(props) {
             params:{
                 sort: {
                     sortBy: sorter,
-                    value: order
+                    value   : order
                 }
             }
         }).then(r =>{

@@ -48,9 +48,11 @@ router.get("/:category_id", async (req, res) => {
     try{
         const category_id = req.params.category_id
         let orderby = {}
-        let parsedQuery = JSON.parse(req.query.sort);
-        if(req.query.sort)
-        orderby =[[parsedQuery.sortBy, parsedQuery.value]]
+        let parsedQuery = {};
+        if(req.query.sort){
+            parsedQuery = JSON.parse(req.query.sort)
+            orderby =[[parsedQuery.sortBy, parsedQuery.value]]
+        }
         console.log(orderby)
         let category = await Categories.find({_id:new mongoose.Types.ObjectId(category_id)})
         let posts = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby).lean()
