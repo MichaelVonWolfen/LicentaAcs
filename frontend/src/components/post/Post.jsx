@@ -7,7 +7,7 @@ import Icon from '@mui/material/Icon';
 import './post.css'
 import Image from "../image/Image"
 export default function Post(props){
-    const {image, date, likeNb, commNb, title, category} = props
+    const {image, date, likeNb, commNb, title, category, postID} = props
     let [state,setState] = React.useState(props.state);
     React.useEffect(() => {
         const node = loadCSS(
@@ -31,7 +31,7 @@ export default function Post(props){
     // <FavoriteBorderIcon label="Hearth"/>
     return(
         <div className={"post-container"}>
-            <a href={`/post/${category}/${title.toLowerCase()}`}>
+            <a href={`/category/${category}/post/${postID}`}>
                 <Image image={image}/>
                 <p>{title}</p>
             </a>

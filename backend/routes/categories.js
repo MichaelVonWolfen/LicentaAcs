@@ -53,7 +53,7 @@ router.get("/:category_id", async (req, res) => {
             parsedQuery = JSON.parse(req.query.sort)
             orderby =[[parsedQuery.sortBy, parsedQuery.value]]
         }
-        console.log(orderby)
+        // console.log(orderby)
         let category = await Categories.find({_id:new mongoose.Types.ObjectId(category_id)})
         let posts = await Posts.find({categoryID:new mongoose.Types.ObjectId(category_id)}).populate("creatorID", 'username').sort(orderby).lean()
         posts = await Promise.all(
@@ -80,7 +80,7 @@ router.get("/:category_id", async (req, res) => {
 router.get("", async (req, res) => {
     try{
         let categories = await Categories.find({}).sort({createdAt:'desc'})
-        console.log(categories)
+        // console.log(categories)
         return  res.send(categories)
     }catch (e) {
         console.log(e)

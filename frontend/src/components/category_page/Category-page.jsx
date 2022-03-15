@@ -14,7 +14,7 @@ export default function CategoryPage(props) {
     const [posts, setPosts] = useState([])
 
     const sortPosts = (sorter, order, callback)=>{
-        console.log(sorter)
+        // console.log(sorter)
         axios.get(`/api/categories/${category}`,{
             params:{
                 sort: {
@@ -24,8 +24,8 @@ export default function CategoryPage(props) {
             }
         }).then(r =>{
             let data = r.data
-            console.log("data")
-            console.log(data)
+            // console.log("data")
+            // console.log(data)
             setCategoryData(data);
         }).catch(e =>{
             console.log(e)
@@ -35,7 +35,7 @@ export default function CategoryPage(props) {
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
-            console.log(data)
+            // console.log(data)
             setCategoryData(data);
         }).catch(e =>{
             console.log(e)
@@ -49,14 +49,15 @@ export default function CategoryPage(props) {
         let allPosts = []
         if(postsList){
             postsList.forEach(postElement =>{
-                console.log(postElement)
+                // console.log(postElement)
                 let post = <Post title={postElement.title}
-                                 category = {category.name}
+                                 category = {category._id}
                                  image={postElement.post_img}
                                  date={new Date(postElement.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
                                  likeNb={postElement.like_nb}
                                  commNb={postElement.commNb}
                                  key={postElement._id}
+                                 postID={postElement._id}
                                  state={Math.random() > 0.5? "saved":"not_saved"}
                 />
                 allPosts.push(post)
@@ -64,9 +65,6 @@ export default function CategoryPage(props) {
             setPosts(allPosts)
         }
     }, [categoryData])
-    useEffect(() =>{
-        console.log(posts)
-    }, [posts])
     return(
         <div className="categories_page_container">
             <h1>{categoryDetails.name}</h1>

@@ -18,7 +18,7 @@ function App() {
               <Route path="register" element={<Register/>} />
               <Route path="category/:category" element={<CategoryPage/>} />
               <Route path="add/post/:category" element={<createPost/>} />
-              <Route path="post/:category/:post" element={<PostPage/>} />
+              <Route path="category/:category/post/:post" element={<PostPage/>} />
               <Route path="login" element={<Login/>} />
           </Routes>
       </BrowserRouter>

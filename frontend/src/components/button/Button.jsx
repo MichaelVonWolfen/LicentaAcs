@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import "./button.css"
+import "./button.sass"
 
-export default function Button(props){
+export default function Button({additionalClasses,text,customClickEvent,link, type, isDissabled}){
     const [sortingOrder, setSortingOrder] = useState(1)
-    let button, link;
-    const  additionalClasses = !props.additionalClasses ? "" : props.additionalClasses
+    let button;
     function redirect(e){
         window.location.href=link
     }
@@ -20,17 +19,22 @@ export default function Button(props){
         }
     }
 
-    if(props.link) {
-        link = props.link
+    if(link) {
         button = (
             <span className={"spanFlex"}>
-                <button className={"button" + " " + additionalClasses} onClick={redirect}>{props.text}</button>
+                <button className={"button" + " " + (additionalClasses || "")} onClick={redirect} disabled={isDissabled || false}>{text}</button>
+            </span>
+        )
+    }if(type === "defaultButton"){
+        button = (
+            <span className={"spanFlex"}>
+                <button className={"button"+ " " + additionalClasses} onClick={customClickEvent} disabled={isDissabled || false}>{text}</button>
             </span>
         )
     }else{
         button = (
             <span className={"spanFlex"}>
-                <button className={"button"+ " " + additionalClasses} onClick={()=>{props.customClickEvent(sortingOrder,updateSortingOrder)}}>{props.text}</button>
+                <button className={"button"+ " " + additionalClasses} onClick={()=>{customClickEvent(sortingOrder,updateSortingOrder)}} disabled={isDissabled || false}>{text}</button>
             </span>
         )
     }

@@ -46,6 +46,7 @@
   text-align: center;
 }
 .PostContainer .post_content {
+  text-indent: 2rem;
   width: 65vw;
   background: var(--background-color, black);
   padding: 15px;
