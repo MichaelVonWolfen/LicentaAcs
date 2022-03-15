@@ -14,6 +14,7 @@ export default function PostPage(props){
     const [categoryDetails, setCategoryDetails] = useState({})
     const [categoryData, setCategoryData] = useState({})
     const [postData, setPostData] = useState({})
+    const [commentsData, setCommentsData] = useState({})
     console.log(category)
 
     useEffect(()=>{
@@ -30,6 +31,23 @@ export default function PostPage(props){
         }).catch(e =>{
             console.log(e)
         })
+        axios.get(`/api/comments/${post}`,).then(r =>{
+            let rawComments = r.data
+            let comments = []
+            console.log(rawComments)
+            rawComments.forEach(c =>{
+                comments.push(
+                    <Comment user={c.authorID.username}
+                             created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
+                             image={c.authorID.profile_picture || "/images/default-user-image.png"}
+                             text={c.content}
+                             likes={Math.floor(Math.random()*100)}/>
+                )
+            })
+            setCommentsData(comments)
+        }).catch(e =>{
+            console.log(e)
+        })
     },  [])
     useEffect(()=>{
         const {category} = categoryData
@@ -37,6 +55,9 @@ export default function PostPage(props){
             setCategoryDetails(getCategoryDetailAndSetColors(category))
         }
     }, [categoryData])
+    useEffect(()=>{
+
+    },[commentsData])
     return(
         <div className="PostContainer">
             <h1 className={"titlePost"}>{postData.title}</h1>
@@ -49,8 +70,8 @@ export default function PostPage(props){
                         <strong className="username">LSAC CHAN</strong>
                         <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">
-                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={true}/>
-                            <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={true}/>
+                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={false}/>
+                            <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={false}/>
                         </div>
                     </div> :
                     <div className="add_comment">
@@ -58,15 +79,13 @@ export default function PostPage(props){
                         <strong className="username">Log IN to add comments</strong>
                         <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"} disabled={true}/>
                         <div className="buttons">
-                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={false}/>
-                            <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={false}/>
+                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={true}/>
+                            <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={true}/>
                         </div>
                     </div>
                 }
                 <div className="comments_section">
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.MaskImage} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.DesertImage} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."} likes={Math.floor(Math.random()*100)}/>
-                    <Comment user={"Lsac-Chan"} created={"12 minutes ago"} image={constants.YogaImage} text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, consequatur."} likes={Math.floor(Math.random()*100)}/>
+                    {commentsData}
                 </div>
             </div>
         </div>

@@ -22,19 +22,19 @@ export default function Button({additionalClasses,text,customClickEvent,link, ty
     if(link) {
         button = (
             <span className={"spanFlex"}>
-                <button className={"button" + " " + (additionalClasses || "")} onClick={redirect} disabled={isDissabled || false}>{text}</button>
+                <button className={"button" + " " + (additionalClasses || "")} onClick={redirect} disabled ={isDissabled || false}>{text}</button>
             </span>
         )
     }if(type === "defaultButton"){
         button = (
             <span className={"spanFlex"}>
-                <button className={"button"+ " " + additionalClasses} onClick={customClickEvent} disabled={isDissabled || false}>{text}</button>
+                <button className={"button"+ " " + additionalClasses} onClick={customClickEvent} disabled ={isDissabled || false}>{text}</button>
             </span>
         )
     }else{
         button = (
             <span className={"spanFlex"}>
-                <button className={"button"+ " " + additionalClasses} onClick={()=>{customClickEvent(sortingOrder,updateSortingOrder)}} disabled={isDissabled || false}>{text}</button>
+                <button className={"button"+ " " + additionalClasses} onClick={()=>{customClickEvent(sortingOrder,updateSortingOrder)}} disabled ={isDissabled || false}>{text}</button>
             </span>
         )
     }
