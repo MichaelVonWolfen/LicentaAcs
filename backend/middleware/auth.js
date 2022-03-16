@@ -14,7 +14,6 @@ module.exports = {
                 return next(errTemplate);
             }
         }
-
         // The authorization header is a string like "Bearer $token"
         const token = req.headers.authorization.split(" ")[1];
         jwt.verify(token, constants.jwtSecret, (error, decoded) => {

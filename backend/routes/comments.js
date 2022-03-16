@@ -19,11 +19,37 @@ router.post("/",requiredAuth.userMiddleware, async(req, res) => {
         return res.sendStatus(500)
     }
 })
+//Route to alter the number of likes
+router.patch("/like",requiredAuth.userMiddleware, async (req, res) => {
+    try {
+        let _id = req.body.commentID;
+        let authorID = req.user._id.toString()
+        let comment = await Comments.findOne({
+            $and:[
+                {_id: new mongoose.Types.ObjectId(_id)},
+                {likesList: new mongoose.Types.ObjectId(authorID)}
+            ]
+        })
+        if(comment !== null)
+            await Comments.updateOne({_id:new mongoose.Types.ObjectId(_id)},{
+                $pullAll:{likesList:[authorID]}
+            })
+        else
+        //else add like
+        await Comments.updateOne({_id:new mongoose.Types.ObjectId(_id)},{
+            $push:{likesList:[authorID]}
+        })
+        return res.sendStatus(200)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
 //route to read comments
 router.get("/:post_id",async(req, res) => {
     try {
         let postID = req.params.post_id;
-        let comments = await Comments.find({postID}).populate("authorID", "username").sort({createdAt:'desc'})
+        let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt:'desc'})
         return res.send(comments)
     }catch (e) {
         console.log(e)
@@ -35,8 +61,10 @@ router.patch("/:comment_id",requiredAuth.userMiddleware,async(req, res) => {
     try {
         let _id = req.params.comment_id;
         let {content} = req.body;
+        console.log("HERE 1")
         let comment = await Comments.findOne({_id: new mongoose.Types.ObjectId(_id)})
         let authorID = req.user._id.toString()
+        console.log("HERE 2")
         if(comment.authorID.toString() !== authorID){
             return res.sendStatus(403)
         }

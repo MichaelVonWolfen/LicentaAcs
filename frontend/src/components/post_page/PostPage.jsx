@@ -14,8 +14,8 @@ export default function PostPage(props){
     const [categoryDetails, setCategoryDetails] = useState({})
     const [categoryData, setCategoryData] = useState({})
     const [postData, setPostData] = useState({})
-    const [commentsData, setCommentsData] = useState({})
-    console.log(category)
+    const [commentsData, setCommentsData] = useState([])
+    const [comments, setComments] = useState([])
 
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
@@ -26,25 +26,13 @@ export default function PostPage(props){
         })
         axios.get(`/api/posts/post/${post}`,).then(r =>{
             let data = r.data
-            console.log(data)
             setPostData(data)
         }).catch(e =>{
             console.log(e)
         })
         axios.get(`/api/comments/${post}`,).then(r =>{
             let rawComments = r.data
-            let comments = []
-            console.log(rawComments)
-            rawComments.forEach(c =>{
-                comments.push(
-                    <Comment user={c.authorID.username}
-                             created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
-                             image={c.authorID.profile_picture || "/images/default-user-image.png"}
-                             text={c.content}
-                             likes={Math.floor(Math.random()*100)}/>
-                )
-            })
-            setCommentsData(comments)
+            setCommentsData(rawComments)
         }).catch(e =>{
             console.log(e)
         })
@@ -56,7 +44,20 @@ export default function PostPage(props){
         }
     }, [categoryData])
     useEffect(()=>{
-
+        let commentsList = []
+        console.log(commentsData)
+        commentsData.forEach(c =>{
+            commentsList.push(
+                <Comment user={c.authorID}
+                         created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
+                         image={c.authorID.profile_picture || "/images/default-user-image.png"}
+                         text={c.content}
+                         likes={c.likesList}
+                         id={c._id}
+                         key={c._id}
+                />)
+        })
+        setComments(commentsList)
     },[commentsData])
     return(
         <div className="PostContainer">
@@ -70,7 +71,7 @@ export default function PostPage(props){
                         <strong className="username">LSAC CHAN</strong>
                         <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">
-                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={false}/>
+                            <Button text={"Comment"} customClickEvent={()=>{}} additionalClasses={"post"} type={"defaultButton"} isDissabled={false}/>
                             <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={false}/>
                         </div>
                     </div> :
@@ -79,13 +80,13 @@ export default function PostPage(props){
                         <strong className="username">Log IN to add comments</strong>
                         <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"} disabled={true}/>
                         <div className="buttons">
-                            <Button text={"Comment"} customClickEvent={""} additionalClasses={"post"} type={"defaultButton"} isDissabled={true}/>
+                            <Button text={"Comment"} customClickEvent={()=>{}} additionalClasses={"post"} type={"defaultButton"} isDissabled={true}/>
                             <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"} isDissabled={true}/>
                         </div>
                     </div>
                 }
                 <div className="comments_section">
-                    {commentsData}
+                    {comments}
                 </div>
             </div>
         </div>
