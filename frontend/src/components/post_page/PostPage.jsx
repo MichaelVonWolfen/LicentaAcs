@@ -1,5 +1,4 @@
 import "./postPage.css"
-import * as constants from "../../constants";
 import Image from "../image/Image"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 import Comment from "../comment/Comment"
@@ -16,6 +15,7 @@ export default function PostPage(props){
     const [postData, setPostData] = useState({})
     const [commentsData, setCommentsData] = useState([])
     const [comments, setComments] = useState([])
+    const [userData, setUserData] = useState({})
 
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
@@ -36,6 +36,19 @@ export default function PostPage(props){
         }).catch(e =>{
             console.log(e)
         })
+        if(token){
+            axios.get(`/api/users/user`,{
+                headers:{
+                    authorization: token
+                }
+            }).then(r =>{
+                let resp = r.data
+                setUserData(resp)
+            }).catch(e =>{
+                console.log(e)
+            })
+        }
+
     },  [])
     useEffect(()=>{
         const {category} = categoryData
@@ -48,13 +61,14 @@ export default function PostPage(props){
         console.log(commentsData)
         commentsData.forEach(c =>{
             commentsList.push(
-                <Comment user={c.authorID}
+                <Comment author={c.authorID}
                          created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
                          image={c.authorID.profile_picture || "/images/default-user-image.png"}
                          text={c.content}
                          likes={c.likesList}
                          id={c._id}
                          key={c._id}
+                         currentLoggedUser={userData}
                 />)
         })
         setComments(commentsList)
@@ -62,13 +76,13 @@ export default function PostPage(props){
     return(
         <div className="PostContainer">
             <h1 className={"titlePost"}>{postData.title}</h1>
-            <Image image={postData.post_img}/>
+            <Image image={postData.post_img || "/images/default-user-image.png"}/>
             <p className={"post_content"} dangerouslySetInnerHTML={{__html: postData.content && postData.content.replace(/(?:\r\n|\r|\n)/g, '</p><p>')}}/>
             <div className="comments">
                 {token?
                     <div className="add_comment">
-                        <img src={constants.LSAC_CHAN} alt="" className={"profile_image"}/>
-                        <strong className="username">LSAC CHAN</strong>
+                        <img src={userData.profile_picture || "/images/default-user-image.png"} alt="" className={"profile_image"}/>
+                        <strong className="username">{userData.username}</strong>
                         <CustomInput type={"textarea"} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">
                             <Button text={"Comment"} customClickEvent={()=>{}} additionalClasses={"post"} type={"defaultButton"} isDissabled={false}/>
