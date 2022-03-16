@@ -5,31 +5,26 @@ import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useState} from "react";
 import axios from "axios";
-export default function Comment({likes, user, created, image, text, id}){
+export default function Comment({likes, author, created, image, text, id, currentLoggedUser}){
     const token = localStorage.getItem("token")
-    const init_likes = likes.length
+    const [isLiked, setIsLiked] = useState(likes.find(userID => currentLoggedUser._id === userID) !== undefined)
     let [likesNB, setLikes] = useState(likes.length)
-    let [Favourite, setFav] = useState(<FavoriteBorderIcon className={"heart_icon"} />)
+
     useEffect(()=>{
-        // console.log("likesNB")
-        // console.log(likesNB)
-        // if(likes.find(like => like === user._id))
-    }, [likesNB])
+        setLikes(likes.length)
+    }, [])
     const likeButtonHandler = (e) =>{
         if(!token) return;
-        if (likesNB === init_likes){
-            setLikes(init_likes + 1);
-            setFav(<FavoriteIcon className={"heart_icon"}/>)
-        }else{
-            setLikes(init_likes);
-            setFav(<FavoriteBorderIcon className={"heart_icon"}/>)
-        }
         axios.patch("/api/comments/like",{
             commentID: id
         },{
             headers:{
                 authorization: `${token}`
             }
+        }).then(r =>{
+            //if isliked == true, then decrease nb of likes before setting isLiked as false
+            !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+            setIsLiked(!isLiked)
         })
     }
     return(
@@ -38,7 +33,10 @@ export default function Comment({likes, user, created, image, text, id}){
                 <img className={"profile_image"} src={image} alt=""/>
                 <div className="reactions">
                     <span className="likes_container" onClick={likeButtonHandler} id={"hearth"} disabled>
-                        {Favourite}
+                        {isLiked?
+                            <FavoriteIcon className={"heart_icon"}/>:
+                            <FavoriteBorderIcon className={"heart_icon"}/>
+                        }
                         <span className={"likes_total"}>{likesNB}</span>
                     </span>
                     <ReplyAllIcon className={"reply"}/>
@@ -47,7 +45,7 @@ export default function Comment({likes, user, created, image, text, id}){
             <div className="right">
                 <div className="top">
                     <strong className={"username"}>
-                        {user.username}
+                        {author.username}
                     </strong>
                     <span className="creation_date">
                         {created}
