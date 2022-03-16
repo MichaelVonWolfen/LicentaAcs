@@ -42,9 +42,21 @@ app.use("/api/comments", comments)
 app.use("/api/posts", posts)
 app.use("/api/users", users)
 app.use("/api/search", search)
-io.on('connection', (socket) => {
-    console.log('a user connected on ' + socket.id);
+
+const midlewares = require("./middleware/auth")
+
+const userNameSpace = io.of("/user")
+    .use((socket, next) => {
+        midlewares.userMiddleware(socket.handshake, undefined, next)
+    })
+const userSocketsHandler = require("./websockets/users");
+userNameSpace.on("connection", (socket) => {
+    console.log(`User connected with id ${socket.id}`)
+    userSocketsHandler(userNameSpace, socket);
 });
+// io.on('connection', (socket) => {
+//     console.log('a user connected on ' + socket.id);
+// });
 
 server.listen(PORT, () => {
     console.log(`listening on *:${PORT}`);

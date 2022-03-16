@@ -7,6 +7,8 @@ import React, {useEffect, useState} from "react";
 import Button from "../button/Button";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {Manager, io} from "socket.io-client"
+
 export default function PostPage(props){
     const token = localStorage.getItem("token")
     const {category, post} = useParams()
@@ -16,7 +18,7 @@ export default function PostPage(props){
     const [commentsData, setCommentsData] = useState([])
     const [comments, setComments] = useState([])
     const [userData, setUserData] = useState({})
-
+    const [socket, setSocket] = useState(typeof io)
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
@@ -47,8 +49,13 @@ export default function PostPage(props){
             }).catch(e =>{
                 console.log(e)
             })
+            setSocket(io("/user",{
+                extraHeaders:{authorization:token}
+            }))
         }
-
+        return () =>{
+            socket.disconnect()
+        }
     },  [])
     useEffect(()=>{
         const {category} = categoryData
