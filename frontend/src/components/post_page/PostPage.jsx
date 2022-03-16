@@ -18,7 +18,7 @@ export default function PostPage(props){
     const [commentsData, setCommentsData] = useState([])
     const [comments, setComments] = useState([])
     const [userData, setUserData] = useState({})
-    const [socket, setSocket] = useState(typeof io)
+    const [socket, setSocket] = useState(null)
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
@@ -32,12 +32,12 @@ export default function PostPage(props){
         }).catch(e =>{
             console.log(e)
         })
-        axios.get(`/api/comments/${post}`,).then(r =>{
-            let rawComments = r.data
-            setCommentsData(rawComments)
-        }).catch(e =>{
-            console.log(e)
-        })
+        // axios.get(`/api/comments/${post}`,).then(r =>{
+        //     let rawComments = r.data
+        //     setCommentsData(rawComments)
+        // }).catch(e =>{
+        //     console.log(e)
+        // })
         if(token){
             axios.get(`/api/users/user`,{
                 headers:{
@@ -49,14 +49,36 @@ export default function PostPage(props){
             }).catch(e =>{
                 console.log(e)
             })
-            setSocket(io("/user",{
-                extraHeaders:{authorization:token}
-            }))
+            // let connection =
+            setSocket(io("http://localhost:3000/user",{
+                    reconnectionDelayMax: 10000,
+                    extraHeaders:{authorization:token}
+                }))
         }
         return () =>{
             socket.disconnect()
         }
     },  [])
+    useEffect(()=>{
+        if(socket === null) return
+        socket.connect()
+        //mesages received
+        socket.on("test", msg => {
+            console.log(msg)
+        })
+        socket.on("disconnect", ()=>{
+            socket.connect()
+        })
+
+        //mesages send on socket load
+        socket.emit("getComments", post, (err, data)=>{
+            if(err){
+                console.log(err)
+                return
+            }
+            setCommentsData(data)
+        })
+    },[socket])
     useEffect(()=>{
         const {category} = categoryData
         if(category){
@@ -76,10 +98,12 @@ export default function PostPage(props){
                          id={c._id}
                          key={c._id}
                          currentLoggedUser={userData}
+                         socket={socket}
                 />)
         })
         setComments(commentsList)
     },[commentsData])
+
     return(
         <div className="PostContainer">
             <h1 className={"titlePost"}>{postData.title}</h1>

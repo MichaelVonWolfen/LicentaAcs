@@ -5,8 +5,7 @@ import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useState} from "react";
 import axios from "axios";
-export default function Comment({likes, author, created, image, text, id, currentLoggedUser}){
-    const token = localStorage.getItem("token")
+export default function Comment({likes, author, created, image, text, id, currentLoggedUser, socket}){
     const [isLiked, setIsLiked] = useState(likes.find(userID => currentLoggedUser._id === userID) !== undefined)
     let [likesNB, setLikes] = useState(likes.length)
 
@@ -14,18 +13,10 @@ export default function Comment({likes, author, created, image, text, id, curren
         setLikes(likes.length)
     }, [])
     const likeButtonHandler = (e) =>{
-        if(!token) return;
-        axios.patch("/api/comments/like",{
-            commentID: id
-        },{
-            headers:{
-                authorization: `${token}`
-            }
-        }).then(r =>{
-            //if isliked == true, then decrease nb of likes before setting isLiked as false
-            !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
-            setIsLiked(!isLiked)
-        })
+        socket.emit("likeChange", id)
+        //if isliked == true, then decrease nb of likes before setting isLiked as false
+        !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+        setIsLiked(!isLiked)
     }
     return(
         <div className={"comment_container"}>
