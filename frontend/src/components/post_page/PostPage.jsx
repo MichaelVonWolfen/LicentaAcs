@@ -3,11 +3,12 @@ import Image from "../image/Image"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
 import Comment from "../comment/Comment"
 import CustomInput from "../inputs/Inputs";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from "../button/Button";
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {io} from "socket.io-client"
+import WShelper from "../helpers/Websockets";
+// import {io} from "socket.io-client"
 
 export default function PostPage(props){
     const token = localStorage.getItem("token")
@@ -18,7 +19,10 @@ export default function PostPage(props){
     const [commentsData, setCommentsData] = useState([])
     const [comments, setComments] = useState([])
     const [userData, setUserData] = useState({})
-    const [socket,setSocket] = useState(null)
+
+    const {sendMessage, messages, users} = WShelper("anonimous",post, {room_id: post})
+    // const socketRef = useRef();
+    // const [socket,setSocket] = useState(null)
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
@@ -62,38 +66,38 @@ export default function PostPage(props){
                 room_id:post
             }
         }
-        setSocket(io.connect(connection_path,{
-            withCredentials: true,
-            extraHeaders: headers
-        }))
-        return () =>{
-            socket.disconnect()
-        }
+        // socketRef.current = io.connect(connection_path,{
+        //     withCredentials: true,
+        //     extraHeaders: headers
+        // })
+        // return () =>{
+        //     socketRef.current.disconnect()
+        // }
     },  [])
-    useEffect(()=>{
-        if(socket === null) return
-        // socket.connect()
-        //mesages received
-        socket.on("test", msg => {
-            console.log(msg)
-        })
-        socket.on("disconnect", ()=>{
-            socket.connect()
-        })
-
-        //mesages send on socket load
-        socket.emit("getComments", post, (err, data)=>{
-            if(err){
-                console.log(err)
-                return
-            }
-            setCommentsData(data)
-        })
-        socket.on("updated_likes", payload =>{
-            console.log("Data came in Post")
-            console.log(payload)
-        })
-    },[socket])
+    // useEffect(()=>{
+    //     if(socketRef.current === null) return
+    //     // socket.connect()
+    //     //mesages received
+    //     socketRef.current.on("test", msg => {
+    //         console.log(msg)
+    //     })
+    //     socketRef.current.on("disconnect", ()=>{
+    //         socketRef.current.connect()
+    //     })
+    //
+    //     //mesages send on socket load
+    //     socketRef.current.emit("getComments", post, (err, data)=>{
+    //         if(err){
+    //             console.log(err)
+    //             return
+    //         }
+    //         setCommentsData(data)
+    //     })
+    //     socketRef.current.on("updated_likes", payload =>{
+    //         console.log("Data came in Post")
+    //         console.log(payload)
+    //     })
+    // },[socketRef])
     useEffect(()=>{
         const {category} = categoryData
         if(category){
@@ -113,7 +117,7 @@ export default function PostPage(props){
                          id={c._id}
                          key={c._id}
                          currentLoggedUser={userData}
-                         socket={socket}
+                         socket={"socketRef.current"}
                 />)
         })
         setComments(commentsList)
