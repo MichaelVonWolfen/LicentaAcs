@@ -1,7 +1,10 @@
 const Comments = require("../models/comment");
 const mongoose = require("mongoose");
+const {Socket} = require("socket.io");
 module.exports = (io, socket) => {
     socket.emit("test", "Helllo from backend!")
+    socket.join(socket.handshake.headers.room_id)
+
     socket.on('getComments', async (postID, callback) => {
         try {
             let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
@@ -11,7 +14,7 @@ module.exports = (io, socket) => {
             return callback("An error occured when processing your message.")
         }
     })
-    socket.on("likeChange", async (commentID)=>{
+    socket.on("likeChange", async (commentID, callback)=>{
         try {
             const user = socket.handshake.user
             let authorID = user._id.toString()
@@ -21,20 +24,32 @@ module.exports = (io, socket) => {
                     {likesList: new mongoose.Types.ObjectId(authorID)}
                 ]
             })
+            let commentData;
             if(comment !== null)
-                await Comments.updateOne({_id:new mongoose.Types.ObjectId(commentID)},{
+                commentData = await Comments.findOneAndUpdate({_id:new mongoose.Types.ObjectId(commentID)},{
                     $pullAll:{likesList:[authorID]}
-                })
+                },{new:true})
             else
                 //else add like
-                await Comments.updateOne({_id:new mongoose.Types.ObjectId(commentID)},{
+                commentData= await Comments.findOneAndUpdate({_id:new mongoose.Types.ObjectId(commentID)},{
                     $push:{likesList:[authorID]}
-                })
+                },{new:true})
+            const payload = {
+                commentID:commentData._id,
+                likesNB:commentData.likesList.length
+            }
+            const postID = commentData.postID.toString()
+
+            socket.nsp.to(postID).emit("updated_likes", payload)
+            io.of("anonimous").to(postID).emit("updated_likes", payload)
+            callback(undefined)
         }catch (e) {
             console.log(e)
+            callback("Error on changing comment like state.")
         }
     })
     socket.on("disconnect", () => {
         console.log(`User disconected ${socket.id}`)
+        socket.rooms.clear()
     });
-    };
+};

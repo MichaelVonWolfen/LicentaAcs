@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import Button from "../button/Button";
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {Manager, io} from "socket.io-client"
+import {io} from "socket.io-client"
 
 export default function PostPage(props){
     const token = localStorage.getItem("token")
@@ -18,7 +18,7 @@ export default function PostPage(props){
     const [commentsData, setCommentsData] = useState([])
     const [comments, setComments] = useState([])
     const [userData, setUserData] = useState({})
-    const [socket, setSocket] = useState(null)
+    const [socket,setSocket] = useState(null)
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
@@ -38,6 +38,8 @@ export default function PostPage(props){
         // }).catch(e =>{
         //     console.log(e)
         // })
+        let headers = {};
+        let connection_path = ""
         if(token){
             axios.get(`/api/users/user`,{
                 headers:{
@@ -49,19 +51,28 @@ export default function PostPage(props){
             }).catch(e =>{
                 console.log(e)
             })
-            // let connection =
-            setSocket(io("http://localhost:3000/user",{
-                    reconnectionDelayMax: 10000,
-                    extraHeaders:{authorization:token}
-                }))
+            connection_path = "/user"
+            headers = {
+                authorization:token,
+                room_id:post
+            }
+        }else{
+            connection_path = "/anonimous"
+            headers = {
+                room_id:post
+            }
         }
+        setSocket(io.connect(connection_path,{
+            withCredentials: true,
+            extraHeaders: headers
+        }))
         return () =>{
             socket.disconnect()
         }
     },  [])
     useEffect(()=>{
         if(socket === null) return
-        socket.connect()
+        // socket.connect()
         //mesages received
         socket.on("test", msg => {
             console.log(msg)
@@ -77,6 +88,10 @@ export default function PostPage(props){
                 return
             }
             setCommentsData(data)
+        })
+        socket.on("updated_likes", payload =>{
+            console.log("Data came in Post")
+            console.log(payload)
         })
     },[socket])
     useEffect(()=>{

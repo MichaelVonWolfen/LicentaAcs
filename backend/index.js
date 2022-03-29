@@ -7,12 +7,24 @@ const PORT = constants.port || 5000;
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const {instrument} = require("@socket.io/admin-ui");
+const cors = require("cors")
 require("./db");
+app.use(cors())
+
+
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: [
+            "http://localhost:3000",
+            "http://127.0.0.1:5500",
+            "https://admin.socket.io"
+        ],
         credentials: true,
     },
+});
+instrument(io, {
+    auth: false
 });
 
 require("dotenv").config();
@@ -49,10 +61,16 @@ const userNameSpace = io.of("/user")
     .use((socket, next) => {
         midlewares.userMiddleware(socket.handshake, undefined, next)
     })
+const anonimousNameSpace = io.of("/anonimous")
 const userSocketsHandler = require("./websockets/users");
+const anonimousSocketsHandler = require("./websockets/anonimous");
 userNameSpace.on("connection", (socket) => {
     console.log(`User connected with id ${socket.id}`)
-    userSocketsHandler(userNameSpace, socket);
+    userSocketsHandler(io, socket);
+});
+anonimousNameSpace.on("connection", (socket) => {
+    console.log(`Anonimous user connected with id ${socket.id}`)
+    anonimousSocketsHandler(io, socket);
 });
 // io.on('connection', (socket) => {
 //     console.log('a user connected on ' + socket.id);

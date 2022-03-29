@@ -13,10 +13,13 @@ export default function Comment({likes, author, created, image, text, id, curren
         setLikes(likes.length)
     }, [])
     const likeButtonHandler = (e) =>{
-        socket.emit("likeChange", id)
-        //if isliked == true, then decrease nb of likes before setting isLiked as false
-        !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
-        setIsLiked(!isLiked)
+        socket.emit("likeChange", id, (err)=>{
+            //if isliked == true, then decrease nb of likes before setting isLiked as false
+            if(!err){
+                !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+                setIsLiked(!isLiked)
+            }
+        })
     }
     return(
         <div className={"comment_container"}>
