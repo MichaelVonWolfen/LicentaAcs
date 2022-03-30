@@ -61,7 +61,7 @@ const userNameSpace = io.of("/user")
     .use((socket, next) => {
         midlewares.userMiddleware(socket.handshake, undefined, next)
     })
-const anonimousNameSpace = io.of("/anonimous")
+const anonimousNameSpace = io.of("/anonymous")
 const userSocketsHandler = require("./websockets/users");
 const anonimousSocketsHandler = require("./websockets/anonimous");
 userNameSpace.on("connection", (socket) => {

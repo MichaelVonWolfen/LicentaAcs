@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import logo from "../../../public/Images/logo.svg"
+import logo from "../../Assets/Images/logo.svg"
 
 export default function Navbar(){
     const isLoggedIn = localStorage.length >= 1

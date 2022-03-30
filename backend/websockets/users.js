@@ -2,7 +2,8 @@ const Comments = require("../models/comment");
 const mongoose = require("mongoose");
 const {Socket} = require("socket.io");
 module.exports = (io, socket) => {
-    socket.emit("test", "Helllo from backend!")
+    console.log("User connected")
+    socket.emit("test", "Helllo from backend, user!")
     socket.join(socket.handshake.headers.room_id)
 
     socket.on('getComments', async (postID, callback) => {

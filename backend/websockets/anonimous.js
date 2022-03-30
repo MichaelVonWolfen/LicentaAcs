@@ -1,6 +1,6 @@
 const Comments = require("../models/comment");
 module.exports = (io, socket) => {
-    socket.emit("test", "Helllo from backend!")
+    socket.emit("test", "Helllo from backend, anonymous!")
     socket.join(socket.handshake.headers.room_id)
 
     socket.on("test", ()=>{

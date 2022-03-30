@@ -44,6 +44,7 @@ export default function CategoryPage() {
         })
     },  [])
     useEffect(()=>{
+        if(categoryData === initData) return
         const {category, postsList} = categoryData
         if(category){
             setCategoryDetails(getCategoryDetailAndSetColors(category))

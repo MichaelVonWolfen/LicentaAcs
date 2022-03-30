@@ -9,6 +9,8 @@ import WShelper from "../../Helpers/Websockets";
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import EInput from "../../Structures/EnumInput";
+import {EnumWSpaths} from "../../Structures/EnumWSpaths";
+import {InterfaceWebsocketHeader} from "../../Structures/InterfaceWebsocketHeader";
 
 interface Icomment{
     authorID: {
@@ -26,10 +28,6 @@ interface IpostData{
     content:string|undefined
 }
 export default function PostPage(){
-    const token = localStorage.getItem("token")
-    const {category, post} = useParams()
-    const [categoryDetails, setCategoryDetails] = useState({})
-    const [categoryData, setCategoryData] = useState({category:""})
     const initComment:Icomment[] =[{
         authorID:{
             profile_picture:"",
@@ -45,18 +43,30 @@ export default function PostPage(){
         post_img:"",
         content:undefined
     }
+
+    const token = localStorage.getItem("token")
+    const {category, post} = useParams()
+    const [categoryDetails, setCategoryDetails] = useState({})
+    const [categoryData, setCategoryData] = useState({category:""})
     const [postData, setPostData] = useState(initPostData)
     const [commentsData, setCommentsData] = useState(initComment)
-    const [comments, setComments] = useState([<Comment likes={[]} author={initComment[0].authorID} created={initComment[0].createdAt.toString()} image={""} text={""} id={initComment[0]._id} currentLoggedUser={{_id:""}} socket={undefined}/>])
+    const [comments, setComments] = useState([<></>])
     const [userData, setUserData] = useState({
         profile_picture:"",
         _id:"",
         username:"",
     })
 
-    const {sendMessage, messages, users} = WShelper("anonimous",post, {room_id: post})
-    // const socketRef = useRef();
-    // const [socket,setSocket] = useState(null)
+    let WSpath = EnumWSpaths.anonymous
+    let headers:InterfaceWebsocketHeader = {room_id:post}
+
+    if(token) {
+        WSpath = EnumWSpaths.user
+        headers["authorization"] = token
+    }
+
+    const {socketRef} = WShelper(WSpath,post, headers)
+
     useEffect(()=>{
         axios.get(`/api/categories/${category}`,).then(r =>{
             let data = r.data
@@ -70,43 +80,18 @@ export default function PostPage(){
         }).catch(e =>{
             console.log(e)
         })
-        // axios.get(`/api/comments/${post}`,).then(r =>{
-        //     let rawComments = r.data
-        //     setCommentsData(rawComments)
-        // }).catch(e =>{
-        //     console.log(e)
-        // })
-        let headers = {};
-        let connection_path = ""
-        if(token){
-            axios.get(`/api/users/user`,{
-                headers:{
+        if(token) {
+            axios.get(`/api/users/user`, {
+                headers: {
                     authorization: token
                 }
-            }).then(r =>{
+            }).then(r => {
                 let resp = r.data
                 setUserData(resp)
-            }).catch(e =>{
+            }).catch(e => {
                 console.log(e)
             })
-            connection_path = "/user"
-            headers = {
-                authorization:token,
-                room_id:post
-            }
-        }else{
-            connection_path = "/anonimous"
-            headers = {
-                room_id:post
-            }
         }
-        // socketRef.current = io.connect(connection_path,{
-        //     withCredentials: true,
-        //     extraHeaders: headers
-        // })
-        // return () =>{
-        //     socketRef.current.disconnect()
-        // }
     },  [])
     // useEffect(()=>{
     //     if(socketRef.current === null) return
@@ -141,17 +126,18 @@ export default function PostPage(){
     useEffect(()=>{
         let commentsList:JSX.Element[] = []
         console.log(commentsData)
+        if (commentsData === initComment) return
         commentsData.forEach(c =>{
             commentsList.push(
                 <Comment author={c.authorID}
-                         created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
-                         image={c.authorID.profile_picture || "/images/default-user-image.png"}
-                         text={c.content}
-                         likes={c.likesList}
-                         id={c._id}
-                         key={c._id}
-                         currentLoggedUser={userData}
-                         socket={undefined}
+                    created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
+                    image={c.authorID.profile_picture || "/images/default-user-image.png"}
+                    text={c.content}
+                    likes={c.likesList}
+                    id={c._id}
+                    key={c._id}
+                    currentLoggedUser={userData}
+                    socket={undefined}
                 />)
                              {/*{"socketRef.current"}*/}
         })

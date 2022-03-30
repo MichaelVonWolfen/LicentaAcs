@@ -42,6 +42,7 @@ module.exports = {
                     }
                 }
                 req.user = user;
+                console.log("All good!")
                 return next();
             });
         });
