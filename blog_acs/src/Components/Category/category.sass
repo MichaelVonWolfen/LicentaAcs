@@ -1,0 +1,84 @@
+$size-pc: 150px
+$size-background: 130px
+$font-size:18pt
+$margin:35px
+$size-pc-small: 100px
+$size-background-small: 90px
+$font-size-small:10pt
+$margin-small: 15px
+$background_color:var(--color, #252422)
+$transition_time: 0.5s
+$position-corrector: 10px
+$position-corrector-small: 5px
+.category
+  width: $size-pc
+  height: $size-pc
+  position: relative
+  margin: $margin
+  &::before
+    z-index: -1
+    content: ""
+    position: absolute
+    outline: 1px solid $background_color
+    height: $size-pc
+    width: $size-pc
+    transform: rotate(10deg)
+    transition: $transition_time
+  &:hover
+    &::before
+      margin: $position-corrector
+      width: $size-background
+      height: $size-background
+      transform: rotate(30deg)
+      background-color: $background_color
+  img
+    width: $size-pc
+    height: $size-pc
+    object-fit: cover
+    z-index: 1
+    outline: none
+    box-shadow: none
+    transform: none
+  .filter
+    z-index: 2
+    position: absolute
+    background: #252422
+    width: $size-pc
+    height: $size-pc
+    top: 0
+    left: 0
+    border: none
+    opacity: 0.2
+    cursor: pointer
+
+  &::after
+    position: absolute
+    content: attr(name)
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    filter: brightness(1.5)
+    color: $background_color
+    font-size: $font-size
+    text-transform: capitalize
+@media screen and (max-width: 600px)
+  .category
+    width: $size-pc-small
+    height: $size-pc-small
+    margin: $margin-small
+    &::before
+      height: $size-pc-small
+      width: $size-pc-small
+    &:hover
+      &::before
+        margin: $position-corrector-small
+        width: $size-background-small
+        height: $size-background-small
+    img
+      width: $size-pc-small
+      height: $size-pc-small
+    .filter
+      width: $size-pc-small
+      height: $size-pc-small
+    &::after
+      font-size: $font-size_small

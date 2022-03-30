@@ -1,0 +1,68 @@
+$color:var(--color, white)
+$background_color:var(--background-color, black)
+$box_shadow_deviation: 10px
+$container_width: 260px
+$image_width: 400px
+$container_padding_top: 30px
+$container_padding_left: 60px
+$container_width_phone: 230px
+$image_width_phone: 140px
+$container_padding_top_phone: 15px
+$container_padding_left_phone: 35px
+.add_comment
+  display: grid
+  grid-template: "image username_place" "image comment_box" "image buttons"
+  grid-template-columns: 1fr 11fr
+  grid-column-gap: 40px
+  .profile_image
+    width: 75px
+    height: 75px
+    object-fit: cover
+    border-radius: 50%
+    box-shadow: none
+    transform: translate(0,0)
+    border: 1px
+    grid-area: image
+    margin: 0
+    padding: 0
+  .username
+    grid-area: username_place
+  .commentArea
+    grid-area: comment_box
+    box-shadow: none
+    margin: 10px 0
+    padding: 5px 10px
+    font-size: 10pt
+  .buttons
+    grid-area: buttons
+    display: flex
+    flex-direction: row
+    width: 25%
+    padding: 0 15px
+.PostContainer
+  padding: 20px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  color: $color
+  .titlePost
+    text-align: center
+  .post_content
+    text-indent: 2rem
+    width: 65vw
+    background: $background_color
+    padding: 15px
+    outline: 2px solid $color
+    box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+    transform: translatex(30px)
+    margin: 50px 0
+  img
+    width: $image_width
+    height: $image_width
+    margin: 50px 0
+@media screen and (max-width: 1370px)
+  //.add_comment
+  img
+    width: $image_width_phone
+    height: $image_width_phone

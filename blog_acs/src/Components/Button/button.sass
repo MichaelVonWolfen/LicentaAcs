@@ -1,0 +1,51 @@
+$background-color: var(--background-color, #252422)
+$text-color: var(--color, #CCC5B9)
+$min-width: 100px
+$height:25px
+$min-width-phone: 75px
+$height-phone:25px
+$transition_time: 0.5s
+.spanFlex
+  display: flex
+  flex-direction: row
+  justify-content: center
+.button_parent
+  position: relative
+  height: auto
+  margin: 20px
+  width: fit-content
+  &::before
+    z-index: -1
+    position: absolute
+    content: ""
+    border: 1px solid $text-color
+    top: -10px
+    left: -10px
+    min-width: $min-width
+    height: $height
+    transition: $transition_time
+  &:hover::before
+    top: -5px
+    left: -5px
+  .button
+    padding: 5px
+    background-color: $background-color
+    color: $text-color
+    min-width: $min-width
+    border: 1px solid $text-color
+    cursor: pointer
+    font-size: 11pt
+    transition: $transition_time
+    &:disabled
+      cursor: no-drop
+    &:hover
+      color: $background-color
+      background-color: $text-color
+@media screen and (max-width: 768px)
+  .button_parent
+    &::before
+      min-width: $min-width-phone
+      height: $height-phone
+    .button
+      min-width: $min-width-phone
+      font-size: 8pt

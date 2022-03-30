@@ -1,0 +1,25 @@
+.add-post-container
+  height: 80vh
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-evenly
+  .left
+    height: max(50%, 300px)
+    display: flex
+    flex-direction: column
+    .titleInput
+      width: 50%
+    .contentArea
+      height: 100%
+      width: max(40vw, 270px)
+  .right
+    .buttons
+      display: flex
+@media screen and (max-width: 768px)
+  .add-post-container
+    margin-top: 100px
+    flex-direction: column
+    .left
+      .titleInput
+        width: 83%

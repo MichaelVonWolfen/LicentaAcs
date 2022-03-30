@@ -1,0 +1,56 @@
+$color:var(--color, white)
+$background_color:var(--background-color, black)
+$box_shadow_deviation: 10px
+$container_width: 260px
+$image_width: 400px
+$container_padding_top: 30px
+$container_padding_left: 60px
+$container_width_phone: 230px
+$image_width_phone: 140px
+$container_padding_top_phone: 15px
+$container_padding_left_phone: 35px
+.comment_container
+  display: grid
+  grid-template: "image image image username creation" "image image image post post" "hearth_icon likes reply_icon post post"
+  margin: 25px 0
+  .left
+    .profile_image
+      width: 75px
+      height: 75px
+      margin: 0
+      padding: 0
+      outline: none
+      box-shadow: none
+      transform: translate(0,0)
+      grid-area: image
+      border-radius: 50%
+      border: 1px solid
+    .reactions
+      display: flex
+      justify-content: space-around
+      transform: translateX(-5px)
+      .likes_container
+        display: flex
+        .heart_icon
+          grid-area: hearth_icon
+        .likes_total
+          grid-area: likes
+          margin: 0 5px
+      .reply
+        grid-area: reply_icon
+  .right
+    .username
+      grid-area: username
+      margin-left: 30px
+    .creation_date
+      grid-area: creation
+      margin-left: 30px
+    .comment_text
+      grid-area: post
+      width: 65vw
+      background: $background_color
+      padding: 15px
+      outline: 2px solid $color
+      //box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+      transform: translatex(30px)
+      //margin: 10px 0

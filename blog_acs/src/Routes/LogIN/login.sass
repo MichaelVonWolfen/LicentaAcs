@@ -1,0 +1,76 @@
+$color:var(--color, white)
+$background_color:var(--background-color, black)
+$box_shadow_deviation: 10px
+$container_width: 260px
+$image_width: 400px
+$container_padding_top: 30px
+$container_padding_left: 60px
+$container_width_phone: 230px
+$image_width_phone: 140px
+$container_padding_top_phone: 15px
+$container_padding_left_phone: 35px
+$width:300px
+$widthButton:200px
+$height:30px
+$heightButton:50px
+.login_container
+  color: $color
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin: 50px 0
+  a
+    color: $color!important
+.login
+  margin: 50px 0
+  min-width: 260px
+  width: 30vw
+  display: flex
+  flex-direction: column
+  background-color: $background_color
+  padding: 20px
+  outline: 1px solid
+  box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 $color
+  .login_input
+    cursor: text
+    height: 50px
+    position: relative
+    border-bottom: 2px solid $color
+    margin: 40px 5px 0 5px
+    padding-top: 10px
+    &::after
+      content: attr(placeholderText)
+      color: $color
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 25%
+      left: 0
+      transition: 0.3s ease-in
+    &:hover, &:focus-within
+      &:after
+        top: 5px
+        font-size: 10pt
+    input
+      width: 100%
+      height: $height
+      font-size: large
+      margin: 10px 0
+      background-color: $background_color
+      color: $color
+      border: none
+      &:focus-visible
+        outline: none
+  .button_parent
+    z-index: 1
+    margin: 40px auto 10px auto
+    &::before
+      z-index: -1
+  label
+    text-transform: capitalize
+    text-align: left
+.input_has_contents
+  &:after
+    top: 5px!important
+    font-size: 10pt!important

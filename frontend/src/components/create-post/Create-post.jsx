@@ -3,8 +3,10 @@ import React from "react";
 import Button from "../button/Button"
 import "./create-post.css"
 import getCategoryDetailAndSetColors from "../helpers/setColors";
-export default function createPost(props){
-    const categoryDetails = getCategoryDetailAndSetColors(props.match.params.category)
+import {useParams} from "react-router-dom";
+export default function createPost(){
+    let category = useParams()
+    const categoryDetails = getCategoryDetailAndSetColors(category)
     return(
         <form action="/" method="post" className="add-post-container">
             <div className="left">

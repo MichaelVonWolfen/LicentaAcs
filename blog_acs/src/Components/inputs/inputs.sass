@@ -1,0 +1,42 @@
+$color:var(--color, white)
+$background-color:var(--background-color, black)
+$box-shadow-deviation:10px
+$min-width: auto
+$file-input-width: 300px
+$padding-small: 15px
+$padding-medium: 30px
+$padding-large: 60px
+.input
+  color: $color
+  font-size: 20pt
+  background: $background-color padding-box
+  border: 2px solid $color
+  margin: $box-shadow-deviation
+  box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 $color
+  padding: $padding-small
+  min-width: $min-width
+  //width: 50vw
+  text-align: center
+  &:focus
+    outline: none
+  &::placeholder
+    color: $color
+textarea.input
+  //height: 50vh
+  text-align: left
+  font-size: 16pt
+  font-weight: 200
+input[type="file"]
+  display: none
+.file
+  min-width: fit-content
+  height: auto
+  padding: 0
+  label
+    padding: $padding-medium $padding-large
+    display: flex
+    flex-direction: column
+    align-items: center
+  .image
+    min-width: 180px
+    height: auto

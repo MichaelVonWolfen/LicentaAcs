@@ -1,0 +1,30 @@
+@mixin circle_base
+  position: absolute
+  width: var(--radius, 100px)
+  height: var(--radius, 100px)
+  top: var(--top_distance, 100px)
+  left: var(--left_distance, 100px)
+  opacity: 0.35
+  border-radius: 100%
+  transform: translate(-50%, -50%)
+body
+  min-height: 100vh
+  //Find how to change the hue so that only one color shall be enough
+  position: relative
+  overflow-x: hidden
+  background-color: var(--background-color, #252422)
+.background
+  position: fixed
+  z-index: -1
+.circle
+  @include circle_base
+  background-color: var(--color, #CCC5B9)
+
+.circle_stroke_only
+  @include circle_base
+  border: 15px solid var(--color, #CCC5B9)
+
+.multiple_circles
+  @include circle_base
+  box-shadow: inset 0 0 0 3px var(--color,#CCC5B9), 0 0 0 14px var(--background-color, #252422),0 0 0 17px var(--color,#CCC5B9), 0 0 0 28px var(--background-color, #252422),0 0 0 31px var(--color,#CCC5B9)
+  opacity: 0.2

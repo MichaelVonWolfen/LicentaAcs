@@ -1,0 +1,24 @@
+$color:var(--color, white)
+$background-color:var(--background-color, black)
+$box-shadow-deviation: 10px
+$container-width: 260px
+$image-width: 200px
+$container-padding-top: 30px
+$container-padding-left: 60px
+$container-width_phone: 230px
+$image-width_phone: 140px
+$container-padding-top_phone: 15px
+$container-padding-left_phone: 35px
+img
+  width: $image-width
+  height: $image-width
+  object-fit: cover
+  outline: 2px solid $color
+  box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+  transform: translatex(30px)
+@media screen and (max-width: 835px)
+    img
+      width: $image-width-phone
+      height: $image-width-phone
+      box-shadow: -$box-shadow-deviation $box-shadow-deviation 0 0 $color
+      transform: translatex(30px)
