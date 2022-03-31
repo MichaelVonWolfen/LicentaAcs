@@ -19,8 +19,4 @@ function App() {
     </BrowserRouter>
   );
 }
-function test(){
-    return <div className="loo">Hello</div>
-}
-
 export default App;

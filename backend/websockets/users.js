@@ -1,18 +1,21 @@
 const Comments = require("../models/comment");
 const mongoose = require("mongoose");
-const {Socket} = require("socket.io");
 module.exports = (io, socket) => {
     console.log("User connected")
+    socket.emit("connection", "Hy")
     socket.emit("test", "Helllo from backend, user!")
     socket.join(socket.handshake.headers.room_id)
 
     socket.on('getComments', async (postID, callback) => {
+        console.log("Entered get comments event.")
+        console.log("Got comments")
         try {
             let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
             return callback(undefined,comments)
         } catch (e) {
             console.log(e)
-            return callback("An error occured when processing your message.")
+            if(callback)
+                return callback("An error occured when processing your message.")
         }
     })
     socket.on("likeChange", async (commentID, callback)=>{
@@ -46,7 +49,8 @@ module.exports = (io, socket) => {
             callback(undefined)
         }catch (e) {
             console.log(e)
-            callback("Error on changing comment like state.")
+            if(callback)
+                callback("Error on changing comment like state.")
         }
     })
     socket.on("disconnect", () => {

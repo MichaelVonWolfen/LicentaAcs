@@ -56,7 +56,6 @@ export default function PostPage(){
         _id:"",
         username:"",
     })
-
     let WSpath = EnumWSpaths.anonymous
     let headers:InterfaceWebsocketHeader = {room_id:post}
 
@@ -64,59 +63,44 @@ export default function PostPage(){
         WSpath = EnumWSpaths.user
         headers["authorization"] = token
     }
-
-    const {socketRef} = WShelper(WSpath,post, headers)
-
+    const eventListeners ={
+        error: (msg:string)=> console.error(msg),
+        connection:function () {
+            console.log("We are connected!")
+            sendEvent("getComments", {
+                msg: post,
+                callback: (err:string, data:any)=>{
+                    console.log("data")
+                    console.log(data)
+                    if(err){
+                        console.log(err)
+                        return
+                    }
+                    setCommentsData(data)
+                }
+            })
+        },
+        test: (msg:string) => console.log(msg),
+        updated_likes:(payload:Object) =>{
+                    console.log("Data came in WS")
+                    console.log(payload)
+                }
+    }
+    const {sendEvent} =WShelper(WSpath,post || "", headers, eventListeners)
     useEffect(()=>{
-        axios.get(`/api/categories/${category}`,).then(r =>{
-            let data = r.data
-            setCategoryData(data);
-        }).catch(e =>{
-            console.log(e)
-        })
-        axios.get(`/api/posts/post/${post}`,).then(r =>{
-            let data = r.data
-            setPostData(data)
-        }).catch(e =>{
-            console.log(e)
-        })
+        axios.get(`/api/categories/${category}`,)
+            .then(r =>setCategoryData(r.data))
+            .catch(e =>console.log(e))
+        axios.get(`/api/posts/post/${post}`,)
+            .then(r => setPostData(r.data))
+            .catch(e =>console.log(e))
         if(token) {
             axios.get(`/api/users/user`, {
-                headers: {
-                    authorization: token
-                }
-            }).then(r => {
-                let resp = r.data
-                setUserData(resp)
-            }).catch(e => {
-                console.log(e)
-            })
+                headers: {authorization: token}
+            }).then(r => setUserData(r.data)
+            ).catch(e => console.log(e))
         }
-    },  [])
-    // useEffect(()=>{
-    //     if(socketRef.current === null) return
-    //     // socket.connect()
-    //     //mesages received
-    //     socketRef.current.on("test", msg => {
-    //         console.log(msg)
-    //     })
-    //     socketRef.current.on("disconnect", ()=>{
-    //         socketRef.current.connect()
-    //     })
-    //
-    //     //mesages send on socket load
-    //     socketRef.current.emit("getComments", post, (err, data)=>{
-    //         if(err){
-    //             console.log(err)
-    //             return
-    //         }
-    //         setCommentsData(data)
-    //     })
-    //     socketRef.current.on("updated_likes", payload =>{
-    //         console.log("Data came in Post")
-    //         console.log(payload)
-    //     })
-    // },[socketRef])
+    },[])
     useEffect(()=>{
         const {category} = categoryData
         if(category){
@@ -125,7 +109,6 @@ export default function PostPage(){
     }, [categoryData])
     useEffect(()=>{
         let commentsList:JSX.Element[] = []
-        console.log(commentsData)
         if (commentsData === initComment) return
         commentsData.forEach(c =>{
             commentsList.push(
@@ -139,7 +122,6 @@ export default function PostPage(){
                     currentLoggedUser={userData}
                     socket={undefined}
                 />)
-                             {/*{"socketRef.current"}*/}
         })
         setComments(commentsList)
     },[commentsData])
