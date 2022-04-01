@@ -11,6 +11,7 @@ module.exports = (io, socket) => {
         console.log(msg)
     })
     socket.on('getComments', async (postID, callback) => {
+        console.log("LOLO")
         try {
             let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
             // console.log(comments)
@@ -19,6 +20,19 @@ module.exports = (io, socket) => {
             console.log(e)
             if(callback)
                 return callback("An error occured when processing your message.")
+        }
+    })
+    socket.on("newComment", async (postID, content) =>{
+        console.log(content)
+        try {
+            let authorID = socket.handshake.user._id.toString()
+            await new Comments({postID, authorID, content}).save()
+            let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
+
+            socket.nsp.in(postID).emit("retrieveNewComment", comments)
+            io.of(constants.namespaces.anonymous).in(postID).emit("retrieveNewComment", comments)
+        }catch (e) {
+            console.log(e)
         }
     })
     socket.on("likeChange", async (commentID, callback)=>{
@@ -43,10 +57,6 @@ module.exports = (io, socket) => {
                 commentData= await Comments.findOneAndUpdate({_id:new mongoose.Types.ObjectId(commentID)},{
                     $push:{likesList:[authorID]}
                 },{new:true})
-            // const payload = {
-            //     commentID:commentData._id,
-            //     likesNB:commentData.likesList.length
-            // }
             const postID = commentData.postID.toString()
             let payload = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
 

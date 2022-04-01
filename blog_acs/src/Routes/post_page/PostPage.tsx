@@ -78,7 +78,8 @@ export default function PostPage(){
             console.log("commentsData")
             console.log(commentsData)
             setCommentsData(payload)
-        }
+        },
+        retrieveNewComment: (comments:Icomment[]) =>setCommentsData(comments)
     }
     WShelper(WSpath,post || "", headers, eventListeners, setSocket)
     useEffect(()=>{
@@ -131,6 +132,13 @@ export default function PostPage(){
         setComments(commentsList)
     },[commentsData])
 
+    const handleCommentSend = (e:any)=>{
+        const textField:HTMLTextAreaElement|null = document.querySelector(".PostContainer .comments .add_comment textarea")
+        if(!textField) return
+        if(textField.value === "") return;
+        socket.emit("newComment", post, textField.value)
+        textField.value = ""
+    };
     return(
         <div className="PostContainer">
             <h1 className={"titlePost"}>{postData.title}</h1>
@@ -144,7 +152,7 @@ export default function PostPage(){
                         <strong className="username">{userData.username}</strong>
                         <CustomInput type={EInput.textarea} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">
-                            <Button text={"Comment"} customClickEvent={()=>{}} additionalClasses={"post"} type={"defaultButton"}
+                            <Button text={"Comment"} customClickEvent={handleCommentSend} additionalClasses={"post"} type={"defaultButton"}
                                     isDisabled={false}/>
                             <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"defaultButton"}
                                     isDisabled={false}/>
