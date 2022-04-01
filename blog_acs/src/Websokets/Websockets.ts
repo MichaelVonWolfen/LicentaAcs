@@ -10,9 +10,9 @@ interface WsSendEvent {
     callback?: any
 }
 
-const WShelper = (namespace: string, postID: string, headers:any, events: any) => {
-    let socketRef:any  =  null;
+const WShelper = (namespace: string, postID: string, headers:any, events: any, setSocket:any) => {
     useEffect(() => {
+        let socketRef:any  =  null;
         if(namespace === EnumWSpaths.user && !headers.authorization) return
         socketRef = io(`${SOCKET_SERVER_URL}/${namespace}`, {query: {roomId:postID,},
             extraHeaders:{...headers},
@@ -23,22 +23,14 @@ const WShelper = (namespace: string, postID: string, headers:any, events: any) =
             if(events[eventName])
                 events[eventName](msg);
         })
+        setSocket(socketRef)
         return () => {
             // @ts-ignore
             socketRef.removeAllListeners();
             // @ts-ignore
             socketRef.disconnect();
         };
-    }, [postID, namespace]);
-
-    const sendEvent = (eventName: string, message: WsSendEvent) => {
-        if (!socketRef) return
-        socketRef.emit(eventName, message.msg, message.callback);
-        console.log("Send event")
-        console.log(eventName)
-    };
-
-    return { sendEvent, socketRef };
+    }, [postID, namespace]);;
 };
 
 export default WShelper;

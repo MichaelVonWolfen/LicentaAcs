@@ -12,6 +12,7 @@ import EInput from "../../Structures/EnumInput";
 import {EnumWSpaths} from "../../Structures/EnumWSpaths";
 import {InterfaceWebsocketHeader} from "../../Structures/InterfaceWebsocketHeader";
 import constants from "../../Config/constants";
+import {io} from "socket.io-client";
 
 interface Icomment{
     authorID: {
@@ -57,6 +58,8 @@ export default function PostPage(){
         _id:"",
         username:"",
     })
+    const [socket, setSocket] = useState(io)
+
     let WSpath = EnumWSpaths.anonymous
     let headers:InterfaceWebsocketHeader = {room_id:post}
 
@@ -68,18 +71,6 @@ export default function PostPage(){
         error: (msg:string)=> console.error(msg),
         connection:function () {
             console.log("We are connected!")
-            sendEvent("getComments", {
-                msg: post,
-                callback: (err:string, data:any)=>{
-                    console.log("data")
-                    console.log(data)
-                    if(err){
-                        console.log(err)
-                        return
-                    }
-                    setCommentsData(data)
-                }
-            })
         },
         test: (msg:string) => console.log(msg),
         updated_likes:(payload:Object) =>{
@@ -87,7 +78,20 @@ export default function PostPage(){
                     console.log(payload)
                 }
     }
-    const {sendEvent} =WShelper(WSpath,post || "", headers, eventListeners)
+    WShelper(WSpath,post || "", headers, eventListeners, setSocket)
+    const likeHandler = ({id, isLiked, setLikes, likesNB, setIsLiked}:any)=>{
+        console.log("Changing like state")
+        socket.emit("Debug", "Success for comment id " + id)
+        socket.emit("likeChange",
+            id,
+            (err:string)=> {
+                //if isliked == true, then decrease nb of likes before setting isLiked as false
+                if (!err) {
+                    !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+                    setIsLiked(!isLiked)
+                }
+            })
+    }
     useEffect(()=>{
         axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,)
             .then(r =>setCategoryData(r.data))
@@ -102,6 +106,19 @@ export default function PostPage(){
             ).catch(e => console.log(e))
         }
     },[])
+    useEffect(()=>{
+        if(!post) return
+        socket.emit("getComments", post,(err:string, data:any)=>{
+                console.log("data")
+                console.log(data)
+                if(err){
+                    console.log(err)
+                    return
+                }
+                setCommentsData(data)
+            }
+        )
+    }, [socket])
     useEffect(()=>{
         const {category} = categoryData
         if(category){
@@ -118,10 +135,10 @@ export default function PostPage(){
                     image={c.authorID.profile_picture || "/images/default-user-image.png"}
                     text={c.content}
                     likes={c.likesList}
-                    id={c._id}
                     key={c._id}
+                    id={c._id}
                     currentLoggedUser={userData}
-                    socket={undefined}
+                    likeHandler={likeHandler}
                 />)
         })
         setComments(commentsList)

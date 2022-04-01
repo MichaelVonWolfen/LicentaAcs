@@ -6,9 +6,10 @@ module.exports = (io, socket) => {
     socket.emit("test", "Helllo from backend, user!")
     socket.join(socket.handshake.headers.room_id)
 
+    socket.on("Debug", (msg) =>{
+        console.log(msg)
+    })
     socket.on('getComments', async (postID, callback) => {
-        console.log("Entered get comments event.")
-        console.log("Got comments")
         try {
             let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
             return callback(undefined,comments)
@@ -20,6 +21,8 @@ module.exports = (io, socket) => {
     })
     socket.on("likeChange", async (commentID, callback)=>{
         try {
+            console.log(commentID)
+            console.log("Like Change")
             const user = socket.handshake.user
             let authorID = user._id.toString()
             let comment = await Comments.findOne({

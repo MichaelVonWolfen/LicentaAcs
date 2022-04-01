@@ -4,7 +4,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useState} from "react";
-import {io} from "socket.io-client"
 
 interface commentInterface {
     likes:string[],
@@ -14,9 +13,9 @@ interface commentInterface {
     text:string,
     id:string,
     currentLoggedUser: {_id:string},
-    socket: typeof io | undefined
+    likeHandler:any
 }
-export default function Comment({likes, author, created, image, text, id, currentLoggedUser, socket}:commentInterface){
+export default function Comment({likes, author, created, image, text, id, currentLoggedUser, likeHandler}:commentInterface){
     const [isLiked, setIsLiked] = useState(likes.find(userID => currentLoggedUser._id === userID) !== undefined)
     let [likesNB, setLikes] = useState(likes.length)
 
@@ -24,6 +23,19 @@ export default function Comment({likes, author, created, image, text, id, curren
         setLikes(likes.length)
     }, [])
     const likeButtonHandler = () =>{
+        likeHandler({id, isLiked, setLikes, likesNB, setIsLiked})
+        // console.log(sendMessage)
+        // sendMessage("likeChange",
+        //     {
+        //         msg:id,
+        //         callback: (err:string)=> {
+        //             //if isliked == true, then decrease nb of likes before setting isLiked as false
+        //             if (!err) {
+        //                 !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+        //                 setIsLiked(!isLiked)
+        //             }
+        //         }
+        //     })
         // socket.emit("likeChange", id, (err)=>{
         //     //if isliked == true, then decrease nb of likes before setting isLiked as false
         //     if(!err){
