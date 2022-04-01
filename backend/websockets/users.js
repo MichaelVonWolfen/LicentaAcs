@@ -1,5 +1,6 @@
 const Comments = require("../models/comment");
 const mongoose = require("mongoose");
+const constants = require("../constants");
 module.exports = (io, socket) => {
     console.log("User connected")
     socket.emit("connection", "Hy")
@@ -11,7 +12,8 @@ module.exports = (io, socket) => {
     })
     socket.on('getComments', async (postID, callback) => {
         try {
-            let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
+            let comments = await Comments.retrPostCommentData(postID, socket.handshake.user._id)
+            // console.log(comments)
             return callback(undefined,comments)
         } catch (e) {
             console.log(e)
@@ -41,14 +43,15 @@ module.exports = (io, socket) => {
                 commentData= await Comments.findOneAndUpdate({_id:new mongoose.Types.ObjectId(commentID)},{
                     $push:{likesList:[authorID]}
                 },{new:true})
-            const payload = {
-                commentID:commentData._id,
-                likesNB:commentData.likesList.length
-            }
+            // const payload = {
+            //     commentID:commentData._id,
+            //     likesNB:commentData.likesList.length
+            // }
             const postID = commentData.postID.toString()
+            let comments = await Comments.retrPostCommentData(postID, "")
 
-            socket.nsp.to(postID).emit("updated_likes", payload)
-            io.of("anonimous").to(postID).emit("updated_likes", payload)
+            socket.to(postID).emit("updated_likes", comments)
+            io.of(constants.namespaces.anonymous).to(postID).emit("updated_likes", comments)
             callback(undefined)
         }catch (e) {
             console.log(e)

@@ -13,6 +13,7 @@ import {EnumWSpaths} from "../../Structures/EnumWSpaths";
 import {InterfaceWebsocketHeader} from "../../Structures/InterfaceWebsocketHeader";
 import constants from "../../Config/constants";
 import {io} from "socket.io-client";
+import {v4 as uuid} from "uuid"
 
 interface Icomment{
     authorID: {
@@ -21,7 +22,8 @@ interface Icomment{
     },
     createdAt:Date,
     content:string,
-    likesList: string[],
+    isLikedByUser:boolean,
+    likesNB:number,
     _id:string
 }
 interface IpostData{
@@ -37,7 +39,8 @@ export default function PostPage(){
         },
         createdAt:new Date(),
         content:"",
-        likesList:[],
+        likesNB:0,
+        isLikedByUser:false,
         _id:""
     }]
     const initPostData:IpostData={
@@ -73,25 +76,13 @@ export default function PostPage(){
             console.log("We are connected!")
         },
         test: (msg:string) => console.log(msg),
-        updated_likes:(payload:Object) =>{
-                    console.log("Data came in WS")
-                    console.log(payload)
-                }
+        updated_likes:(payload:Icomment[]) =>{
+            console.log("Received commend update")
+            console.log(payload)
+            setCommentsData(payload)
+        }
     }
     WShelper(WSpath,post || "", headers, eventListeners, setSocket)
-    const likeHandler = ({id, isLiked, setLikes, likesNB, setIsLiked}:any)=>{
-        console.log("Changing like state")
-        socket.emit("Debug", "Success for comment id " + id)
-        socket.emit("likeChange",
-            id,
-            (err:string)=> {
-                //if isliked == true, then decrease nb of likes before setting isLiked as false
-                if (!err) {
-                    !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
-                    setIsLiked(!isLiked)
-                }
-            })
-    }
     useEffect(()=>{
         axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,)
             .then(r =>setCategoryData(r.data))
@@ -126,6 +117,8 @@ export default function PostPage(){
         }
     }, [categoryData])
     useEffect(()=>{
+        console.log("Comments Data")
+        console.log(commentsData)
         let commentsList:JSX.Element[] = []
         if (commentsData === initComment) return
         commentsData.forEach(c =>{
@@ -134,11 +127,12 @@ export default function PostPage(){
                     created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
                     image={c.authorID.profile_picture || "/images/default-user-image.png"}
                     text={c.content}
-                    likes={c.likesList}
-                    key={c._id}
+                    isLikedByUser ={c.isLikedByUser}
+                    likes_NB={c.likesNB}
+                    key={uuid()}
                     id={c._id}
                     currentLoggedUser={userData}
-                    likeHandler={likeHandler}
+                    socket={socket}
                 />)
         })
         setComments(commentsList)

@@ -57,11 +57,11 @@ app.use("/api/search", search)
 
 const midlewares = require("./middleware/auth")
 
-const userNameSpace = io.of("/user")
+const userNameSpace = io.of(constants.namespaces.user)
     .use((socket, next) => {
         midlewares.userMiddleware(socket.handshake, undefined, next)
     })
-const anonimousNameSpace = io.of("/anonymous")
+const anonimousNameSpace = io.of(constants.namespaces.anonymous)
 const userSocketsHandler = require("./websockets/users");
 const anonimousSocketsHandler = require("./websockets/anonimous");
 userNameSpace.on("connection", (socket) => {
@@ -72,9 +72,6 @@ anonimousNameSpace.on("connection", (socket) => {
     console.log(`Anonimous user connected with id ${socket.id}`)
     anonimousSocketsHandler(io, socket);
 });
-// io.on('connection', (socket) => {
-//     console.log('a user connected on ' + socket.id);
-// });
 
 server.listen(PORT, () => {
     console.log(`listening on *:${PORT}`);

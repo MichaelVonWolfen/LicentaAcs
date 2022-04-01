@@ -4,45 +4,33 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useState} from "react";
+import {Socket} from "socket.io-client"
 
 interface commentInterface {
-    likes:string[],
+    isLikedByUser:boolean,
+    likes_NB:number
     author: {username:string},
     created:string,
     image:string,
     text:string,
     id:string,
     currentLoggedUser: {_id:string},
-    likeHandler:any
+    socket:  Socket
 }
-export default function Comment({likes, author, created, image, text, id, currentLoggedUser, likeHandler}:commentInterface){
-    const [isLiked, setIsLiked] = useState(likes.find(userID => currentLoggedUser._id === userID) !== undefined)
-    let [likesNB, setLikes] = useState(likes.length)
+export default function Comment({isLikedByUser, likes_NB, author, created, image, text, id, socket}:commentInterface){
+    const [isLiked, setIsLiked] = useState(isLikedByUser || false)
+    let [likesNB, setLikes] = useState(likes_NB || 0)
 
-    useEffect(()=>{
-        setLikes(likes.length)
-    }, [])
     const likeButtonHandler = () =>{
-        likeHandler({id, isLiked, setLikes, likesNB, setIsLiked})
-        // console.log(sendMessage)
-        // sendMessage("likeChange",
-        //     {
-        //         msg:id,
-        //         callback: (err:string)=> {
-        //             //if isliked == true, then decrease nb of likes before setting isLiked as false
-        //             if (!err) {
-        //                 !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
-        //                 setIsLiked(!isLiked)
-        //             }
-        //         }
-        //     })
-        // socket.emit("likeChange", id, (err)=>{
-        //     //if isliked == true, then decrease nb of likes before setting isLiked as false
-        //     if(!err){
-        //         !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
-        //         setIsLiked(!isLiked)
-        //     }
-        // })
+        socket.emit("likeChange",
+            id,
+            (err:string)=> {
+                //if isliked == true, then decrease nb of likes before setting isLiked as false
+                if (!err) {
+                    !isLiked ? setLikes(likesNB + 1) : setLikes(likesNB - 1)
+                    setIsLiked(!isLiked)
+                }
+            })
     }
     return(
         <div className={"comment_container"}>

@@ -9,7 +9,7 @@ module.exports = (io, socket) => {
     })
     socket.on('getComments', async (postID, callback) => {
         try {
-            let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
+            let comments = await Comments.retrPostCommentData(postID, "")
             return callback(undefined,comments)
         } catch (e) {
             console.log(e)
