@@ -23,7 +23,7 @@ interface Icomment{
     createdAt:Date,
     content:string,
     isLikedByUser:boolean,
-    likesNB:number,
+    likesList:string[],
     _id:string
 }
 interface IpostData{
@@ -39,7 +39,7 @@ export default function PostPage(){
         },
         createdAt:new Date(),
         content:"",
-        likesNB:0,
+        likesList:[],
         isLikedByUser:false,
         _id:""
     }]
@@ -72,13 +72,11 @@ export default function PostPage(){
     }
     const eventListeners ={
         error: (msg:string)=> console.error(msg),
-        connection:function () {
-            console.log("We are connected!")
-        },
+        connection: () => console.log("We are connected!"),
         test: (msg:string) => console.log(msg),
-        updated_likes:(payload:Icomment[]) =>{
-            console.log("Received commend update")
-            console.log(payload)
+        updated_likes:(payload:Icomment[]) => {
+            console.log("commentsData")
+            console.log(commentsData)
             setCommentsData(payload)
         }
     }
@@ -100,8 +98,6 @@ export default function PostPage(){
     useEffect(()=>{
         if(!post) return
         socket.emit("getComments", post,(err:string, data:any)=>{
-                console.log("data")
-                console.log(data)
                 if(err){
                     console.log(err)
                     return
@@ -117,8 +113,6 @@ export default function PostPage(){
         }
     }, [categoryData])
     useEffect(()=>{
-        console.log("Comments Data")
-        console.log(commentsData)
         let commentsList:JSX.Element[] = []
         if (commentsData === initComment) return
         commentsData.forEach(c =>{
@@ -127,8 +121,7 @@ export default function PostPage(){
                     created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
                     image={c.authorID.profile_picture || "/images/default-user-image.png"}
                     text={c.content}
-                    isLikedByUser ={c.isLikedByUser}
-                    likes_NB={c.likesNB}
+                    likes={c.likesList}
                     key={uuid()}
                     id={c._id}
                     currentLoggedUser={userData}

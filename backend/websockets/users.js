@@ -12,7 +12,7 @@ module.exports = (io, socket) => {
     })
     socket.on('getComments', async (postID, callback) => {
         try {
-            let comments = await Comments.retrPostCommentData(postID, socket.handshake.user._id)
+            let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
             // console.log(comments)
             return callback(undefined,comments)
         } catch (e) {
@@ -48,10 +48,10 @@ module.exports = (io, socket) => {
             //     likesNB:commentData.likesList.length
             // }
             const postID = commentData.postID.toString()
-            let comments = await Comments.retrPostCommentData(postID, "")
+            let payload = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
 
-            socket.to(postID).emit("updated_likes", comments)
-            io.of(constants.namespaces.anonymous).to(postID).emit("updated_likes", comments)
+            socket.to(postID).emit("updated_likes", payload)
+            io.of(constants.namespaces.anonymous).to(postID).emit("updated_likes", payload)
             callback(undefined)
         }catch (e) {
             console.log(e)

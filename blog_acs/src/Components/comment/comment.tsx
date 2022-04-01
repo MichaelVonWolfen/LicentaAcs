@@ -7,8 +7,7 @@ import {useState} from "react";
 import {Socket} from "socket.io-client"
 
 interface commentInterface {
-    isLikedByUser:boolean,
-    likes_NB:number
+    likes:string[],
     author: {username:string},
     created:string,
     image:string,
@@ -17,10 +16,13 @@ interface commentInterface {
     currentLoggedUser: {_id:string},
     socket:  Socket
 }
-export default function Comment({isLikedByUser, likes_NB, author, created, image, text, id, socket}:commentInterface){
-    const [isLiked, setIsLiked] = useState(isLikedByUser || false)
-    let [likesNB, setLikes] = useState(likes_NB || 0)
+export default function Comment({likes, author, created, image, text, id, currentLoggedUser, socket}:commentInterface){
+    const [isLiked, setIsLiked] = useState(likes.find(userID => currentLoggedUser._id === userID) !== undefined)
+    let [likesNB, setLikes] = useState(likes.length)
 
+    useEffect(()=>{
+        setLikes(likes.length)
+    }, [])
     const likeButtonHandler = () =>{
         socket.emit("likeChange",
             id,
