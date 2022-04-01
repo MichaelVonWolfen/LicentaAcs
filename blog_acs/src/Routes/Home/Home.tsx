@@ -3,6 +3,7 @@ import Button from "../../Components/Button/button";
 import "./home.scss"
 import Category from "../../Components/Category/category";
 import axiox from "axios"
+import constants from "../../Config/constants";
 export default function Home() {
     const [categoriesAdded, setCategoriesAdded] = useState([])
     const home_data = {
@@ -11,7 +12,7 @@ export default function Home() {
         bloggers: "1.4 M"
     }
     useEffect(()=> {
-        axiox.get("/api/categories").then(result => {
+        axiox.get(`${constants.BACKEND_URL}/api/categories`).then(result => {
             setCategoriesAdded([])
             const categories = result.data;
             console.log(categories)

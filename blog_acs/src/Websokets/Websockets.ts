@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import io, { Socket } from "socket.io-client";
-import {InterfaceWebsocketHeader} from "../Structures/InterfaceWebsocketHeader";
+import { useEffect } from "react";
+import io from "socket.io-client";
 import {EnumWSpaths} from "../Structures/EnumWSpaths";
-import {DefaultEventsMap} from "@socket.io/component-emitter";
+import constants from "../Config/constants";
 
-const SOCKET_SERVER_URL = "http://localhost:5000";
+const SOCKET_SERVER_URL = constants.BACKEND_URL;
 
 interface WsSendEvent {
-    msg: string | object,
+    msg: string | undefined,
     callback?: any
 }
 
@@ -32,7 +31,7 @@ const WShelper = (namespace: string, postID: string, headers:any, events: any) =
         };
     }, [postID, namespace]);
 
-    const sendEvent = (eventName: string, message: { msg: string | undefined; callback?: (err: string, data: any) => void }) => {
+    const sendEvent = (eventName: string, message: WsSendEvent) => {
         if (!socketRef) return
         socketRef.emit(eventName, message.msg, message.callback);
         console.log("Send event")

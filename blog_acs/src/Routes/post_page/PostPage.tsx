@@ -5,12 +5,13 @@ import Comment from "../../Components/comment/comment"
 import CustomInput from "../../Components/inputs/Inputs";
 import Button from "../../Components/Button/button";
 import axios from "axios";
-import WShelper from "../../Helpers/Websockets";
+import WShelper from "../../Websokets/Websockets";
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import EInput from "../../Structures/EnumInput";
 import {EnumWSpaths} from "../../Structures/EnumWSpaths";
 import {InterfaceWebsocketHeader} from "../../Structures/InterfaceWebsocketHeader";
+import constants from "../../Config/constants";
 
 interface Icomment{
     authorID: {
@@ -88,14 +89,14 @@ export default function PostPage(){
     }
     const {sendEvent} =WShelper(WSpath,post || "", headers, eventListeners)
     useEffect(()=>{
-        axios.get(`/api/categories/${category}`,)
+        axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,)
             .then(r =>setCategoryData(r.data))
             .catch(e =>console.log(e))
-        axios.get(`/api/posts/post/${post}`,)
+        axios.get(`${constants.BACKEND_URL}/api/posts/post/${post}`,)
             .then(r => setPostData(r.data))
             .catch(e =>console.log(e))
         if(token) {
-            axios.get(`/api/users/user`, {
+            axios.get(`${constants.BACKEND_URL}/api/users/user`, {
                 headers: {authorization: token}
             }).then(r => setUserData(r.data)
             ).catch(e => console.log(e))

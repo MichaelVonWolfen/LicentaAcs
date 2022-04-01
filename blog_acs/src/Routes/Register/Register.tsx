@@ -3,6 +3,7 @@ import Button from "../../Components/Button/button";
 import CustomInputs from "../../Components/inputs/Inputs"
 import axios from "axios";
 import EInput from "../../Structures/EnumInput";
+import constants from "../../Config/constants";
 
 export default function Register (){
     document.body.setAttribute("style",`--background-color: #252422;--color: #CCC5B9;`)
@@ -30,7 +31,7 @@ export default function Register (){
             password: e.target.password.value,
             confirmationPassword: e.target.confirmPassword.value
         }
-        axios.post("/api/auth/register",user).then(result =>{
+        axios.post(`${constants.BACKEND_URL}/api/auth/register`,user).then(result =>{
             alert(result.data.title)
             window.location.href = "/login"
         }).catch(err =>{

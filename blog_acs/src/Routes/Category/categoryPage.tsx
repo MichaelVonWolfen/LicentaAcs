@@ -7,6 +7,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import {Icategory, Ipost, ICategoryData} from "../../Structures/InterfacesCategoryPage"
+import constants from "../../Config/constants";
 
 export default function CategoryPage() {
     const {category} = useParams()
@@ -17,7 +18,7 @@ export default function CategoryPage() {
 
     const sortPosts = (sorter:string, order:string[], callback:Function)=>{
         // console.log(sorter)
-        axios.get(`/api/categories/${category}`,{
+        axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,{
             params:{
                 sort: {
                     sortBy: sorter,
@@ -35,7 +36,7 @@ export default function CategoryPage() {
         callback()
     };
     useEffect(()=>{
-        axios.get(`/api/categories/${category}`,).then(r =>{
+        axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,).then(r =>{
             let data = r.data
             // console.log(data)
             setCategoryData(data);

@@ -2,6 +2,7 @@ import React from "react";
 import "./login.sass"
 import Button from "../../Components/Button/button";
 import axios from "axios";
+import constants from "../../Config/constants";
 export default function Login(){
     document.body.setAttribute("style",`--background-color: #252422;--color: #CCC5B9;`)
     const input = (e:any)=>{
@@ -21,7 +22,7 @@ export default function Login(){
             email: e.target.email.value,
             password: e.target.password.value,
         }
-        axios.post("/api/auth/login",data).then(result =>{
+        axios.post(`${constants.BACKEND_URL}/api/auth/login`,data).then(result =>{
             // console.log(result)
             localStorage.setItem("token", `Bearer ${result.data}`)
             window.location.href = "/"
