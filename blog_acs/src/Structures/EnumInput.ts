@@ -1,6 +1,7 @@
 enum EInput{
     text = "text",
     textarea = "textarea",
-    file = "file"
+    file = "file",
+    color = "color"
 }
 export default EInput;

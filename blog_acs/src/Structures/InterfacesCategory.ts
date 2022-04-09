@@ -14,4 +14,13 @@ interface ICategoryData {
     category:Icategory
     postsList: Ipost[]
 }
-export type {Ipost, ICategoryData, Icategory}
+interface ICategoryInformation {
+    color:string,
+    background_color:string,
+    name:string
+}
+interface ICategoryInput2 {
+    background_color:string,
+    color:string
+}
+export type {Ipost, ICategoryData, Icategory, ICategoryInput2, ICategoryInformation}

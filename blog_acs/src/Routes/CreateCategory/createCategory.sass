@@ -1,0 +1,48 @@
+$gap:80px
+$color:var(--color, white)
+$background-color:var(--background-color, black)
+.mousePointer
+  pointer-events: none
+.add-category-container
+  height: 80vh
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  width: 100vw
+  gap: 10%
+  .left
+    height: max(50%, 300px)
+    display: flex
+    flex-direction: column
+    gap: $gap
+    width: 40%
+    .colorInputs
+      display: flex
+      flex-direction: column
+      gap: $gap
+      .colorInput
+        padding: 10px 20px
+        margin: 0 10px
+        border: 2px solid $color
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        row-gap: $gap /2
+        color: $color
+        box-shadow: -10px 10px 0 var(--color, white)
+        font-size: 16pt
+        input
+          justify-self: flex-end
+    .contentArea
+      height: 100%
+      width: max(40vw, 270px)
+  .right
+    .buttons
+      display: flex
+@media screen and (max-width: 700px)
+  .add-category-container
+    margin-top: 100px
+    flex-direction: column
+    .left
+      .titleInput
+        width: 83%

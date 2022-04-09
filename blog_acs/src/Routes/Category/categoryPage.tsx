@@ -6,7 +6,7 @@ import getCategoryDetailAndSetColors from "../../Helpers/setColors";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from "axios";
 import {useParams} from "react-router-dom";
-import {Icategory, Ipost, ICategoryData} from "../../Structures/InterfacesCategoryPage"
+import {Icategory, Ipost, ICategoryData} from "../../Structures/InterfacesCategory"
 import constants from "../../Config/constants";
 
 export default function CategoryPage() {

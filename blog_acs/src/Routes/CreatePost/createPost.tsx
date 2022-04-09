@@ -1,14 +1,29 @@
 import CustomInput from "../../Components/inputs/Inputs";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../../Components/Button/button"
 import "./createPost.sass"
 import getCategoryDetailAndSetColors from "../../Helpers/setColors";
 import {useParams} from "react-router-dom";
 import EInput from "../../Structures/EnumInput"
+import axios from "axios";
+import constants from "../../Config/constants";
 
 export default function CreatePost(){
-    let category = useParams()
-    const categoryDetails = getCategoryDetailAndSetColors(category)
+    let {category} = useParams()
+    const [categoryData, setCategoryData] = useState({category:""})
+    useEffect(()=>{
+        axios.get(`${constants.BACKEND_URL}/api/categories/${category}`,)
+            .then(r => {
+                setCategoryData(r.data)
+            })
+            .catch(e =>console.log(e))
+    }, [])
+    useEffect(()=>{
+        const {category} = categoryData
+        if(category !== ''){
+            getCategoryDetailAndSetColors(category)
+        }
+    }, [categoryData])
     return(
         <form action="/" method="post" className="add-post-container">
             <div className="left">

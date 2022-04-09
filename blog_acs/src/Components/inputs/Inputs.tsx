@@ -1,5 +1,5 @@
 import React, {FormEvent, InputHTMLAttributes} from "react";
-import "./inputs.css"
+import "./inputs.sass"
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import EnumInput from "../../Structures/EnumInput"
 import EInput from "../../Structures/EnumInput"
@@ -9,7 +9,9 @@ interface ICustomInput {
     name:string,
     additionalClasses:string | undefined,
     type:EnumInput,
-    disabled?:boolean
+    disabled?:boolean,
+    onChange?:any
+    value?:string
 }
 export default function CustomInput(props:ICustomInput){
     const  additionalClasses = !props.additionalClasses ? "" : props.additionalClasses
@@ -38,6 +40,10 @@ export default function CustomInput(props:ICustomInput){
                     </label>
                     <input type="file" name={props.name} accept="image/png, image/jpeg"id="fileUpload" onChange={fileAdded}/>
                 </div>
+            )
+        case EInput.color:
+            return (
+                <input type="color" name={props.name} id={props.name} onChange={props.onChange} value={props.value}/>
             )
         default:
                 return(

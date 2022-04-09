@@ -46,18 +46,18 @@ export default function Post(props:Ipost){
                 <Image image={image}/>
                 <p>{title}</p>
             </a>
-                {
-                    state === "not_saved" ?
-                        <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>
-                        :
-                        <CheckIcon className={"bookmark"} onClick={changeState}/>
-                }
+                {/*{*/}
+                {/*    state === "not_saved" ?*/}
+                {/*        <BookmarkBorderIcon className={"bookmark"} onClick={changeState}/>*/}
+                {/*        :*/}
+                {/*        <CheckIcon className={"bookmark"} onClick={changeState}/>*/}
+                {/*}*/}
             <div className="reaction-buttons">
-                <span className="icon">
-                    {/*@ts-ignore */}
-                    <FavoriteIcon label="Hearth"/>
-                    <span>{likeNb}</span>
-                </span>
+                {/*<span className="icon">*/}
+                {/*    /!*@ts-ignore *!/*/}
+                {/*    <FavoriteIcon label="Hearth"/>*/}
+                {/*    <span>{likeNb}</span>*/}
+                {/*</span>*/}
                 <span className="icon">
                     <Icon baseClassName="fas" className="fa-comment-dots"/>
                     <span>{commNb}</span>

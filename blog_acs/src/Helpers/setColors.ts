@@ -1,15 +1,7 @@
-interface Icategory {
-    color:string,
-    background_color:string,
-    name:string
-}
-interface IcategoryInput2 {
-    background_color:string,
-    color:string
-}
+import {ICategoryInformation, ICategoryInput2} from "../Structures/InterfacesCategory";
 
-let categoryDetails:Icategory;
-function setCategoryColors({background_color, color}:IcategoryInput2) {
+let categoryDetails:ICategoryInformation;
+function setCategoryColors({background_color, color}:ICategoryInput2) {
     document.body.setAttribute(`style`,`--background-color: ${background_color};--color: ${color};`)
 }
 const resetCategoryColors = () => {

@@ -2,8 +2,26 @@ const router = require("express").Router()
 const Categories = require("../models/categorie")
 const Posts = require("../models/post");
 const Comments = require("../models/comment")
+const Users = require("../models/user")
 const mongoose = require("mongoose")
 const requiredAuth = require("../middleware/auth");
+router.get("/homeData", async (req, res)=>{
+    try{
+        let postNB = await Posts.count({})
+        let comments = await Comments.count({})
+        let categories = await Categories.count({})
+        let users = await Users.count({})
+        return res.send({
+            posts: postNB,
+            users: users,
+            categories: categories,
+            comments
+        })
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
 router.post("/", requiredAuth.userMiddleware,async (req, res) => {
     try {
         const {name, image, style} = req.body
