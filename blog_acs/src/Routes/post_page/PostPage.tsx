@@ -142,7 +142,7 @@ export default function PostPage(){
     return(
         <div className="PostContainer">
             <h1 className={"titlePost"}>{postData.title}</h1>
-            <Image image={postData.post_img || "/images/default-user-image.png"}/>
+            <Image image={postData.post_img ? `${constants.BACKEND_URL}/${postData.post_img}` : "/images/default-user-image.png"}/>
             {/* @ts-ignore */}
             <p className={"post_content"} dangerouslySetInnerHTML={{__html: postData.content && postData.content.replace(/(?:\r\n|\r|\n)/g, '</p><p>')}}/>
             <div className="comments">

@@ -24,14 +24,37 @@ export default function CreatePost(){
             getCategoryDetailAndSetColors(category)
         }
     }, [categoryData])
+    function handleSubmit(e:HTMLFormElement & EventTarget | any) {
+        e.preventDefault()
+        const token = localStorage.getItem("token")
+        if(!e.target || !token) return
+        const data = new FormData(e.target)
+        data.append("categoryID", category || '')
+        console.log(data)
+        fetch(`${constants.BACKEND_URL}/api/posts/post`,{
+            method:"POST",
+            headers:{
+                authorization: token,
+            },
+            body: data
+        }).then(r =>{
+            console.log(r.status)
+            if(r.status < 400) window.location.href = "/"
+            else {
+                r.text().then(response =>{
+                    alert(response)
+                })
+            }
+        })
+    }
     return(
-        <form action="/" method="post" className="add-post-container">
+        <form action="/" method="post" className="add-post-container" onSubmit={handleSubmit}>
             <div className="left">
                 <CustomInput type={EInput.text} name={"title"} placeholder={'Add Title'} additionalClasses={"titleInput"}/>
                 <CustomInput type={EInput.textarea} name={"content"} placeholder={'Add your special experiences'} additionalClasses={"contentArea"}/>
             </div>
             <div className="right">
-                <CustomInput type={EInput.file} name={"file"} placeholder={'Add file'} additionalClasses={"fileAddClass"}/>
+                <CustomInput type={EInput.file} name={"post_img"} placeholder={'Add file'} additionalClasses={"fileAddClass"}/>
                 <div className="buttons">
                     <Button text={"Save Split"} customClickEvent={()=>{}} additionalClasses={"post"}/>
                     <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"submit"} customClickEvent={()=>{}}/>

@@ -5,8 +5,6 @@ import "./createCategory.sass"
 import getCategoryDetailAndSetColors from "../../Helpers/setColors";
 import EInput from "../../Structures/EnumInput"
 import constants from "../../Config/constants";
-import {log} from "util";
-import axios from "axios";
 
 const DefaultStyle = {
     primary_color: "#CCC5B9",
@@ -41,12 +39,6 @@ export default function CreateCategory(){
         e.preventDefault()
         const token = localStorage.getItem("token")
         if(!e.target || !token) return
-        const data:any = {}
-        for (let entry of new FormData(e.target).entries()) {
-            if(data[entry[0]] !== "image")
-                data[entry[0]] = entry[1]
-        }
-        console.log(data)
         fetch(`${constants.BACKEND_URL}/api/categories`,{
             method:"POST",
             headers:{

@@ -4,6 +4,20 @@ const Categories = require("../models/categorie")
 const mongoose = require("mongoose");
 const requiredAuth = require("../middleware/auth");
 
+const multer  = require('multer')
+const uuid = require("uuid").v4
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './uploads/posts/');
+    },
+    filename: function (req, file, callback) {
+        let ext = file.originalname.split(".")
+        ext = ext[ext.length - 1]
+        callback(null, `${uuid()}.${ext}`);
+    }
+});
+const upload = multer({ storage })
 // route to update likes
 // route to delete like
 router.patch("/:id",requiredAuth.userMiddleware, async (req, res) => {
@@ -47,9 +61,12 @@ router.get("/:id", async (req, res) => {
     }
 })
 // route to create a post
-router.post("/post",requiredAuth.userMiddleware, async(req, res) => {
+router.post("/post",requiredAuth.userMiddleware,upload.single("post_img"), async(req, res) => {
     try{
-        const {title, content, post_img, categoryID}  = req.body;
+        console.log(req.body)
+        console.log(req.file)
+        const {title, content, categoryID}  = req.body;
+        let post_img = `posts/${req.file.filename}`
         let user_id = req.user._id.toString()
         if(!user_id || !title || !content || !post_img || !categoryID)
             return res.status(400).send("Not all required fields received")

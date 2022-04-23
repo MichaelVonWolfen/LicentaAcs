@@ -57,7 +57,7 @@ export default function CategoryPage() {
                 let post = <Post
                     title={postElement.title}
                     category = {category._id}
-                    image={postElement.post_img}
+                    image={`${constants.BACKEND_URL}/${postElement.post_img}`}
                     date={new Date(postElement.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
                     likeNb={postElement.like_nb} commNb={postElement.commNb}
                     key={postElement._id} postID={postElement._id}

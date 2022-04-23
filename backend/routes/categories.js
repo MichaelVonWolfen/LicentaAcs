@@ -10,7 +10,7 @@ const uuid = require("uuid").v4
 
 const storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, './uploads');
+        callback(null, './uploads/categories/');
     },
     filename: function (req, file, callback) {
         let ext = file.originalname.split(".")
@@ -43,7 +43,7 @@ router.post("/", requiredAuth.userMiddleware, upload.single("image"), async (req
             "primary_color":req.body.primary_color,
             "secondary_color":req.body.secondary_color
         }
-        const image = req.file.filename
+        const image = "categories/" + req.file.filename
         let copy_category = await Categories.findOne({name})
         if (copy_category) {
             return res.status(400).send("Category already exists")
