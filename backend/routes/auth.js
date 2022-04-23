@@ -2,7 +2,22 @@ const passport = require("passport");
 const router = require("express").Router();
 const utils = require("./utils");
 
-router.post("/register", (req, res, next) => {
+const multer  = require('multer')
+const uuid = require("uuid").v4
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './uploads/users/');
+    },
+    filename: function (req, file, callback) {
+        let ext = file.originalname.split(".")
+        ext = ext[ext.length - 1]
+        callback(null, `${uuid()}.${ext}`);
+    }
+});
+const upload = multer({ storage })
+
+router.post("/register",upload.single("profile_picture"),(req, res, next) => {
+    console.log(req.body)
     const { errors, isValid } = utils.validateRegisterTeamInput(req.body);
     if (!isValid) {
         console.log(errors)

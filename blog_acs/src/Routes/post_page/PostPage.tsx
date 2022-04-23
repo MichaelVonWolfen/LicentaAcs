@@ -120,7 +120,7 @@ export default function PostPage(){
             commentsList.push(
                 <Comment author={c.authorID}
                     created={new Date(c.createdAt).toLocaleDateString('ro', { year:"numeric", month:"short", day:"numeric"})}
-                    image={c.authorID.profile_picture || "/images/default-user-image.png"}
+                    image={c.authorID.profile_picture? `${constants.BACKEND_URL}/${c.authorID.profile_picture}` : "/images/default-user-image.png"}
                     text={c.content}
                     likes={c.likesList}
                     key={uuid()}
@@ -148,7 +148,7 @@ export default function PostPage(){
             <div className="comments">
                 {token?
                     <div className="add_comment">
-                        <img src={userData.profile_picture || "/images/default-user-image.png"} alt="" className={"profile_image"}/>
+                        <img src={userData.profile_picture? `${constants.BACKEND_URL}/${userData.profile_picture}` : "/images/default-user-image.png"} alt="" className={"profile_image"}/>
                         <strong className="username">{userData.username}</strong>
                         <CustomInput type={EInput.textarea} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">

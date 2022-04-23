@@ -7,7 +7,7 @@ export default function Login(){
     document.body.setAttribute("style",`--background-color: #252422;--color: #CCC5B9;`)
     const input = (e:any)=>{
         let value = e.target.value
-        const label = document.querySelector(`#${e.target.name}`)
+        const label = document.querySelector(`#${e.target.name}Label`)
         if(!label) return;
         if(value){
             label.classList.add("input_has_contents")
@@ -37,12 +37,12 @@ export default function Login(){
             <h1>Login</h1>
             <form action="/" method="post" className="login" onSubmit={handleLogin}>
                 {/* @ts-ignore */}
-                <label htmlFor={"email"} className="login_input" placeholderText={"Email"} id="email" >
-                    <input type="text" name="email" className={"email"} required={true} onInput={input}/>
+                <label htmlFor={"email"} className="login_input" placeholderText={"Email"} id="emailLabel" >
+                    <input type="text" name="email" className={"email"} required={true} onInput={input} id="email" />
                 </label>
                 {/* @ts-ignore */}
-                <label htmlFor={"password"} className="login_input" placeholderText={"Password"} id="password">
-                    <input type="password" name="password" className="password"  required={true} onInput={input}/>
+                <label htmlFor={"password"} className="login_input" placeholderText={"Password"} id="passwordLabel">
+                    <input type="password" name="password" className="password"  required={true} onInput={input} id="password" />
                 </label>
                 <div className="button_logIN">
                     {/* @ts-ignore */}
