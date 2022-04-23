@@ -47,19 +47,19 @@ export default function Register (){
                 <CustomInputs type={EInput.file} placeholder={""} name={"profile picture"} additionalClasses = ""/>
                 <div className="login">
                     {/* @ts-ignore*/}
-                    <label htmlFor={"username"} className="login_input" placeholderText={"Username"} id="username" >
+                    <label htmlFor={"username"} className="login_input" placeholdertext={"Username"} id="username" >
                         <input type="text" name="username" className={"username"} required={true} onInput={input}/>
                     </label>
                     {/* @ts-ignore*/}
-                    <label htmlFor={"email"} className="login_input" placeholderText={"Email"} id="email" >
+                    <label htmlFor={"email"} className="login_input" placeholdertext={"Email"} id="email" >
                         <input type="text" name="email" className={"email"} required={true} onInput={input}/>
                     </label>
                     {/* @ts-ignore*/}
-                    <label htmlFor={"password"} className="login_input" placeholderText={"Password"} id="password">
+                    <label htmlFor={"password"} className="login_input" placeholdertext={"Password"} id="password">
                         <input type="password" name="password" className="password"  required={true} onInput={input}/>
                     </label>
                     {/* @ts-ignore*/}
-                    <label htmlFor={"confirmPassword"} className="login_input" placeholderText={"Confirm Password"} id="confirmPassword">
+                    <label htmlFor={"confirmPassword"} className="login_input" placeholdertext={"Confirm Password"} id="confirmPassword">
                         <input type="password" name="confirmPassword" className="confirmPassword"  required={true} onInput={input}/>
                     </label>
                     <div className="button_logIN">

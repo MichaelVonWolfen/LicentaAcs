@@ -5,6 +5,20 @@ const Comments = require("../models/comment")
 const Users = require("../models/user")
 const mongoose = require("mongoose")
 const requiredAuth = require("../middleware/auth");
+const multer  = require('multer')
+const uuid = require("uuid").v4
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './uploads');
+    },
+    filename: function (req, file, callback) {
+        let ext = file.originalname.split(".")
+        ext = ext[ext.length - 1]
+        callback(null, `${uuid()}.${ext}`);
+    }
+});
+const upload = multer({ storage })
 router.get("/homeData", async (req, res)=>{
     try{
         let postNB = await Posts.count({})
@@ -22,9 +36,14 @@ router.get("/homeData", async (req, res)=>{
         return res.sendStatus(500)
     }
 })
-router.post("/", requiredAuth.userMiddleware,async (req, res) => {
+router.post("/", requiredAuth.userMiddleware, upload.single("image"), async (req, res) => {
     try {
-        const {name, image, style} = req.body
+        const {name} = req.body
+        const style = {
+            "primary_color":req.body.primary_color,
+            "secondary_color":req.body.secondary_color
+        }
+        const image = req.file.filename
         let copy_category = await Categories.findOne({name})
         if (copy_category) {
             return res.status(400).send("Category already exists")

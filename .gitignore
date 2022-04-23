@@ -6,6 +6,7 @@
 # Logs
 .idea
 logs
+backend/uploads
 *.log
 *.map
 npm-debug.log*

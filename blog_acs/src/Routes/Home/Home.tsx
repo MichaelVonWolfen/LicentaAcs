@@ -17,7 +17,7 @@ export default function Home() {
             setCategoriesAdded([])
             const categories = result.data;
             console.log(categories)
-            setCategoriesAdded(categories.map((category: { image: string; style: { primary_color: string; }; name: string; _id: string; }) => <Category image={category.image}
+            setCategoriesAdded(categories.map((category: { image: string; style: { primary_color: string; }; name: string; _id: string; }) => <Category image={`${constants.BACKEND_URL}/${category.image}`}
                                                                     color={category.style.primary_color}
                                                                     name={category.name}
                                                                     path={category._id}

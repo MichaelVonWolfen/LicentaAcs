@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const passport = require("passport");
 const constants = require("./constants");
 const app = express();
@@ -12,6 +12,7 @@ const cors = require("cors")
 require("./db");
 app.use(cors())
 
+app.use(express.static("./uploads"))
 
 const io = new Server(server, {
     cors: {
@@ -29,9 +30,9 @@ instrument(io, {
 
 require("dotenv").config();
 // Bodyparser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+app.use(express.json())
 // Passport middleware
 app.use(passport.initialize());
 
@@ -55,22 +56,22 @@ app.use("/api/posts", posts)
 app.use("/api/users", users)
 app.use("/api/search", search)
 
-const midlewares = require("./middleware/auth")
+const middlewares = require("./middleware/auth")
 
 const userNameSpace = io.of(constants.namespaces.user)
     .use((socket, next) => {
-        midlewares.userMiddleware(socket.handshake, undefined, next)
+        middlewares.userMiddleware(socket.handshake, undefined, next)
     })
-const anonimousNameSpace = io.of(constants.namespaces.anonymous)
+const anonymousNameSpace = io.of(constants.namespaces.anonymous)
 const userSocketsHandler = require("./websockets/users");
-const anonimousSocketsHandler = require("./websockets/anonimous");
+const anonymousSocketsHandler = require("./websockets/anonimous");
 userNameSpace.on("connection", (socket) => {
     console.log(`User connected with id ${socket.id}`)
     userSocketsHandler(io, socket);
 });
-anonimousNameSpace.on("connection", (socket) => {
-    console.log(`Anonimous user connected with id ${socket.id}`)
-    anonimousSocketsHandler(io, socket);
+anonymousNameSpace.on("connection", (socket) => {
+    console.log(`Anonymous user connected with id ${socket.id}`)
+    anonymousSocketsHandler(io, socket);
 });
 
 server.listen(PORT, () => {
