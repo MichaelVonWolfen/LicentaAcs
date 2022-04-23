@@ -148,7 +148,7 @@ export default function PostPage(){
             <div className="comments">
                 {token?
                     <div className="add_comment">
-                        <img src={userData.profile_picture? `${constants.BACKEND_URL}/${userData.profile_picture}` : "/images/default-user-image.png"} alt="" className={"profile_image"}/>
+                        <img src={userData.profile_picture? `${constants.BACKEND_URL}/${userData.profile_picture}` : "/images/default-user-image.png"} alt="" className={"profile_image"} loading={"lazy"}/>
                         <strong className="username">{userData.username}</strong>
                         <CustomInput type={EInput.textarea} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"}/>
                         <div className="buttons">
@@ -159,7 +159,7 @@ export default function PostPage(){
                         </div>
                     </div> :
                     <div className="add_comment">
-                        <img src="/images/default-user-image.png" alt="Default profile picture" className={"profile_image"}/>
+                        <img src="/images/default-user-image.png" alt="Default profile picture" className={"profile_image"} loading={"lazy"}/>
                         <strong className="username">Log IN to add comments</strong>
                         <CustomInput type={EInput.textarea} name={"content"} placeholder={' Add comment'} additionalClasses={"commentArea"} disabled={true}/>
                         <div className="buttons">

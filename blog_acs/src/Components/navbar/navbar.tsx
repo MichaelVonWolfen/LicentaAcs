@@ -23,7 +23,7 @@ export default function Navbar(){
     }
     return(
         <nav>
-            <a href="/" className={"logo"}><img src={logo} alt="logo"/></a>
+            <a href="/" className={"logo"}><img src={logo} alt="logo" loading={"lazy"}/></a>
             <span className={"search_container"}>
                 <input type="text" placeholder="Search" className="search_bar"/>
             </span>

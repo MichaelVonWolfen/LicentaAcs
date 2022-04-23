@@ -17,7 +17,7 @@ export default function Category(props:categoryInterface) {
     return(
     // @ts-ignore
         <div className="category" style={style} name={props.name} onClick={redirect}>
-            <img src={props.image}  alt={props.name}/>
+            <img src={props.image}  alt={props.name} loading={"lazy"}/>
             <button className="filter" name={props.name}/>
         </div>
     )

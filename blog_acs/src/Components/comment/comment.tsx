@@ -37,7 +37,7 @@ export default function Comment({likes, author, created, image, text, id, curren
     return(
         <div className={"comment_container"}>
             <div className="left">
-                <img className={"profile_image"} src={image} alt=""/>
+                <img className={"profile_image"} src={image} alt="" loading={"lazy"}/>
                 <div className="reactions">
                     <span className="likes_container" onClick={likeButtonHandler} id={"hearth"}>
                         {isLiked?
