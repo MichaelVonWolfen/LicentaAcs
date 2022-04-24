@@ -21,6 +21,7 @@ export default function Home() {
                                                                     color={category.style.primary_color}
                                                                     name={category.name}
                                                                     path={category._id}
+                                                                    key={category._id}
             />))
         })
         axiox.get(`${constants.BACKEND_URL}/api/categories/homeData`).then(result => {

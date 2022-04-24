@@ -54,6 +54,58 @@ nav
       width: 10px
       height: 10px
       border: 2px solid $color
+  .search_results
+    &.hidden
+      display: none
+    z-index: 999
+    position: absolute
+    background-color: $color
+    //box-shadow: 0 0 5px 1px white
+    display: grid
+    //display: none
+    border-radius: 0 0 5px 5px
+    width: 300px
+    left: 50%
+    top: 80px
+    padding: 10px 0
+    transform: translate(-50%, 0)
+    max-height: min(1000px, 80vh)
+    overflow-y: scroll
+    .result
+      //margin: 1px
+      padding: 20px 60px
+      background-image: var(--url)
+      background-repeat: no-repeat
+      background-size: 45px
+      background-position: center left 5px
+      color: $background-color
+      text-align: left
+      //border: 2px solid red
+      display: flex
+      align-items: center
+      position: relative
+      text-decoration: none
+      &::after
+        position: absolute
+        bottom: 5px
+        left: 21%
+        content: attr(itemtype)
+        font-size: 10pt
+        color: $background-color
+        opacity: 0.5
+      &:hover
+        color: $color
+        background-color: $background-color
+        &::after
+          color: $color
+      img
+        width: 50px
+        aspect-ratio: 1 / 1
+      span
+        height: fit-content
+      //  margin-left: 50px
+
+
   .links
     padding-top: 5px
   .nav_link
