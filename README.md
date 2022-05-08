@@ -4,8 +4,8 @@ RUN:
 
 `cd frontend`
 
-`yarn install`
+`pnpm install`
 
-`yarn start`
+`pnpm start`
 
 ##Backend can be started but there is no link between the frontend an backend atm
