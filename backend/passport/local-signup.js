@@ -20,7 +20,7 @@ module.exports = new LocalStrategy(
                 new User({
                     username: req.body.username,
                     email: req.body.email,
-                    profile_picture: `users/${req.file.filename}`,
+                    profile_picture: `users/${req.file?.filename}` || "",
                     password: password,
                 }).save(async (error) => {
                     if (error) {

@@ -19,10 +19,10 @@ export default function Register (){
     const formSubmit = (e:any) =>{
         e.preventDefault()
         console.log(e)
-        if(e.target.password.value !== e.target.confirmPassword.value){
-            alert("Passwords must be the same")
-            return
-        }
+        // if(e.target.password.value !== e.target.confirmPassword.value){
+        //     alert("Passwords must be the same")
+        //     return
+        // }
         let data = new FormData(e.target)
         for (let entry of data.entries()) {
             console.log(entry)

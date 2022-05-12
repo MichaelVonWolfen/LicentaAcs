@@ -9,15 +9,19 @@ const storage = multer.diskStorage({
         callback(null, './uploads/users/');
     },
     filename: function (req, file, callback) {
-        let ext = file.originalname.split(".")
-        ext = ext[ext.length - 1]
-        callback(null, `${uuid()}.${ext}`);
+        console.log(file)
+        if(file){
+            let ext = file.originalname.split(".")
+            ext = ext[ext.length - 1]
+            callback(null, `${uuid()}.${ext}`);
+        }
     }
 });
 const upload = multer({ storage })
 
 router.post("/register",upload.single("profile_picture"),(req, res, next) => {
     console.log(req.body)
+    console.log(req.file)
     const { errors, isValid } = utils.validateRegisterTeamInput(req.body);
     if (!isValid) {
         console.log(errors)

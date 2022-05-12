@@ -29,6 +29,7 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
+    "@types/react-dom": "^18.0.3",
     "dotenv": "^10.0.0",
     "validate.js": "^0.13.1"
   }
