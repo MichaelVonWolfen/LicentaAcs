@@ -56,7 +56,7 @@ export default function CreatePost(){
             <div className="right">
                 <CustomInput type={EInput.file} name={"post_img"} placeholder={'Add file'} additionalClasses={"fileAddClass"}/>
                 <div className="buttons">
-                    <Button text={"Save Split"} customClickEvent={()=>{}} additionalClasses={"post"}/>
+                    <Button text={"Create Post"} customClickEvent={()=>{}} additionalClasses={"post"}/>
                     <Button text={"Discard"} link={"/"} additionalClasses={"discard"} type={"submit"} customClickEvent={()=>{}}/>
                 </div>
             </div>

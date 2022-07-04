@@ -4,6 +4,30 @@ const mongoose = require("mongoose")
 const requiredAuth = require("../middleware/auth");
 
 //route to create comments
+router.get("/", requiredAuth.userMiddleware, async (req, res) =>{
+    try {
+        let comments = await Comments.find({})
+            .populate("authorID", "username")
+            .populate("postID", "title")
+            .lean()
+        comments = comments.map(comment =>{
+            comment = {
+                ...comment,
+                "Author": comment["authorID"]["username"] || "none",
+                "Post": comment["postID"]["title"] || "none",
+                "Likes": comment["likesList"].length || 0
+            }
+            delete comment["authorID"]
+            delete comment["postID"]
+            delete comment["likesList"]
+            return comment
+        })
+        return res.send( comments)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
 router.post("/",requiredAuth.userMiddleware, async(req, res) => {
     try {
         let authorID = req.user._id.toString()
@@ -61,10 +85,8 @@ router.patch("/:comment_id",requiredAuth.userMiddleware,async(req, res) => {
     try {
         let _id = req.params.comment_id;
         let {content} = req.body;
-        console.log("HERE 1")
         let comment = await Comments.findOne({_id: new mongoose.Types.ObjectId(_id)})
         let authorID = req.user._id.toString()
-        console.log("HERE 2")
         if(comment.authorID.toString() !== authorID){
             return res.sendStatus(403)
         }
@@ -86,7 +108,7 @@ router.delete("/:comment_id",requiredAuth.userMiddleware, async(req, res) => {
             return res.sendStatus(403)
         }
         await Comments.findByIdAndRemove(_id)
-        return res.sendStatus(200)
+        return res.send("Comment deleted")
     }catch (e) {
         console.log(e)
         return res.sendStatus(500)

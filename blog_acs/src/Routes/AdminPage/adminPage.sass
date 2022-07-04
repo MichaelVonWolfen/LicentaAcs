@@ -1,0 +1,33 @@
+.adminContainer
+  color: wheat
+  display: grid
+  place-content: center
+  overflow: scroll
+  min-height: 92vh
+  table
+    background-color: #252422
+    border: 1px solid
+    box-shadow: -10px 10px 0 0 var(--color, wheat)
+    .button_parent
+      margin: 0!important
+    tr
+      &:first-child
+        td
+          overflow-x: hidden
+          text-transform: capitalize
+      &:last-child
+        td
+          border-bottom: none
+      td
+        overflow: scroll
+        max-width: 170px
+        max-height: 500px
+        white-space: nowrap
+        &::-webkit-scrollbar
+          height: 5px
+        border-left: 1px solid
+        border-bottom: 1px solid
+        &:first-child
+          border-left: none
+        margin: 0
+        padding: 10px

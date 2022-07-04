@@ -5,6 +5,7 @@ import Login from "./LogIN/Login";
 import PostPage from "./post_page/PostPage";
 import Register from "./Register/Register";
 import CreateCategory from "./CreateCategory/createCategory";
+import AdminPage from "./AdminPage/adminPage";
 export {
     CategoryPage,
     CreatePost,
@@ -13,4 +14,5 @@ export {
     PostPage,
     Register,
     CreateCategory,
+    AdminPage,
 };

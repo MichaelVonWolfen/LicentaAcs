@@ -4,8 +4,8 @@ module.exports = (io, socket) => {
     socket.join(socket.handshake.headers.room_id)
 
     socket.on("test", ()=>{
-        console.log("LOLOLOLO")
-        socket.emit("rest", "PLM")
+        console.log("Conexiune reusita")
+        socket.emit("succes", "Test WS")
     })
     socket.on('getComments', async (postID, callback) => {
         try {

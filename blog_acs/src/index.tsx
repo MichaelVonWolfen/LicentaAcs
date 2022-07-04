@@ -15,12 +15,13 @@ root.render(
         <Navbar/>
         <Routes>
             <Route path={"/"} element={<Background Component={CustomRoutes.Home}/>}/>
-            <Route path="category/:category" element={<Background Component={CustomRoutes.CategoryPage}/>} />
-            <Route path="category/:category/post/:post" element={<Background Component={CustomRoutes.PostPage}/>} />
-            <Route path="add/post/:category" element={<Background Component={CustomRoutes.CreatePost}/>} />
-            <Route path="add/category" element={<Background Component={CustomRoutes.CreateCategory}/>} />
-            <Route path="login" element={<Background Component={CustomRoutes.Login}/>} />
-            <Route path="register" element={<Background Component={CustomRoutes.Register}/>} />
+            <Route path="/admin/" element={<Background Component={CustomRoutes.AdminPage}/>} />
+            <Route path="/category/:category" element={<Background Component={CustomRoutes.CategoryPage}/>} />
+            <Route path="/category/:category/post/:post" element={<Background Component={CustomRoutes.PostPage}/>} />
+            <Route path="/add/post/:category" element={<Background Component={CustomRoutes.CreatePost}/>} />
+            <Route path="/add/category" element={<Background Component={CustomRoutes.CreateCategory}/>} />
+            <Route path="/login/" element={<Background Component={CustomRoutes.Login}/>} />
+            <Route path="/register/" element={<Background Component={CustomRoutes.Register}/>} />
         </Routes>
     </BrowserRouter>
 );

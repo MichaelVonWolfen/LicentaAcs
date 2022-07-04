@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const requiredAuth = require("../middleware/auth");
 
 const multer  = require('multer')
+const {userMiddleware} = require("../middleware/auth");
 const uuid = require("uuid").v4
 
 const storage = multer.diskStorage({
@@ -18,6 +19,31 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage })
+router.get("/allposts", userMiddleware , async (req, res)=>{
+    try{
+        let postList = await Posts.find({})
+            .populate("creatorID", "username -_id")
+            .populate("categoryID", "name -_id")
+            .lean()
+            postList = postList.map(post =>{
+                post = {
+                    ...post,
+                    "Creator Name": post["creatorID"]["username"],
+                    course: post["categoryID"]["name"]
+                }
+                delete post["creatorID"]
+                delete post["categoryID"]
+                delete post["users_likes_IDS"]
+                delete post["post_img"]
+                return post
+            })
+            // .select("-users_likes_IDS")
+        return res.send(postList)
+    }catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
 // route to update likes
 // route to delete like
 router.patch("/:id",requiredAuth.userMiddleware, async (req, res) => {
@@ -111,16 +137,17 @@ router.patch("/post/:post_id",requiredAuth.userMiddleware, async(req, res) => {
     }
 })
 // route to delete post
-router.delete("/post/:id",requiredAuth.userMiddleware, async (req, res) => {
+router.delete("/:id",requiredAuth.userMiddleware, async (req, res) => {
     try{
+        console.log("dsksk ")
         let _id = req.params.id;
         let post = await Posts.findOne({_id: new mongoose.Types.ObjectId(_id)})
-        let authorID = req.user._id.toString()
-        if(post.creatorID.toString() !== authorID){
-            return res.sendStatus(403)
-        }
+        // let authorID = req.user._id.toString()
+        // if(post.creatorID.toString() !== authorID){
+        //     return res.sendStatus(403)
+        // }
         let deleted_data = await Posts.deleteOne({_id})
-        return res.send(deleted_data)
+        return res.send("Post deleted")
     }catch (e) {
         console.log(e)
         return res.sendStatus(500)

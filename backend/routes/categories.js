@@ -70,11 +70,11 @@ router.patch("/:id",requiredAuth.userMiddleware, async (req, res) => {
         res.sendStatus(500)
     }
 })
-router.delete("/:name",requiredAuth.userMiddleware, async (req, res) => {
+router.delete("/:id",requiredAuth.userMiddleware, async (req, res) => {
     try {
-        let category_name = req.params.name
-        await Categories.deleteMany({name: category_name})
-        return res.send(`Deleted ${category_name}`)
+        let course_id = req.params.id
+        await Categories.deleteMany({_id: course_id})
+        return res.send(`Deleted ${course_id}`)
     } catch (e) {
         console.log(e)
         return res.status(500).send("Something went wrong")

@@ -12,5 +12,12 @@ router.get("/user",requiredAuth.userMiddleware,(req, res) => {
     user.email = null
     return res.send(user)
 })
-
+router.get("/", requiredAuth.userMiddleware, async (req, res)=>{
+    try{
+        return res.send(await Users.find({}).select("-password -profile_picture"))
+    }catch (e){
+        console.log(e)
+        return res.sendStatus(500)
+    }
+})
 module.exports = router

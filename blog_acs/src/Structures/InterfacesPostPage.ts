@@ -4,4 +4,5 @@ interface ILikeHandler {
     setIsLiked:any,
     setLikes:any
 }
+
 export type {ILikeHandler}

@@ -11,7 +11,6 @@ module.exports = (io, socket) => {
         console.log(msg)
     })
     socket.on('getComments', async (postID, callback) => {
-        console.log("LOLO")
         try {
             let comments = await Comments.find({postID}).populate("authorID", ["username", "profile_picture"]).sort({createdAt: 'desc'})
             // console.log(comments)

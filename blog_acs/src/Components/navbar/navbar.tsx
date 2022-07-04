@@ -90,7 +90,10 @@ export default function Navbar(){
                     <a className={"nav_link"} href="/register">Register</a>
                 </span>
                 ):(
-                    <a className={"nav_link"} onClick={handleLogout}>Log Out</a>
+                    <>
+                        <a className={"nav_link"} href="/add/category">Add a new course</a>
+                        <a className={"nav_link"} onClick={handleLogout}>Log Out</a>
+                    </>
                 )}
             </span>
             <span className={"links hamburger"} onClick={changeSidebarState}>

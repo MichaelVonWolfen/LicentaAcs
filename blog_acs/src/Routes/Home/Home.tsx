@@ -67,8 +67,8 @@ export default function Home() {
                 </div>
             </div>
             <div className="transparent_bar">
-                <h6>One blog</h6>
-                <h6>Dozens of personalities</h6>
+                <h6>One place...</h6>
+                <h6>Dozens of courses and students</h6>
             </div>
             <h2 className="most-popular">Our most popular courses</h2>
             <div className="categories" id={"categories"}>
