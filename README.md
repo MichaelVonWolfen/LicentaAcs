@@ -1,12 +1,5 @@
 # Split Site
 
-RUN:
-
-`cd frontend`
-
-`pnpm install`
-
-`pnpm start`
-
-
-##Backend can be started but there is no link between the frontend an backend atm
+#### Video Demo:  [Video](https://youtu.be/6fVpLWIWXZA)
+#### Description:
+A blog made for teachers and students in Javascript useing Node.JS and REACT.js and websockets and Mongodb
